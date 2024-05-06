@@ -1,0 +1,22 @@
+\chapter{Conclusão}
+\label{chap:conclusao}
+
+Esta dissertação tem como objetivo a utilização de descritor fractal em sistema de CBIR e também busca analisar o seu desempenho na recuperação de imagens de línguas similares a aquelas utilizadas como a “Imagem Pesquisa”. Durante o desenvolvimento do trabalho de pesquisa, foi possível validar que o descritor fractal possui um desempenho melhor quando comparado com outras técnicas para a encontrar a dimensão fractal de um objeto  e por conta disto, descriminam melhor a imagem, o que facilita a recuperação ou retorno de imagem similares em um banco de imagens.
+
+Afim de validar a pesquisa, foi desenvolvido um modelo experimental para que seja eficiente em medir o desempenho do sistema de CBIR em recuperar imagens de línguas quando compradas com imagens de línguas com diagnóstico positivo para HAS, realizado conforme a metodologia e comprovação de profissionais especializados em MTC. Para avaliar o modelo foram promovidos testes preliminares e relatados nesta dissertação.
+
+No atual estágio desta dissertação, o banco de imagens não está completo e aguarda as imagens das línguas com HAS positivo. Por isso os testes são preliminares e insuficientes para uma conclusão. No entanto, estes testes apontam que o sistema de CBIR possui uma Precisão de 98,95\% sendo que 85,26\% das imagens recuperadas está na primeira opção. Os testes preliminares também contemplaram a recuperação de línguas com fissuras, sendo o melhor resultado da AUC de 65,5\% e a recuperação de imagem conforme a sua cor, cujo resultado da AUC é de 71\%.
+
+Esta dissertação utiliza o método \textit{boxcounting} para determinar a dimensão fractal das imagens e para isso foi utilizado a biblioteca Python PoreSpy que demonstra ser eficiente para encontrar o vetor de característica da imagem. Além disso, esta biblioteca permite que seja redefinido o vetor de característica permitindo configurar a quantidade de elementos para compô-lo. 
+
+Este é um fato importante, porque os testes preliminares indicam a necessidade de ajustes no sistema de CBIR que pode ser melhorado adicionando mais variáveis da curva log-log ao vetor de características, o que é possível com a biblioteca Python PoreSpy.
+
+A respeito das medidas de similaridade, o resultado dos testes preliminares demonstram que estão muito próximos e podem orientar que há equilíbrio entre os métodos utilizados para encontrar o resultado do cálculo da distância.
+
+O banco de imagens é único e estará composto por duas bases de imagens de línguas que são distintas, sendo a primeira composta por pacientes Brasileiros, portanto, pessoas do ocidente com imagens de língua que não são homogêneas, ou seja, diferentes raças, idade e gêneros e que contempla o padrão ouro. O segundo banco é composto por 95 imagens de pacientes orientais, idosos e dos gêneros masculino e feminino. Todos os testes preliminares foram realizados exclusivamente com o segundo banco de imagens
+
+
+
+
+
+
