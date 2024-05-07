@@ -8,7 +8,19 @@ As bases de imagens utilizadas neste trabalho não possuem acesso público. O ac
 a base ocorreu pela parceria existente entre o Centro Universitário FEI e o Instituto do Coração do Hospital das Clínicas da FMUSP (InCor).
 
 
+
+\section{Métodos}
+\label{sec:cap4_metodos}
+
+\subsection{Features Radiômicas}
+\label{subsec:cap4_features_radiomicas}
+
+Foi extraído 72 \textit{features} radiômicas de fase diastólica, representada por um conjunto de fatias variando entre 6 e 18 \textit{frames}, de cada paciente usando matriz de coocorrência de níveis de cinza (GLCM) e estatísticas baseadas em histograma. 
+
+Foi aplicado o filtro \textit{Laplace of Gaussian} (LoG) com cinco diferentes valores em cada parte para suavizar as imagens e realçar as bordas. Foi calculado \textit{features} GLCM como contraste, entropia, correlação, homogeneidade e energia de quatro direções (1°, 45°, 90° e 135°) para cada filtro LoG. Também é calculado \textit{features} de intensidade como média, variância, média dos percentis (10 e 90), desvio robusto da média absoluta, curtose e assimetria usando estatísticas de primeira ordem. Foram obtidos 78 \textit{features} radiômicas para cada paciente dentro da quantidade de fatias existentes na fase diastólica.
+
+
 \section{Considerações Finais do Capítulo}
-\label{subsec:rcond_cap_4}
+\label{sec:cap4_consideracoes_finais}
 
 \lipsum[1-4]
