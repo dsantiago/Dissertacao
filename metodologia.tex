@@ -1,7 +1,12 @@
 \chapter{Metodologia} 
 \label{chap:metodologia}
 
-\lipsum[2-4]
+O objetivo deste trabalho é propor e investigar uma arquitetura de aprendizado profundo que unifica \textit{features} de radiômica e \textit{features} profundas. Inicialmente, é empregado diversas técnicas de aprendizado de máquina para extrair \textit{features} manuais de imagens de RM, abrangendo textura, forma, escala de cinza, etc. Posteriormente, uma rede \textit{ResNet50} pré-treinada é utilizada para extrair \textit{features} profundas que encapsulam informações semânticas de alto nível e de representação das imagens de RM. Estas \textit{features} são então fundidas em um vetor de \textit{features} unificado. Para aprimorar a acurácia e a robustez, um módulo de \textit{self attention} foi desenvolvido. Utilizando o mecanismo de \textit{self attention}, este módulo otimiza e pondera o vetor de \textit{features} fundidas de forma eficaz.
+
+\section{Conjunto de Dados}
+As bases de imagens utilizadas neste trabalho não possuem acesso público. O acesso
+a base ocorreu pela parceria existente entre o Centro Universitário FEI e o Instituto do Coração do Hospital das Clínicas da FMUSP (InCor).
+
 
 \section{Considerações Finais do Capítulo}
 \label{subsec:rcond_cap_4}
