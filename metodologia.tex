@@ -1,7 +1,7 @@
 \chapter{Metodologia} 
 \label{chap:metodologia}
 
-O objetivo deste trabalho é propor e investigar uma arquitetura de aprendizado profundo que unifica \textit{features} de radiômica e \textit{features} profundas. Inicialmente, é empregado diversas técnicas de aprendizado de máquina para extrair \textit{features} manuais de imagens de RM, abrangendo textura, forma, escala de cinza, etc. Posteriormente, uma rede \textit{ResNet50} pré-treinada é utilizada para extrair \textit{features} profundas que encapsulam informações semânticas de alto nível e de representação das imagens de RM. Estas \textit{features} são então fundidas em um vetor de \textit{features} unificado. Para aprimorar a acurácia e a robustez, um módulo de \textit{self attention} foi desenvolvido. Utilizando o mecanismo de \textit{self attention}, este módulo otimiza e pondera o vetor de \textit{features} fundidas de forma eficaz.
+O objetivo deste trabalho é propor e investigar uma arquitetura de aprendizado profundo que unifica \textit{features} de radiômica e \textit{features} profundas. Inicialmente, é empregado diversas técnicas de aprendizado de máquina para extrair \textit{features} manuais de imagens de RM, abrangendo textura, forma, escala de cinza, etc. Posteriormente, uma rede \textit{ResNet50} pré-treinada é utilizada para extrair \textit{features} profundas que encapsulam informações semânticas de alto nível e de representação das imagens de RM. Estas \textit{features} são então fundidas em um vetor de \textit{features} unificado. Para aprimorar a acurácia e a robustez, um módulo de \textit{self-attention} foi desenvolvido. Utilizando o mecanismo de \textit{self-attention}, este módulo otimiza e pondera o vetor de \textit{features} fundidas de forma eficaz.
 
 %---------------------------------------------------------
 \section{Conjunto de Dados}
@@ -36,13 +36,13 @@ F_{hd} = \textit{Concat}(F_h, F_d)
 \end{equation}
 
 %---------------------------------------------------------
-\subsection{Módulo de SelfAttention}
+\subsection{Módulo de Fusão de Self-Attention}
 \label{subsec:cap4_mod_self_attention}
 
-Neste trabalho é empregado o mecanismo de \textit{self-attention} para aprender a importância de cada \textit{feature} e capturar suas dependências de longo alcance. Como ilustrado na 
+Neste trabalho é empregado o mecanismo de \textit{self-attention} para aprender a importância de cada \textit{feature} e capturar suas dependências de longo alcance. Como ilustrado na Figura 11111, o módulo de fusão de \textit{self-attention} é utilizado para mapear uma consulta ($Q$), chave ($K$) e valor ($V$) para um valor de \textit{attention}. Utilizamos as 128 \textit{features} concatenadas $F_{hd}$  como \textit{tokens} e projetamos cada \textit{feature} em três matrizes aprendíveis: matriz chave $K$, matriz consulta $Q$ e matriz de valor $V$ por produto escalar com as matrizes $W_{Q}$, $W_{K}$ e $W_{V}$. Logo os valores $Q$, $K$, $V$ são denotados como $W_{Q}F_{gd}$, $W_{K}F_{gd}$, $W_{V}F_{gd}$ respectivamente, onde $W_{Q}$, $W_{K}$ e $W_{V}$ representam a transformação linear para as matrizes $Q$, $K$ e $V$. O módulo de fusão baseado em \textit{self-attention} é definido como segue na Equação \ref{eq:attention}, onde $d_{k}$ é a dimensão do valor de $K$. Sem utilizar operações recorrentes ou convolucionais, o módulo de fusão de \textit{self-attention} pode modelar as dependências de longo prazo entre as características de entrada.      Este módulo calcula de forma adaptativa os pesos entre as \textit{features} com base em sua importância e relevância, capturando de forma mais abrangente as associações entre \textit{features} radiômicas e profundas. Tal processo realça a capacidade expressiva das \textit{features} fundidas e permite que o modelo foque mais precisamente nas \textit{features} mais informativas para prever 
 
 
-Figura 1, o módulo de fusão de autoatenção é utilizado para mapear uma consulta (), chave () e valor () para um valor de atenção. Pegamos as 24 características concatenadas  como tokens e projetamos cada característica em três matrizes aprendíveis: matriz chave , matriz consulta  e matriz valor  por produto escalar com as matrizes ,  e . Os , ,  são denotados como , ,  respectivamente, onde ,  e  representam as matrizes de transformação linear para , , . O módulo de fusão baseado em autoatenção é definido da seguinte forma:
+a recorrência precoce do câncer de pulmão de células não pequenas (NSCLC) e reduzir a influência de características irrelevantes na previsão. Além disso, o modelo pode alocar dinamicamente atenção a diferentes amostras de imagens de tomografia computadorizada (CT). Essa flexibilidade permite que o modelo se adapte melhor à representação de características de diferentes amostras, melhorando a precisão e a generalização da previsão.
 
 %---------------------------------------------------------
 
