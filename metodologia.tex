@@ -19,10 +19,37 @@ a base ocorreu pela parceria existente entre o Centro Universitário FEI e o Ins
 Foi extraído 72 \textit{features} radiômicas de fase diastólica, representada por um conjunto de fatias variando entre 6 e 18 \textit{frames}, de cada paciente usando matriz de coocorrência de níveis de cinza (GLCM) e estatísticas baseadas em histograma. Foi aplicado o filtro \textit{Laplace of Gaussian} (LoG) com cinco diferentes valores em cada parte para suavizar as imagens e realçar as bordas. Foi calculado \textit{features} GLCM como contraste, entropia, correlação, homogeneidade e energia para cada filtro LoG. Também é calculado \textit{features} de intensidade como média, variância, média dos percentis (10 e 90), desvio robusto da média absoluta, curtose e assimetria usando estatísticas de primeira ordem. Foram obtidos 78 \textit{features} radiômicas para cada paciente dentro da quantidade de fatias extraídas na fase diastólica.
 
 %---------------------------------------------------------
+\subsection{Features Profundas}
+\label{subsec:cap4_features_profundas}
+ 
+Para extrair características profundas das imagens de RM, é utilizada a arquitetura pré-treinada de um \textit{ResNet50} sem sua última camada totalmente conectada, treinada no conjunto de dados ImageNet. Estudos anteriores demonstraram que o pré-treinamento com ImageNet pode melhorar o desempenho de tarefas de classificação de imagens médicas. ResNet50 é um modelo de rede neural convolucional profunda com 50 camadas que compreende muitos blocos residuais. Cada bloco contém módulos de convolução e uma conexão de salto que transfere a informação do bloco anterior para o próximo bloco. A conexão de salto ajuda a reter a informação semântica mais básica aprendida nas camadas anteriores, que de outra forma se tornaria abstrata devido à conexão de longa cadeia. A conexão de salto também evita o desaparecimento do gradiente nas camadas mais profundas ao fornecer um caminho alternativo para a retropropagação. A informação da conexão de salto é adicionada à informação calculada em cada bloco \cite{aiSelfAttentionBasedFusion2023}. Ao todo são 2048 \textit{features} coletadas da saída deste modelo.
+
+%---------------------------------------------------------
 \subsection{Unificando as Features}
 \label{subsec:cap4_unificando_features}
 
-Um vez em posse das features radiômicas, é aplicado um F-Test e reduz-se cada um dos vetores à 64 \textit{features}. Unificando ambos os vetores obtemos um vetor de \textit{features} de tamanho 128 o qual passará pelo mecanismo de \textit{attention}.
+Um vez em posse das features radiômicas, é aplicado um F-Test tanto às 78 \textit{features} radiômicas quanto às 2048 \textit{features} profundas, reduzindo cada um dos vetores ao espaço de 64 \textit{features}. No método de fusão convencional, é simplesmente concatenado os dois vetores de \textit{features} como na Eq. \ref{eq:concat}, onde \textit{Concat} simplesmente concatena os dois vetores. Unificando ambos os vetores obtemos um vetor de 128 \textit{features} o qual passará pelo mecanismo de \textit{self-attention}.
+
+\begin{equation}
+F_{hd} = \textit{Concat}(F_h, F_d)
+\label{eq:concat}
+\end{equation}
+
+%---------------------------------------------------------
+\subsection{Módulo de SelfAttention}
+\label{subsec:cap4_mod_self_attention}
+
+Neste trabalho é empregado o mecanismo de \textit{self-attention} para aprender a importância de cada \textit{feature} e capturar suas dependências de longo alcance. Como ilustrado na 
+
+
+Figura 1, o módulo de fusão de autoatenção é utilizado para mapear uma consulta (), chave () e valor () para um valor de atenção. Pegamos as 24 características concatenadas  como tokens e projetamos cada característica em três matrizes aprendíveis: matriz chave , matriz consulta  e matriz valor  por produto escalar com as matrizes ,  e . Os , ,  são denotados como , ,  respectivamente, onde ,  e  representam as matrizes de transformação linear para , , . O módulo de fusão baseado em autoatenção é definido da seguinte forma:
+
+%---------------------------------------------------------
+
+% \subsection{Unificando as Features}
+% \label{subsec:cap4_unificando_features}
+
+% Um vez em posse das features radiômicas, é aplicado um F-Test e reduz-se cada um dos vetores à 64 \textit{features}. Unificando ambos os vetores obtemos um vetor de \textit{features} de tamanho 128 o qual passará pelo mecanismo de \textit{attention}.
 
 %---------------------------------------------------------
 \section{Considerações Finais do Capítulo}
