@@ -7,7 +7,7 @@ Dada a enorme quantidade de dados gerados, a medicina tem se apoiado na utiliza�
 
 A IA, composta por redes neurais profundas, também chamada de \gls{DL} dentro do espectro da visão computacional, pode ser utilizadas como classificadores, detectores de objetos, segmentadores, etc. Estas redes, com suas múltiplas camadas profundas, geram \textit{features} discriminantes após otimizadas a cerca de um conjunto de dados. Outro modelo de rede que vem tendo um uso cada vez maior e se encontra em diversas arquiteturas consagradas atuais, são as redes \textit{transformers}. As redes \textit{transformers} ficaram populares por serem comumente usadas em redes generativas auto-regressivas para geração sintética de texto, também conhecidas como \gls{LLM}, tendo como como seu exemplo mais conhecido o \textit{ChatGPT}. Os \textit{transformers} são arquiteturas que possuem como ponto forte principalmente sua capacidade de paralelismo e seu mecanismo de \textit{self-attention} que permite que o modelo se concentre nas partes relevantes dos dados de entrada, aprimorando a compreensão do contexto e das relações dentro dos dados.
 
-Outra técnica também muito utilizada na análise de imagens médicas é a análise de textura que vem sendo usada por várias décadas em diversos domínios da medicina. Em oncologia, a análise de textura de imagens de tomografia computadorizada mostrou correlação com a biologia tumoral subjacente ao diferenciar características histológicas diferentes e mutações genéticas específicas. Em malignidades estabelecidas, a análise de textura se relaciona com a histologia do tumor em muitos tumores sólidos comuns (pulmão, colorretal, esofágico, mama), ela se correlaciona com mutações genéticas específicas e pode acompanhar respostas terapêuticas. Fora da oncologia, mudanças não malignas em órgãos podem ser detectadas (por exemplo, cirrose hepática e pneumonite intersticial usual). Dentro da imagem cardíaca, a análise de textura aplicada à ressonância magnética cardiovascular tem sido usada para avaliar o risco de arritmia pós-infarto do miocárdio, o uso da RMC em imagens sem contraste e com realce tardio de gadolínio em pacientes com cardiomiopatia hipertrófica (CH) para prever o resultado é uma área de interesse particular atualmente \cite{schofieldTextureAnalysisCardiovascular2019a}.
+Outra técnica também muito utilizada na análise de imagens médicas é a análise de textura que vem sendo usada por várias décadas em diversos domínios da medicina. Em oncologia, a análise de textura de imagens de tomografia computadorizada mostrou correlação com a biologia tumoral subjacente ao diferenciar características histológicas diferentes e mutações genéticas específicas. Em malignidades estabelecidas, a análise de textura se relaciona com a histologia do tumor em muitos tumores sólidos comuns (pulmão, colorretal, esofágico, mama), ela se correlaciona com mutações genéticas específicas e pode acompanhar respostas terapêuticas. Fora da oncologia, mudanças não malignas em órgãos podem ser detectadas (por exemplo, cirrose hepática e pneumonite intersticial usual). Dentro da imagem cardíaca, a análise de textura aplicada à ressonância magnética cardiovascular tem sido usada para avaliar o risco de arritmia pós-infarto do miocárdio, o uso da RMC em imagens sem contraste e com realce tardio de gadolínio em pacientes com \gls{CH} para prever o resultado é uma área de interesse particular atualmente \cite{schofieldTextureAnalysisCardiovascular2019a}.
 
 A área da análise radiômica consiste no processo de obter dados qualitativos destas imagens de radiografias combinadas, por vezes, a extração de textura destas mesmas imagens. A análise radiômica pode até ser usada para avaliar a resposta ao tratamento ou para transmitir certas características prognósticas. Dentre as doenças do coração, a \gls{CH} é desenvolvida prioritariamente em jovens e pessoas de meia idade, sendo a mais comum das cardiomiopatias . Mesmo que a \gls{CH} se apresente de forma assintomática em parte dos casos, esta pode culminar em morte súbita cardíaca, insuficiência cardíaca, acidente vascular cerebral e arritmia \cite{kwonComparisonMortalityCause2022}. A análise radiômica auxilia com diagnóstico prévio afim de compreender e atuar em caso de \gls{CH} que demonstrem risco ao paciente.
 
@@ -18,9 +18,11 @@ Este trabalho tem como ideia principal unir tanto as \textit{features} radiômic
 \newpage
 
 % \section{Motivação}
-
+%---------------------------------------------------------
 \section{Objetivo}
+\label{sec:cap1_objetivo}
 
+%---------------------------------------------------------
 \subsection{Objetivos Específicos}
 
 Como objetivo desta dissertação, espera-se obter os seguintes resultados:
@@ -37,8 +39,9 @@ Como objetivo desta dissertação, espera-se obter os seguintes resultados:
 \item Iteração e análise dos resultados obtidos, sua documentação e comparação.
 \end{enumerate}
 
-
+%---------------------------------------------------------
 \section{Estrutura do trabalho}
+\label{sec:cap1_estrutura_trabalho}
 
 \textcolor{lightgray}{
 Esta proposta de dissertação está organizada em seis capítulos, a saber:

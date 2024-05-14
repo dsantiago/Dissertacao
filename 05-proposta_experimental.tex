@@ -1,0 +1,80 @@
+\chapter{Proposta Experimental}
+\label{chap:proposta}
+
+%--------------------------------------------------------
+\section{Conjunto de Dados} 
+\label{sec:cap5_conj_dados}
+
+%---------------------------------------------------------
+Os experimentos foram  aplicados em duas bases distintas com imagens de RM do coração, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o ACDC e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso
+se dá pela parceria existente entre o \gls{FEI} e o \gls{InCor}.
+
+%--------------------------------------------------------
+\subsection{Conjunto de Dados ACDC} 
+\label{subsec:cap5_acdc}
+
+O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adquiridos no hospital universitário de Dijon (França). Os dados adquiridos foram totalmente anonimizados e tratados de acordo com as regulamentações estabelecidas pelo comitê ético local do hospital de Dijon. O conjunto de dados cobre várias patologias bem definidas com casos suficientes para (1) treinar adequadamente métodos de aprendizado de máquina e (2) avaliar claramente as variações dos principais parâmetros fisiológicos obtidos a partir de cine-RM (em particular volume diastólico e fração de ejeção). O conjunto de dados é composto por 150 exames (todos de pacientes diferentes) divididos em cinco subgrupos distribuídos de forma igualitária, sendo quatro patológicos e um grupo de sujeitos saudáveis. Dentre as cinco classes distintas, tem-se: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. As classes DCM e HCM são interpretadas como passíveis de \gls{CH} e as demais; NOR, MINF e RV; são interpretadas como o coração em condições normais. Os dados encontram-se balanceados e a distribuição dos dados pode ser conferida na Tabela. \ref{tab:count_dataset}. É possível notar, que após agrupamento das classes como especificado, estas tornam-se minimamente desbalanceadas, em uma proporção de 40/60.
+
+Além disso, cada paciente vem com as seguintes informações adicionais: peso, altura, bem como os instantes das fases diastólica e sistólica \cite{bernardDeepLearningTechniques2018a}.
+
+% DCM (Dilated Cardiomyopathy): This condition is characterized by an enlarged and weakened left ventricle that cannot pump blood efficiently. DCM can lead to heart failure and arrhythmias.
+
+% HCM (Hypertrophic Cardiomyopathy): This is a genetic condition where the heart muscle (myocardium) becomes abnormally thick, which can make it harder for the heart to pump blood. It can also lead to problems with the heart's electrical system.
+
+% NOR (Normal): This class represents individuals with normal cardiac function and no evident cardiac disease. These are typically healthy patients with no significant abnormalities in their heart structure or function.
+
+% MINF (Myocardial Infarction): Commonly known as a heart attack, myocardial infarction occurs when blood flow to a part of the heart is blocked for a long enough time that part of the heart muscle is damaged or dies.
+
+% RV (Right Ventricular Abnormality)
+
+\begin{table}[hbtp]
+    \centering
+    \renewcommand{\arraystretch}{1} % default é 1 
+    \begin{tabular}{|c|c|c|c|}
+    \hline 
+          \textbf{Grupo} & \textbf{Quantidade} & \textbf{C/ HC} & \textbf{S/ HC}  \\ 
+    \hline 
+        NOR & 30 & 0 & 30 \\ 
+        DCM & 30 & 30 & 0\\ 
+        HCM & 30 & 30 & 0\\ 
+        MINF & 30 & 0 & 30 \\ 
+        RV & 30 & 0 & 30 \\
+    \hline 
+        \textbf{Total}: & 150  & 60 & 90\\ 
+    \hline 
+    \end{tabular} 
+    \caption{Fonte: Autor}
+    \label{tab:count_dataset}
+\end{table}
+
+%--------------------------------------------------------
+\subsection{Conjunto de Dados InCor} 
+\label{subsec:cap5_incor}
+
+O conjunto de dados \gls{InCor} O GE é composto por casos reais de pacientes que realizaram exames de RMC e que foram classificados por especialistas do \gls{InCor} como casos que continham CMH, CMD ou nenhuma das duas anomalias. No total foram adquiridos 400 casos, distribuídos conforme a Figura \ref{fig:fig012}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
+
+\begin{figure}[htbp]
+    \centering
+    \caption{Distribuição das anomalias entre diferentes gêneros e idades}
+    \includegraphics[width=1\textwidth]{figures/fig012.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig012}
+\end{figure}
+
+%--------------------------------------------------------
+\subsection{Experimentos ACDC}
+\label{subsec:cap5_experimentos_acdc}
+
+Utilizando o conjunto de dados \gls{ACDC} como linha de base, 
+
+
+
+
+%--------------------------------------------------------
+\section{Cronograma}
+\label{sec:cronograma}
+
+\lipsum[2-4]
+
+
+
