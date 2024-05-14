@@ -10,7 +10,19 @@ O objetivo deste trabalho é propor e investigar uma arquitetura de aprendizado 
 %---------------------------------------------------------
 \subsection{ResNet}
 \label{subsec:cap4_resnet}
-As redes residuais, ou \textit{ResNet}, desenvolvidas por \cite{heDeepResidualLearning2015}, são arquiteturas convolucionais formada pela composição de blocos residuais, seguidos de uma camada completamente conectada. Estes blocos, ilustrados na Figura 11, empregam o que os autores chamam de \textit{skip connections}, conexões que permitem que camadas sejam puladas durante o treino, resolvendo o problema conhecido como \textit{vanishing gradient}, que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente. A inovação trazida por este modelo permitiu a criação de redes muito mais profundas e pode possuir um número definido de camadas, portanto o uso de nomes como ResNet50 ou ResNet101 é uma prática comum para identificar a quantidade de camadas utilizadas no modelo.
+
+A \textit{ResNet} (Rede Residual) é uma arquitetura de rede neural profunda amplamente utilizada em tarefas de visão computacional, como classificação de imagens, detecção de objetos e segmentação de imagens. Ela foi introduzida por  \cite{heDeepResidualLearning2015}, e se destacou por ganhar a competição ImageNet em 2015 com uma precisão significativamente maior do que as arquiteturas anteriores. A principal característica da \textit{ResNet} é sua capacidade de treinar redes muito profundas sem sofrer com o problema do "desvanecimento do gradiente" que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente, problema este muito comum em redes tradicionais muito profundas. A ResNet introduz um conceito chave chamado bloco residual que é um componente da rede onde a entrada do bloco é somada à sua saída antes de passar para a próxima camada. Esta conexão direta é chamada de \textit{skip connection} ou \textit{short-cut connection} e pode ser conferido na Figura 11.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/fig013.png}
+    \caption{Fonte: \cite{aiSelfAttentionBasedFusion2023}}
+    \label{fig:fig013}
+\end{figure}
+
+A ResNet é composta por vários blocos residuais empilhados.
+Existem várias versões da ResNet, como ResNet-18, ResNet-34, ResNet-50, ResNet-101, e ResNet-152, onde os números indicam a profundidade total da rede (ou seja, o número de camadas).
+% A \textit{ResNet}, desenvolvidas por \cite{heDeepResidualLearning2015}, são arquiteturas convolucionais formada pela composição de blocos residuais, seguidos de uma camada completamente conectada. Estes blocos, ilustrados na Figura 11, empregam o que os autores chamam de \textit{skip connections}, conexões que permitem que camadas sejam puladas durante o treino, resolvendo o problema conhecido como \textit{vanishing gradient}, que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente. A inovação trazida por este modelo permitiu a criação de redes muito mais profundas e pode possuir um número definido de camadas, portanto o uso de nomes como ResNet50 ou ResNet101 é uma prática comum para identificar a quantidade de camadas utilizadas no modelo.
 
 %---------------------------------------------------------
 \subsection{Features Radiômicas}
