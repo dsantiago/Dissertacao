@@ -110,16 +110,27 @@ O conjunto de dados \gls{InCor} O GE é composto por casos reais de pacientes qu
 \subsection{Experimentos ACDC}
 \label{subsec:cap5_experimentos_acdc}
 
-Utilizando o conjunto de dados \gls{ACDC} como linha de base, 
+Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. \textit{Features} de primeira ordem e \gls{GLCM} são extraídas compondo ao todo 78 valores que compõem as features radiômicas. Para extração das \textit{features profundas}, é utilizada uma rede \textit{ResNet50} congelada é utilizada, a última camada densa é removida responsável por gerar a predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir 2048 \textit{features}.
 
+A \textit{F-Test} é utilizado como seletor de \textit{features}, aplicado tanto nas \textit{features} radiômicas quanto nas profundas, as diminuindo ao valor de 64. Essas \textit{features} são concatenadas, e enviadas ao módulo de \textit{self-attention} e os resultados armazenados.
 
+Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 30 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo, neste caso 4. Com o resultado do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de seu resultado entre 0 e 1. Dos resultados, é classificado com CH todo valor $>0,5$ e normal o inverso.
 
+\begin{equation}
+\textit{sigmoide}(x) = \frac{1}{1 + e^x}
+\label{eq:sigmoide}
+\end{equation}
 
 %--------------------------------------------------------
 \section{Cronograma}
 \label{sec:cronograma}
 
-\lipsum[2-4]
+O cronograma proposto das atividades segue na Fig. \ref{fig:fig014}.
 
-
-
+\begin{figure}[htbp]
+    \centering
+    \caption{Cronograma Sugerido}
+    \includegraphics[width=1\textwidth]{figures/fig014.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig014}
+\end{figure}

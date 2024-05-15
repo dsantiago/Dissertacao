@@ -79,6 +79,19 @@ O esquemático da arquitetura proposta pode ser conferida na Figura \ref{fig:fig
     \label{fig:fig011}
 \end{figure}
 
+Para medir o desempenho da solução serão aplicadas no presente trabalho: acurácia e precisão, expressas pelas equações \ref{eq:acc} e \ref{eq:precision}. A precisão foi escolhida neste contexto pois quanto maior esta for, menor é a taxa de falso negativo nos resultados. A precisão é pertinente quando o custo com a identificação de falso positivos é alto, como é o caso de doenças fatais.
+
+\begin{equation}
+\textit{Acurácia} = \frac{\textit{TP} + \textit{TN}}{\textit{TP} + \textit{TN} + \textit{FP} + \textit{FN}}
+\label{eq:acc}
+\end{equation}
+
+\begin{equation}
+\textit{Precisão} = \frac{\textit{TP}}{\textit{TP} + \textit{FP}}
+\label{eq:precision}
+\end{equation}
+
+
 %---------------------------------------------------------
 
 % \subsection{Unificando as Features}
@@ -90,4 +103,4 @@ O esquemático da arquitetura proposta pode ser conferida na Figura \ref{fig:fig
 \section{Considerações Finais do Capítulo}
 \label{sec:cap4_consideracoes_finais}
 
-Como considerações finais deste capítulo, destacamos o uso de \textit{dataset} público, com dados de pacientes incluindo o conjuntos de fatias que identificam a ação de sístole e diástole do coração. É aplicado pré-processamento para onde é extraído manualmente 78 \textit{features} radiômicas, \textit{features} estas que analisam textura, níveis e variações dos tons de cinza incluindo diversas estatísticas como de primeira ordem e o \gls{GLCM}. Ainda em fase de pré-processamento é extraída as \textit{features} profundas oriundos do modelo de visão \textit{ResNet50}, com os pesos treinados no \textit{dataset} da \textit{ImageNet}. É removida a última camada linear da \textit{ResNet50} resultando ao seu final, sem a camada classificadora, 2048 \textit{features}. Em posse de ambas as features, é aplicada a técnica de \textit{F-test} para obter as 64 \textit{features} mais relevantes e, após, concatená-las obtendo um vetor de características de 128 \textit{features}. Este vetor é exposto ao módulo de fusão com \textit{self-attention}, identificando as \textit{features} mais determinantes independente de espacialidade. Ao fim o modelo entrega a classificação binária se o paciente apresenta ou não quadro de \gls{CH}. Como resultado obtido, temos um AUC de 0,74.
+Como considerações finais deste capítulo, destacamos o uso de \textit{dataset} público, com dados de pacientes incluindo o conjuntos de fatias que identificam a ação de sístole e diástole do coração. É aplicado pré-processamento para onde é extraído manualmente 78 \textit{features} radiômicas, \textit{features} estas que analisam textura, níveis e variações dos tons de cinza incluindo diversas estatísticas como de primeira ordem e o \gls{GLCM}. Ainda em fase de pré-processamento é extraída as \textit{features} profundas oriundos do modelo de visão \textit{ResNet50}, com os pesos treinados no \textit{dataset} da \textit{ImageNet}. É removida a última camada linear da \textit{ResNet50} resultando ao seu final, sem a camada classificadora, 2048 \textit{features}. Em posse de ambas as features, é aplicada a técnica de \textit{F-test} para obter as 64 \textit{features} mais relevantes e, após, concatená-las obtendo um vetor de características de 128 \textit{features}. Este vetor é exposto ao módulo de fusão com \textit{self-attention}, identificando as \textit{features} mais determinantes independente de espacialidade. 
