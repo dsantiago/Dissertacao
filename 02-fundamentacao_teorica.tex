@@ -116,6 +116,17 @@ O mecanismo de atenção é particularmente chamado de "Atenção de Produto Esc
 Dos vários pontos de vantagem do mecanismo de atenção, pode-se citar: o total de poder computacional por camada, o total de computação que pode ser paralelizada e o já mencionado que seria relação de dependência entre dados que se encontram muito distantes um do outro, como também distâncias que necessitam ser percorridas frente e para trás na rede para identificar tais relações. Como benefício adicional, o mecanismo de atenção pode gerar modelos mais interpretáveis. Não apenas as cabeças de atenção individuais claramente aprendem a executar diferentes tarefas, muitas parecem exibir comportamentos relacionados à estrutura sintática e semântica das frases, no caso da aplicação em \textit{tokens} oriundos de textos.
 
 %--------------------------------------------------------
+\section{Otimizador \textit{Adam}}
+\label{subsec:otimizadores_cap_3}
+
+Toda rede neural, é treinada aplicando otimização em uma determinada função objetivo afim de minimizar o erro perante os dados de treinamento. Neste contexto, o presente trabalho escolhe o \gls{Adam} como otimizador dada sua adaptatividade.
+
+O método \gls{Adam}, introduzido por \cite{kingmaAdamMethodStochastic2014}, é um método popular para o treinamento de modelos de \textit{deep learning}. O \gls{Adam} combina os benefícios de outras duas técnicas de otimização, o \textit{AdaGrad} e o \textit{RMSProp}. O \gls{Adam} é um método de otimização estocástica eficiente que requer apenas gradientes de primeira ordem com pouca exigência de memória. O método calcula taxas de aprendizado adaptativas individuais para diferentes parâmetros a partir de estimativas dos primeiros e segundos momentos dos gradientes.
+
+Algumas das vantagens do \gls{Adam} são: taxas de aprendizado adptativas, que levam a uma convergência mais rápida e eficiente comparadas com métodos de aprendizado fixos; robustez, que suportam gradientes esparsos de forma efetiva o qual é crucial para diversas aplicações de \textit{deep learning} atuais; fácil de utilizar, pois requer menos ajustes de parâmetros a tornando amigável ao usuário e acessível a uma grande gama de tarefas.
+
+
+%--------------------------------------------------------
 \section{Considerações Finais do Capitulo}
 \label{subsec:rcond_cap_3}
 
@@ -133,3 +144,4 @@ Dadas as vantagens e limitações discutidas, este trabalho tem como proposta a 
 \end{figure}
 
 Com esta abordagem, acredita-se que será aproveitada a riqueza de informações contidas nas imagens de RM e ajustadas de forma adaptativa a importância destas \textit{features}. A fusão das \textit{features} radiômicas manuais e as \textit{features} profundas, devem melhorar as habilidades de expressividade e generalização do modelo. 
+

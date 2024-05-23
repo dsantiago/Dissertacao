@@ -2,10 +2,44 @@
 \label{chap:proposta}
 
 %--------------------------------------------------------
+\section{Materiais} 
+\label{sec:cap5_materiais}
+
+Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software} utilizado nos experimentos para fins de reprodução. A tabela \ref{tab:hardware_software} referência tanto o \textit{hardware} como as principais bibliotecas utilizadas e suas versões.
+
+\begin{table}[hbtp]
+    \centering
+    \renewcommand{\arraystretch}{1} % default é 1 
+    % \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|p{12cm}|}
+    \begin{tabular}{|c|c|}
+    \hline 
+       \textbf{Item} & \textbf{Descrição}\\
+    \hline 
+       Computador & \textit{Macbook M1 Pro}  \\
+    \hline 
+       Memória & 16gb  \\
+    \hline 
+       Versão \textit{Python} & 3.11.0  \\
+    \hline 
+       Versão \textit{pyradiomics} & 3.0.1 \\
+    \hline 
+       Versão \textit{torch} & 2.2.1 \\
+    \hline 
+       Versão \textit{torchvision} & 0.17.1 \\
+    \hline 
+    \end{tabular} 
+    \caption{Fonte: Autor}
+    \label{tab:hardware_software}
+\end{table}
+
+
+
+
+
+%--------------------------------------------------------
 \section{Conjunto de Dados} 
 \label{sec:cap5_conj_dados}
 
-%---------------------------------------------------------
 Os experimentos foram  aplicados em duas bases distintas com imagens de RM do coração, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o ACDC e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso
 se dá pela parceria existente entre o \gls{FEI} e o \gls{InCor}.
 
@@ -129,7 +163,7 @@ O cronograma proposto das atividades segue na Fig. \ref{fig:fig014}.
 
 \begin{figure}[htbp]
     \centering
-    \caption{Cronograma Sugerido}
+    \caption{Cronograma planejado}
     \includegraphics[width=1\textwidth]{figures/fig014.png}
     \caption*{Fonte: Autor}
     \label{fig:fig014}
