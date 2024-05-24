@@ -2,10 +2,17 @@
 \label{chap:resultados_discussao}
 
 %--------------------------------------------------------
+\section{Trabalhos Paralelos} 
+\label{sec:cap6_trabalhos_paralelos}
+
+Em paralelo a este trabalho, houve a contribuição com o seguinte trabalho \cite{adornoAutomaticDetectionPeople2023}, trabalho este que visa dar apoio ao metrô de São Paulo na identificação de pessoas com deficiência, para liberar o acesso de forma mais coerente, à apenas aqueles que realmente se encontram nas categorias atendidas, como idosos, gestantes, cadeirantes, etc. Este projeto lida com visão computacional, mais precisamente detecção de objetos, e avalia uma família de modelos para tal tarefa.
+
+
+%--------------------------------------------------------
 \section{Resultados} 
 \label{sec:cap6_resultados}
 
-Os testes iniciais foram aplicados ao conjunto de dados do \gls{ACDC}. Este conjunto de dados público já vem separado com 100 exames para treino e 50 para testes. A Figura \ref{fig:fig018} e \ref{fig:fig019} são exemplos de imagens de \gls{DCM} e \gls{HCM} capturadas na diástole, ambas com suas máscaras. Na Figura \ref{fig:fig020} temos uma imagem de coração em estado normal (\gls{NOR}).
+Os testes iniciais foram aplicados ao conjunto de dados do \gls{ACDC}. Este conjunto de dados público já vem separado com 100 exames para treino e 50 para testes. A Figura \ref{fig:fig018} e \ref{fig:fig019} são exemplos de imagens de \gls{DCM} e \gls{HCM} capturadas na diástole, todas com suas respectivas máscaras, capturadas em momento de diástole do coração. Na Figura \ref{fig:fig020} temos uma imagem de coração em estado normal (\gls{NOR}). Todas as mostradas fazem parte do conjunto de treinamento.
 
 \begin{figure}[htbp]
     \caption{Captura Diastólica DCM}
@@ -31,7 +38,7 @@ Os testes iniciais foram aplicados ao conjunto de dados do \gls{ACDC}. Este conj
     \label{fig:fig020}
 \end{figure}
 
-Os resultados foram obtidos aplicando a metodologia previamente apresentada, foi extraídas as \textit{features} radiômicas e profundas, após foi aplicado o F-Test para seleção de \textit{features} e o resultado concatenado. Por fim, o modelo de \textit{self-attention} foi aplicado, os hiperparâmetros utilizados são: taxa de aprendizado $0,0001$, otimizador \gls{Adam} e aproximadamente 300 épocas. As principais métricas calculadas são conferidas na Tabela \ref{tab:metrics}.
+Os resultados foram obtidos aplicando a metodologia previamente apresentada, foi extraídas as \textit{features} radiômicas e profundas, após foi aplicado o F-Test para seleção de \textit{features} e o resultado concatenado. Em seguida, o modelo de \textit{self-attention} foi aplicado, os hiperparâmetros utilizados são: taxa de aprendizado $0,0001$, otimizador \gls{Adam} e aproximadamente 300 épocas. Por fim, é aplicada a função matemática sigmoide e definido o limite de $0,5$ para corte onde os valores acima deste limite são classificados como \gls{CH} e os demais como normal. As principais métricas calculadas são conferidas na Tabela \ref{tab:metrics}.
 
 \begin{table}[hbtp]
     \centering
