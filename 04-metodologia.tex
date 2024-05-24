@@ -79,7 +79,10 @@ O esquemático da arquitetura proposta pode ser conferida na Figura \ref{fig:fig
     \label{fig:fig011}
 \end{figure}
 
-Para medir o desempenho da solução serão aplicadas no presente trabalho: acurácia e precisão, expressas pelas equações \ref{eq:acc} e \ref{eq:precision}. A precisão foi escolhida neste contexto pois quanto maior esta for, menor é a taxa de falso negativo nos resultados. A precisão é pertinente quando o custo com a identificação de falso positivos é alto, como é o caso de doenças fatais.
+Para medir o desempenho da solução serão aplicadas no presente trabalho: acurácia e precisão, expressas pelas equações \ref{eq:acc}, \ref{eq:precision} e \ref{eq:recall}.
+Também é calculada a \gls{AUC}, também reconhecida como a área que avalia o modelo em diversos limites contínuos de decisão, verificando a taxa de verdadeiros positivos contra falsos positivos em cada limite.
+
+% A precisão foi escolhida neste contexto pois quanto maior esta for, menor é a taxa de falso negativo nos resultados. A precisão é pertinente quando o custo com a identificação de falso positivos é alto, como é o caso de doenças fatais.
 
 \begin{equation}
 \textit{Acurácia} = \frac{\textit{TP} + \textit{TN}}{\textit{TP} + \textit{TN} + \textit{FP} + \textit{FN}}
@@ -91,13 +94,29 @@ Para medir o desempenho da solução serão aplicadas no presente trabalho: acur
 \label{eq:precision}
 \end{equation}
 
+\begin{equation}
+\textit{Revocação} = \frac{\textit{TP}}{\textit{TP} + \textit{FN}}
+\label{eq:recall}
+\end{equation}
 
 %---------------------------------------------------------
-
 % \subsection{Unificando as Features}
 % \label{subsec:cap4_unificando_features}
 
 % Um vez em posse das features radiômicas, é aplicado um F-Test e reduz-se cada um dos vetores à 64 \textit{features}. Unificando ambos os vetores obtemos um vetor de \textit{features} de tamanho 128 o qual passará pelo mecanismo de \textit{attention}.
+
+%---------------------------------------------------------
+\subsection{Fluxograma}
+\label{subsec:cap4_floxugrama}
+
+A Figura. \ref{fig:fig015} confere o fluxograma do projeto ilustrando de forma esquemática suas fases de atuação.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/fig015.png}
+    \caption{Fonte: Autor}
+    \label{fig:fig015}
+\end{figure}
 
 %---------------------------------------------------------
 \section{Considerações Finais do Capítulo}

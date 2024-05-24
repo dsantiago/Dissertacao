@@ -5,7 +5,7 @@
 \section{Materiais} 
 \label{sec:cap5_materiais}
 
-Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software} utilizado nos experimentos para fins de reprodução. A tabela \ref{tab:hardware_software} referência tanto o \textit{hardware} como as principais bibliotecas utilizadas e suas versões.
+Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software} utilizado nos experimentos para fins de reprodução. A Tabela. \ref{tab:hardware_software} referência tanto o \textit{hardware} como as principais bibliotecas utilizadas e suas versões.
 
 \begin{table}[hbtp]
     \centering
@@ -27,20 +27,21 @@ Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o 
     \hline 
        Versão \textit{torchvision} & 0.17.1 \\
     \hline 
+       Versão \textit{numpy} & 1.26.4 \\
+    \hline 
+       Versão \textit{scikit-learn} & 1.4.1.post1 \\
+    \hline 
     \end{tabular} 
     \caption{Fonte: Autor}
     \label{tab:hardware_software}
 \end{table}
 
 
-
-
-
 %--------------------------------------------------------
 \section{Conjunto de Dados} 
 \label{sec:cap5_conj_dados}
 
-Os experimentos foram  aplicados em duas bases distintas com imagens de RM do coração, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o ACDC e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso
+Os experimentos foram  aplicados em duas bases distintas com imagens de RM do coração, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o \gls{ACDC} e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso
 se dá pela parceria existente entre o \gls{FEI} e o \gls{InCor}.
 
 %--------------------------------------------------------
@@ -130,7 +131,7 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
 \subsection{Conjunto de Dados InCor} 
 \label{subsec:cap5_incor}
 
-O conjunto de dados \gls{InCor} O GE é composto por casos reais de pacientes que realizaram exames de RMC e que foram classificados por especialistas do \gls{InCor} como casos que continham CMH, CMD ou nenhuma das duas anomalias. No total foram adquiridos 400 casos, distribuídos conforme a Figura \ref{fig:fig013}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
+O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que realizaram exames de RMC e que foram classificados por especialistas do \gls{InCor} como casos que continham cardiomiopatia hipertrófica, cardiomiopatia dilatada ou nenhuma das duas anomalias. No total foram adquiridos 400 casos, distribuídos conforme a Figura \ref{fig:fig013}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
 
 \begin{figure}[htbp]
     \centering
@@ -148,7 +149,7 @@ Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 1
 
 A \textit{F-Test} é utilizado como seletor de \textit{features}, aplicado tanto nas \textit{features} radiômicas quanto nas profundas, as diminuindo ao valor de 64. Essas \textit{features} são concatenadas, e enviadas ao módulo de \textit{self-attention} e os resultados armazenados.
 
-Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 30 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo, neste caso 4. Com o resultado do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de seu resultado entre 0 e 1. Dos resultados, é classificado com CH todo valor $>0,5$ e normal o inverso.
+Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 300 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo, neste caso 4. Com o resultado do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de seu resultado entre 0 e 1. Dos resultados, é classificado com CH todo valor $>0,5$ e normal o inverso.
 
 \begin{equation}
 \textit{sigmoide}(x) = \frac{1}{1 + e^x}
@@ -159,7 +160,7 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 \section{Cronograma}
 \label{sec:cronograma}
 
-O cronograma proposto das atividades segue na Fig. \ref{fig:fig014}.
+O cronograma proposto das atividades segue na Figura. \ref{fig:fig014}. De forma resumida, as disciplinas se encontram concluídas, resultados experimentais no conjunto de dados de base, \gls{ACDC} coletados e futuros experimentos arquiteturais em andamento.
 
 \begin{figure}[htbp]
     \centering
