@@ -5,7 +5,7 @@
 \section{Materiais} 
 \label{sec:cap5_materiais}
 
-Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software} utilizado nos experimentos para fins de reprodução. A Tabela. \ref{tab:hardware_software} referência tanto o \textit{hardware} como as principais bibliotecas utilizadas e suas versões.
+Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software}, como também as principais bibliotecas utilizadas e suas versões nos experimentos para fins de reprodução. A Tabela \ref{tab:hardware_software} estrutura estas informações.
 
 \begin{table}[hbtp]
     \centering
@@ -41,8 +41,7 @@ Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o 
 \section{Conjunto de Dados} 
 \label{sec:cap5_conj_dados}
 
-Os experimentos foram  aplicados em duas bases distintas com imagens de RM do coração, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o \gls{ACDC} e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso
-se dá pela parceria existente entre o \gls{FEI} e o \gls{InCor}.
+A ideia é realizar os experimentos em duas bases distintas com imagens de \gls{RM}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o \gls{ACDC} e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso se dá pela parceria existente entre o \gls{FEI} e o \gls{InCor}.
 
 %--------------------------------------------------------
 \subsection{Conjunto de Dados ACDC} 
@@ -109,6 +108,7 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
 
 \begin{table}[hbtp]
     \centering
+    \caption{Classes do ACDC}
     \renewcommand{\arraystretch}{1} % default é 1 
     \begin{tabular}{|c|c|c|c|}
     \hline 
@@ -123,7 +123,7 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
         \textbf{Total}: & 150  & 60 & 90\\ 
     \hline 
     \end{tabular} 
-    \caption{Fonte: Autor}
+    \caption*{Fonte: Autor}
     \label{tab:count_dataset}
 \end{table}
 
@@ -131,7 +131,7 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
 \subsection{Conjunto de Dados InCor} 
 \label{subsec:cap5_incor}
 
-O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que realizaram exames de RMC e que foram classificados por especialistas do \gls{InCor} como casos que continham cardiomiopatia hipertrófica, cardiomiopatia dilatada ou nenhuma das duas anomalias. No total foram adquiridos 400 casos, distribuídos conforme a Figura \ref{fig:fig013}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
+O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que realizaram exames de \gls{RMC} e que foram classificados por especialistas do \gls{InCor} como casos que continham cardiomiopatia hipertrófica, cardiomiopatia dilatada ou nenhuma das duas anomalias. No total foram adquiridos 400 casos, distribuídos conforme a Figura \ref{fig:fig013}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
 
 \begin{figure}[htbp]
     \centering
@@ -145,11 +145,11 @@ O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que rea
 \subsection{Experimentos ACDC}
 \label{subsec:cap5_experimentos_acdc}
 
-Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. \textit{Features} de primeira ordem e \gls{GLCM} são extraídas compondo ao todo 78 valores que compõem as features radiômicas. Para extração das \textit{features profundas}, é utilizada uma rede \textit{ResNet50} congelada é utilizada, a última camada densa é removida responsável por gerar a predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir 2048 \textit{features}.
+Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos para treino, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. \textit{Features} de primeira ordem e \gls{GLCM} são extraídas compondo ao todo 78 valores que compõem as \textit{features} radiômicas. Para extração das \textit{features} profundas, é utilizada uma rede \textit{ResNet50} congelada e sua última camada densa é removida, já que originalmente é responsável pela predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir 2048 \textit{features}.
 
-A \textit{F-Test} é utilizado como seletor de \textit{features}, aplicado tanto nas \textit{features} radiômicas quanto nas profundas, as diminuindo ao valor de 64. Essas \textit{features} são concatenadas, e enviadas ao módulo de \textit{self-attention} e os resultados armazenados.
+O \textit{F-Test} é utilizado como seletor de \textit{features}, aplicado tanto nas \textit{features} radiômicas quanto nas profundas, selecionando um total de 64 \textit{features} em cada abordagem: radiômicas e profundas. Essas \textit{features} são concatenadas, enviadas ao módulo de autoatenção e os resultados armazenados.
 
-Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 300 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo, neste caso 4. Com o resultado do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de seu resultado entre 0 e 1. Dos resultados, é classificado com CH todo valor $>0,5$ e normal o inverso.
+Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 300 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo. Com a saída do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de sua entrada entre 0 e 1. Para fins de classificação, valores maiores que $0,5$ são considerados com \gls{CH} e menor ou iguais considerados normal.
 
 \begin{equation}
 \textit{sigmoide}(x) = \frac{1}{1 + e^x}
@@ -160,7 +160,7 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 \section{Cronograma}
 \label{sec:cronograma}
 
-O cronograma proposto das atividades segue na Figura. \ref{fig:fig014}. De forma resumida, as disciplinas se encontram concluídas, resultados experimentais no conjunto de dados de base, \gls{ACDC} coletados e futuros experimentos arquiteturais em andamento.
+O cronograma proposto das atividades segue na Figura \ref{fig:fig014}. De forma resumida, as disciplinas se encontram concluídas, resultados experimentais no conjunto de dados \gls{ACDC} coletados e futuros experimentos arquiteturais em andamento.
 
 \begin{figure}[htbp]
     \centering
