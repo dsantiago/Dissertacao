@@ -128,17 +128,19 @@ Este estudo exemplifica a aplicação de técnicas avançadas de aprendizado de 
 
 \begin{figure}[htbp]
     \centering
+    \caption{Arquitetura Proposta}
     \includegraphics[width=1\textwidth]{figures/fig008.png}
-    \caption{Fonte: \cite{aiSelfAttentionBasedFusion2023}}
+    \caption*{Fonte: \citeonline{aiSelfAttentionBasedFusion2023}}
     \label{fig:fig008}
 \end{figure}
 %---------------------------------------------------------
 
-\cite{iranmehrImprovedPredictionMGMT2022} desenvolveram uma rede de aprendizado profundo inovadora que utiliza um mecanismo baseado em atenção para aprimorar a previsão do estado de metilação do gene MGMT em \gls{GBM}, o tipo mais agressivo de tumor cerebral. Pacientes com \gls{GBM} possuem uma expectativa muito baixa, entre 18 e 24 meses e requerem tratamentos agressivos, como por exemplo, quimioterapia. Sua pesquisa, apresentada em "\textit{Improved Prediction of MGMT Methylation Status in Glioblastoma using a Deep Attention Network}", destaca um avanço significativo nas capacidades diagnósticas não invasivas para \gls{GBM}, que tipicamente tem uma taxa de sobrevivência de apenas 18 meses.
+\citeonline{iranmehrImprovedPredictionMGMT}
+desenvolveram uma rede de aprendizado profundo inovadora que utiliza um mecanismo baseado em atenção para aprimorar a previsão do estado de metilação do gene MGMT em \gls{GBM}, o tipo mais agressivo de tumor cerebral. Pacientes com \gls{GBM} possuem uma expectativa muito baixa, entre 18 e 24 meses e requerem tratamentos agressivos, como por exemplo, quimioterapia. Sua pesquisa, apresentada em "\textit{Improved Prediction of MGMT Methylation Status in Glioblastoma using a Deep Attention Network}", destaca um avanço significativo nas capacidades diagnósticas não invasivas para \gls{GBM}, que tipicamente tem uma taxa de sobrevivência de apenas 18 meses.
 
-O estudo foca no gene MGMT, cujo estado de metilação é crucial para determinar a eficácia da quimioterapia em pacientes com \gls{GBM}. As análises radiômicas tradicionais, embora úteis, muitas vezes não capturam os recursos intrincados necessários para uma previsão precisa da metilação. \citeauthor{iranmehrImprovedPredictionMGMT2022} propõem um modelo que integra características radiômicas manuais com técnicas de \gls{DL}, melhorando a extração de características e a precisão da previsão de \gls{GBM}.
+O estudo foca no gene MGMT, cujo estado de metilação é crucial para determinar a eficácia da quimioterapia em pacientes com \gls{GBM}. As análises radiômicas tradicionais, embora úteis, muitas vezes não capturam os recursos intrincados necessários para uma previsão precisa da metilação. \citeauthor{iranmehrImprovedPredictionMGMT2022} propõem um modelo que integra características radiômicas manuais com técnicas de \gls{AP}, melhorando a extração de características e a precisão da previsão de \gls{GBM}.
 
-O modelo introduzido pela equipe utiliza uma combinação de mecanismos de atenção espremida e sequencial para priorizar fatias e regiões relevantes dentro das imagens de \gls{RM}, respectivamente. Esse método não apenas melhora o foco em áreas significativas, mas também aprimora a interpretabilidade geral do modelo. O modelo proposto na Figura \ref{fig:fig009}), consiste de três etapas: 1) Um modelo base para extrair as \textit{features}, 2) uma rede de atenção temporal e espacial e 3) uma rede de classificação para prever se o exame é metilado ou não metilado. 
+O modelo introduzido pela equipe utiliza uma combinação de mecanismos de atenção espremida e sequencial para priorizar fatias e regiões relevantes dentro das imagens de \gls{RMC}, respectivamente. Esse método não apenas melhora o foco em áreas significativas, mas também aprimora a interpretabilidade geral do modelo. O modelo proposto na Figura \ref{fig:fig009}), consiste de três etapas: 1) Um modelo base para extrair as \textit{features}, 2) uma rede de atenção temporal e espacial e 3) uma rede de classificação para prever se o exame é metilado ou não metilado. 
 
 \begin{figure}[htbp]
     \centering
