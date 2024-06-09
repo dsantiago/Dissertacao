@@ -38,18 +38,17 @@ Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o 
     \label{tab:hardware_software}
 \end{table}
 
-
 %--------------------------------------------------------
 \section{Conjunto de Dados} 
-\label{sec:cap5_conj_dados}
+\label{subsec:cap5_dataset}
 
-A ideia é realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o \gls{ACDC} e consiste de dados públicos e são utilizados como linha de base para avaliação dos métodos aplicados. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso se dá pela parceria existente entre a \gls{FEI} e o \gls{InCor}.
+Este trabalho visa realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. O primeiro conjunto de dados é o \gls{ACDC} e será utilizado como linha de base para avaliação da metodologia. O conjunto de dados para treino do \gls{ACDC} possui $30$ casos de \gls{CMH}, $30$ casos de \gls{CMD} e $90$ casos normais. O segundo conjunto de dados é o \gls{InCor}, possuindo imagens na fase diastólica contendo as mesmas três classes de interesse previamente mencionadas.
 
 %--------------------------------------------------------
 \subsection{Experimentos ACDC}
 \label{subsec:cap5_experimentos_acdc}
 
-Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos para treino, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. características de primeira ordem e \gls{GLCM} são extraídas compondo ao todo $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, é utilizada uma rede \textit{ResNet50} congelada e sua última camada densa é removida, já que originalmente é responsável pela predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir $\DeepFeatures$ características.
+A partir da arquitetura proposta foi realizada uma prova de conceito utilizando o conjunto de treino do \gls{ACDC} como linha de base, composto por $100$ exames de pacientes, coletando apenas as fatias das imagens da fase diastólica e a máscara referente disponibilizada. Características de primeira ordem e \gls{GLCM} são extraídas compondo ao todo $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, é utilizada uma rede \textit{ResNet50} congelada e sua última camada densa é removida, visto que originalmente esta é responsável pela predição das 1000 classes oriundas do conjunto de dados do \textit{ImageNet}. A rede, após adaptada, passa a produzir $\DeepFeatures$ características.
 
 O \textit{F-Test} é utilizado como seletor de características, aplicado tanto nas características radiômicas quanto nas profundas, selecionando um total de $\SelectedFeatures$ características em cada abordagem: radiômicas e profundas. Essas características são concatenadas, enviadas ao módulo de autoatenção e os resultados armazenados.
 
@@ -64,7 +63,7 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 \section{Cronograma}
 \label{sec:cronograma}
 
-O cronograma proposto das atividades segue na Figura \ref{fig:fig014}. De forma resumida, as disciplinas se encontram concluídas, resultados experimentais no conjunto de dados \gls{ACDC} coletados e futuros experimentos arquiteturais em andamento.
+O cronograma proposto das atividades segue na Figura \ref{fig:fig014}. Os itens em azul são atividades concluídas como: disciplinas, revisão bibliográfica, refinamento do tema, testes iniciais, etc. Itens em rosa são atividades em andamento como: implementação de modelos de comparação e escrita da dissertação. Atividades em amarelo são atividades planejadas como: análise de resultados, escrita da dissertação e escrita de artigos.
 
 \begin{figure}[htbp]
     \centering
