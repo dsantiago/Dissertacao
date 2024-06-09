@@ -44,8 +44,9 @@ Uma abordagem simples para a descrição de textura radiômica é a análise do 
 \captionsetup{justification=centering}
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{figures/fig001.png}
     \caption{Exemplos de análise radiômica.}
+    \includegraphics[width=0.6\textwidth]{figures/fig001.png}
+    \caption*{Autor: \cite{mayerhoeferIntroductionRadiomics2020}}
     \label{fig:fig001}
 \end{figure}
 
@@ -58,18 +59,19 @@ Uma abordagem simples para a descrição de textura radiômica é a análise do 
 
 \begin{figure}[htbp]
     \centering
+    \caption*{Aplicação de Vizinhos em Abordagens Radiômicas}
     \includegraphics[width=0.6\textwidth]{figures/fig002.png}
-    \caption{Exemplos de análise radiômica.}
+    \caption*{Autor: \cite{mayerhoeferIntroductionRadiomics2020}}
     \label{fig:fig002}
 \end{figure}
 
 %--------------------------------------------------------
-\subsection{características de Modelo}
+\subsection{Características de Modelo}
 
 As análises baseadas em modelos visam interpretar características em níveis de cinza espaciais para caracterizar objetos ou formas. Um modelo parametrizado de geração de textura é calculado e ajustado à região de interesse, do termo \gls{ROI}, e seus parâmetros estimados são utilizados como características radiômicas. O modelo autorregressivo é um exemplo de abordagem baseada em modelo e baseia-se na ideia de que o nível de cinza de um \textit{pixel} é uma soma ponderada dos níveis de cinza de 4 \textit{pixels} vizinhos. Além disso, o $\sigma$, o qual carrega informações sobre a variância do erro de previsão mínimo, mede a regularidade da textura. A análise fractal também produz recursos que podem ser usados na análise radiômica, em particular a dimensão fractal, que reflete a taxa de adição de detalhe estrutural com o aumento da magnificação, escala ou resolução e, portanto, serve como uma medida de complexidade. A lacunaridade, um recurso que mede a falta de invariância rotacional ou translacional, reflete a inomogeneidade \cite{mayerhoeferIntroductionRadiomics2020}.
 
 %--------------------------------------------------------
-\subsection{características de Transformação}
+\subsection{Características de Transformação}
 Métodos Baseados em Transformadas, incluindo transformadas de \textit{Fourier}, \textit{Gabor} e de \textit{wavelets} de \textit{Haar}, analisam padrões de níveis de cinza em um espaço diferente. A transformada discreta de \textit{wavelet} de \textit{Haar}, por exemplo, analisa o conteúdo da frequência de uma imagem em diferentes escalas. A decomposição por \textit{wavelets} de uma imagem é possível aplicando um par de filtros espelhados em quadratura, um filtro de passa-alta e um de passa-baixa. Embora o filtro de passa-alta destaque as mudanças no nível de cinza e, assim, enfatize detalhes da imagem, o filtro de passa-baixa suaviza a imagem em termos de nível de cinza, removendo detalhes da imagem. Após a decomposição do sinal, um conjunto de canais de frequência orientados espacialmente está disponível, o qual é usado para descrever a variabilidade local da imagem. As energias dentro dos canais de frequência são então usadas como características. A filtragem de passa-alta em ambas as direções (Figura \ref{fig:fig001}), captura detalhes diagonais, a filtragem de passa-alta seguida por filtragem de passa-baixa captura bordas verticais, a filtragem de passa-baixa seguida da filtragem de passa-alta captura bordas horizontais, e a filtragem de passa-baixa em ambas as direções captura as frequências mais baixas, em diferentes escalas. Notavelmente, a transformação por \textit{wavelets} pode ser usada não apenas para a geração de características radiômicas, mas também para segmentação de imagens ou como um passo de pré-processamento para análise de textura \cite{mayerhoeferIntroductionRadiomics2020}.
 
 %---------------------------------------------------------
