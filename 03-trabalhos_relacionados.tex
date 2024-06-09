@@ -7,14 +7,15 @@
 % (Seções 3.1.2 e 3.2.2) para cada um dos tópicos em questão. A Seção 3.3, reconhecimento automático de dor em recém-nascidos, traz algumas das abordagens criadas em função dos anos,
 % para contextualização sobre as técnica disponíveis no meio.
 
-Aplicar a unificação de técnicas radiômicas e \gls{DL} em cardiomiopatias já são objeto de estudo em diversas pesquisas recentes.
-Neste capítulo serão apresentados trabalhos e metodologias correlatos ao esforço de outros autores a cerca deste tema. Será descrito como foi a metodologia utilizada na revisão sistemática da literatura, assim como trabalhos que trazem ideias próximas ao proposto neste trabalho.
+Aplicar a unificação de técnicas radiômicas e \gls{AP} em cardiomiopatias já são objeto de estudo em diversas pesquisas recentes.
+Neste capítulo serão apresentados trabalhos e metodologias correlatos ao esforço de outros autores a cerca deste tema. Será descrito como foi a metodologia utilizada na revisão sistemática da literatura, assim como trabalhos que trazem ideias próximas ao proposto neste trabalho \cite{petersenGuidelinesConductingSystematic2015a}.
 
 %---------------------------------------------------------
 \section{Revisão Sistemática da Literatura} 
 \label{sec:rev_sistematica}
 
-Para a fase exploratória dos trabalhos relacionados, foi utilizada a ferramenta \textit{Parsifal} com o objetivo de identificar estudos onde se aplica a análise radiômica no contexto de cardiopatia. O objetivo inicialmente definido foi o seguinte: "Identificar estudos onde se aplica análise radiômica a cardiopatia. Em segunda opção, alguma outra doença de natureza cardíaca". A pesquisa teve como objetivo responder as seguintes perguntas: quais desafios descritos nos estudos prévios e se há replicabilidade da proposta. As palavras chaves selecionadas são: \textit{cardiac}, \textit{cardiomyopathy} e \textit{radiomics}. A palavra de busca selecionada foi: ``\textit{radiomics} AND (\textit{cardiac} OR \textit{cardiomyopathy})'' com o intuito de filtrar os resultados de forma a identificar onde na ciência poderia identificar a interseção de ambas as abordagens, radiômica e \gls{DL}. Os resultado do filtro de busca podem ser conferidos na Tabela \ref{tab:resultado_busca}. 
+Para a fase exploratória dos trabalhos relacionados, foi utilizada a ferramenta \textit{Parsifal} \footnote{https://parsif.al} com o objetivo de identificar estudos que aplicam a análise radiômica no contexto de cardiomiopatia. O objetivo inicialmente definido foi o seguinte: "Identificar estudos onde se aplica análise radiômica a cardiopatia. Em segunda opção, alguma outra doença de natureza cardíaca". A pesquisa teve como objetivo responder as seguintes perguntas: quais desafios descritos nos estudos prévios e se há replicabilidade da proposta. As palavras chaves selecionadas foram: \textit{cardiac}, \textit{cardiomyopathy} e \textit{radiomics}. A palavra de busca selecionada foi: ``\textit{radiomics} AND (\textit{cardiac} OR \textit{cardiomyopathy})''. Os resultado do filtro de busca são apresentados na Tabela \ref{tab:resultado_busca}. 
+
 
 \begin{table}[hbtp]
     \centering
@@ -32,7 +33,7 @@ Para a fase exploratória dos trabalhos relacionados, foi utilizada a ferramenta
     \label{tab:resultado_busca}
 \end{table}
 
-Em posse dos resultados, alguns critérios de aceitação foram aplicados como pode ser visto na Tabela \ref{tab:criterios}.
+A partir dos resultados foram aplicados os critérios de inclusão e exclusão, descritos na Tabela \ref{tab:criterios}.
 
 \begin{table}[hbtp]
     \centering
@@ -56,7 +57,8 @@ Em posse dos resultados, alguns critérios de aceitação foram aplicados como p
     \label{tab:criterios}
 \end{table}
 
-Critérios de aceitação também foram aplicados e podem ser conferidos na Tabela \ref{tab:questoes}. Dentre cada uma das seis perguntas, foi calculada a nota usando como pontuação 1 para sim, 0,5 para parcial e 0 para talvez. Como nota de corte, foi utilizado o valor 3, ou seja, qualquer artigo que não alcance o valor mínimo de 3, é descartado. Uma vez aplicado os critérios de aceitação, restaram 18 artigos dos 49 artigos iniciais.
+Critérios de inclusão também foram aplicados e são apresentados na Tabela \ref{tab:questoes}. Dentre estes critérios, cada artigo era representado pela soma das pontuações e os artigos que obtiveram uma nota menor que 3 foram excluídos da revisão. Para as notas, ficou definido como pontuação: $1$ para critério aceito, $0,5$ para critério parcialmente aceito e $0$ para critério não atingido. Uma vez aplicado os critérios e filtrado mediante pontuação, restaram $18$ dos $49$ artigos iniciais.
+
 
 \begin{table}[hbtp]
     \centering
@@ -78,12 +80,12 @@ Critérios de aceitação também foram aplicados e podem ser conferidos na Tabe
     \label{tab:questoes}
 \end{table}
 
-Um esquemático de como o processo foi feito, bem como sua seleção e critérios aplicados, podem ser conferidos na Figura \ref{fig:fig021}.
+O diagrama com o funil de seleção aplicado é apresentado na Figura \ref{fig:fig021}. É possível verificar na imagem, por exemplo, que foram removidos $28$ artigos dos $49$ artigos selecionados inicialmente, restando $21$. Aplicando os critérios de qualidade, foram selecionados $18$ artigos. Dentre os artigos selecionados, $3$ foram excluídos por não agregarem o suficiente ou serem redundantes.
 
-\begin{figure}[htbp]
+\begin{figure}[h!]
     \centering
-    \caption{Representação de Funil da Seleção da Literatura}
-    \includegraphics[width=0.8\textwidth]{figures/fig021.png}
+    \caption{Funil da Seleção da Literatura}
+    \includegraphics[width=1\textwidth]{figures/fig021.png}
     \caption*{Fonte: Autor}
     \label{fig:fig021}
 \end{figure}
@@ -99,7 +101,7 @@ O desempenho preditivo dos modelos foi rigorosamente avaliado, com os modelos fi
 
 Esta pesquisa demonstra o potencial de integrar algoritmos de aprendizado profundo com dados de imagem complexos para melhorar as avaliações diagnósticas pré-operatórias. Os achados de \citeauthor{jiangMRIBasedRadiomics2021} sugerem que tais abordagens analíticas avançadas podem fornecer suporte substancial na tomada de decisões clínicas, potencialmente levando a planos de tratamento mais personalizados e melhores resultados para os pacientes.
 
-No contexto da pesquisa contínua em imagens médicas e diagnóstico de câncer, a metodologia e os resultados de \citeauthor{jiangMRIBasedRadiomics2021} fornecem um exemplo convincente do potencial da inteligência artificial para revolucionar os processos diagnósticos em oncologia. O uso de \gls{RM} multiparamétrica e modelos sofisticados de aprendizado de máquina exemplifica as abordagens inovadoras que estão sendo desenvolvidas para enfrentar os desafios da detecção precoce e precisa de câncer.
+No contexto da pesquisa contínua em imagens médicas e diagnóstico de câncer, a metodologia e os resultados de \citeauthor{jiangMRIBasedRadiomics2021} fornecem um exemplo convincente do potencial da inteligência artificial para revolucionar os processos diagnósticos em oncologia. O uso de \gls{RMC} multiparamétrica e modelos sofisticados de aprendizado de máquina exemplifica as abordagens inovadoras que estão sendo desenvolvidas para enfrentar os desafios da detecção precoce e precisa de câncer.
 
 \begin{figure}[htbp]
     \centering
@@ -109,16 +111,16 @@ No contexto da pesquisa contínua em imagens médicas e diagnóstico de câncer,
 \end{figure}
 
 %---------------------------------------------------------
-Em outro trabalho, \cite{renBiLSTMMultiheadAttentionbased2023} desenvolveram um modelo avançado usando uma rede Bi-LSTM (memória de longo prazo bidirecional) combinada com um mecanismo de atenção de múltiplas cabeças, utilizando \textit{features} radiômicas e imagens de \gls{TC} de lesões, para aprimorar a diferenciação dos principais subtipos de adenocarcinoma pulmonar, integrando assinaturas radiômicas com características radiológicas de tomografias computadorizadas. O estudo recrutou 421 pacientes de três hospitais, confirmados com adenocarcinoma in situ, adenocarcinoma minimamente invasivo ou adenocarcinoma invasivo, com base na análise de 427 lesões.
+Em outro trabalho, \citeonline{renBiLSTMMultiheadAttentionbased2023}, desenvolveram um modelo avançado usando uma rede Bi-LSTM (memória de longo prazo bidirecional) combinada com um mecanismo de atenção de múltiplas cabeças, utilizando \textit{features} radiômicas e imagens de \gls{TC} de lesões, para aprimorar a diferenciação dos principais subtipos de adenocarcinoma pulmonar, integrando assinaturas radiômicas com características radiológicas de tomografias computadorizadas. O estudo recrutou 421 pacientes de três hospitais, confirmados com adenocarcinoma in situ, adenocarcinoma minimamente invasivo ou adenocarcinoma invasivo, com base na análise de 427 lesões.
 
 A metodologia empregada envolveu a extração de \textit{features} radiômicas usando o software `\textit{PyRadiomics}' das regiões de lesões identificadas em cada imagem de \gls{TC}. As 100 principais características foram então selecionadas através do método de classificação de características de máxima relevância e mínima redundância. Um modelo preditivo foi subsequentemente desenvolvido empregando essas \textit{features} juntamente com as \textit{features} radiológicas, usando a estrutura Bi-LSTM e atenção múltipla para classificar as lesões.
 
-O desempenho diagnóstico do modelo foi quantitativamente impressionante, alcançando valores da área sob a curva (AUC) de 0,985, 0,94 e 0,981 nos grupos de treinamento, teste e validação, respectivamente, com precisão correspondentes a 0,92, 0,976 e 0,91. Além disso, comparações foram feitas com dois outros modelos — rede neural convolucional (CNN) + atenção múltipla, e LSTM + atenção múltipla — demonstrando que o modelo Bi-LSTM e atenção múltipla superou essas alternativas em precisão e acurácia no conjunto de testes.
+O desempenho diagnóstico do modelo foi quantitativamente impressionante, alcançando valores da área sob a curva (AUC) de 0,985, 0,94 e 0,981 nos grupos de treinamento, teste e validação, respectivamente, com precisão correspondentes a 0,92, 0,976 e 0,91. Além disso, comparações foram feitas com dois outros modelos — \gls{CNN} em conjunto com atenção múltipla, e LSTM em conjunto com atenção múltipla — demonstrando que o modelo Bi-LSTM e atenção múltipla superou essas alternativas em precisão e acurácia no conjunto de testes.
 
 Esta pesquisa destaca a utilidade potente da combinação de técnicas avançadas de aprendizado de máquina com análises radiômicas e radiológicas detalhadas para refinar o processo diagnóstico para subtipos de adenocarcinoma pulmonar, potencialmente orientando abordagens de tratamento mais personalizadas baseadas na caracterização do subtipo.
 
 %---------------------------------------------------------
- \cite{aiSelfAttentionBasedFusion2023} conduziram um estudo inovador intitulado ``Um Modelo de Fusão Baseado em Autoatenção de Características Radiômicas e Profundas para Previsão de Recorrência Precoce em CPNP'', que aborda o significativo desafio de prever a recorrência precoce em câncer de pulmão de células não pequenas usando técnicas avançadas de aprendizado de máquina. Sua pesquisa aproveita o mecanismo de autoatenção para fundir \textit{features} radiômicas manuais e \textit{features} de aprendizado profundo extraídas de imagens de \gls{TC}, com o objetivo de aumentar a precisão preditiva e robustez para recorrência precoce em câncer de pulmão de células não pequenas.
+ \citeonline{aiSelfAttentionBasedFusion2023} conduziram um estudo inovador intitulado ``Um Modelo de Fusão Baseado em Autoatenção de Características Radiômicas e Profundas para Previsão de Recorrência Precoce em CPNP'', que aborda o significativo desafio de prever a recorrência precoce em câncer de pulmão de células não pequenas usando técnicas avançadas de aprendizado de máquina. Sua pesquisa aproveita o mecanismo de autoatenção para fundir \textit{features} radiômicas manuais e \textit{features} de aprendizado profundo extraídas de imagens de \gls{TC}, com o objetivo de aumentar a precisão preditiva e robustez para recorrência precoce em câncer de pulmão de células não pequenas.
 
 O estudo começou empregando diversas técnicas de aprendizado de máquina para extrair uma variedade de \textit{features} artesanais de imagens de \gls{TC}, incluindo \textit{features} de textura, forma e escala de cinza. Para capturar informações semânticas de alto nível e de representação, uma rede \textit{ResNet50} pré-treinada foi utilizada para a extração de \textit{features} profundas. Essas \textit{features} extraídas foram então fundidas com um vetor de \textit{features} extraído de dados de texturas de imagens radiômicas e unificado usando um módulo de fusão de autoatenção inovador desenvolvido pelos pesquisadores. Este módulo otimiza e pondera o vetor de \textit{features} fundidas, aproveitando plenamente o mecanismo de autoatenção para melhorar as capacidades de previsão do modelo e sua arquitetura pode ser conferida na Figura \ref{fig:fig008}.
 
@@ -135,7 +137,7 @@ Este estudo exemplifica a aplicação de técnicas avançadas de aprendizado de 
 \end{figure}
 %---------------------------------------------------------
 
-\citeonline{iranmehrImprovedPredictionMGMT}
+\citeonline{iranmehrImprovedPredictionMGMT2022}
 desenvolveram uma rede de aprendizado profundo inovadora que utiliza um mecanismo baseado em atenção para aprimorar a previsão do estado de metilação do gene MGMT em \gls{GBM}, o tipo mais agressivo de tumor cerebral. Pacientes com \gls{GBM} possuem uma expectativa muito baixa, entre 18 e 24 meses e requerem tratamentos agressivos, como por exemplo, quimioterapia. Sua pesquisa, apresentada em "\textit{Improved Prediction of MGMT Methylation Status in Glioblastoma using a Deep Attention Network}", destaca um avanço significativo nas capacidades diagnósticas não invasivas para \gls{GBM}, que tipicamente tem uma taxa de sobrevivência de apenas 18 meses.
 
 O estudo foca no gene MGMT, cujo estado de metilação é crucial para determinar a eficácia da quimioterapia em pacientes com \gls{GBM}. As análises radiômicas tradicionais, embora úteis, muitas vezes não capturam os recursos intrincados necessários para uma previsão precisa da metilação. \citeauthor{iranmehrImprovedPredictionMGMT2022} propõem um modelo que integra características radiômicas manuais com técnicas de \gls{AP}, melhorando a extração de características e a precisão da previsão de \gls{GBM}.
@@ -145,7 +147,7 @@ O modelo introduzido pela equipe utiliza uma combinação de mecanismos de aten�
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1\textwidth]{figures/fig009.png}
-    \caption{Método proposto. \textit{Densenet} é o modelo base, a saída da rede densa é alimentada pela rede de atenção que prioriza as fatias e regiões e gera a classificação binária do status de metilação do MGMT.
+    \caption{Método proposto. \textit{Densenet} é o modelo base, a saída da rede densa é alimentada pela rede de atenção que prioriza as fatias e regiões e gera a classificação binária do status de metilação do MGMT \cite{iranmehrImprovedPredictionMGMT2022}.
     }
     \label{fig:fig009}
 \end{figure}
@@ -156,8 +158,9 @@ Avaliado em várias métricas de classificação binária, o modelo alcançou a 
 
 \begin{figure}[htbp]
     \centering
+    \caption{Arquitetura Proposta}
     \includegraphics[width=1\textwidth]{figures/fig010.png}
-    \caption{Fonte: \cite{iranmehrImprovedPredictionMGMT2022}}
+    \caption*{Fonte: \cite{iranmehrImprovedPredictionMGMT2022}}
     \label{fig:fig010}
 \end{figure}
 

@@ -1,6 +1,8 @@
 \chapter{Proposta Experimental}
 \label{chap:proposta_experimental}
 
+Este capítulo traz informações relacionadas com as ferramentas utilizadas no experimento, como linguagem, biblioteca, entre outros. Informações sobre o conjunto de dados \gls{ACDC}, utilizado como linha de base, e o conjunto de dados \gls{InCor}, que será utilizado em experimentos futuros. Por fim, são apresentados resultados experimentais com o conjunto de dados \gls{ACDC}. 
+
 %--------------------------------------------------------
 \section{Materiais} 
 \label{sec:cap5_materiais}
@@ -145,11 +147,11 @@ O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que rea
 \subsection{Experimentos ACDC}
 \label{subsec:cap5_experimentos_acdc}
 
-Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos para treino, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. \textit{Features} de primeira ordem e \gls{GLCM} são extraídas compondo ao todo 78 valores que compõem as \textit{features} radiômicas. Para extração das \textit{features} profundas, é utilizada uma rede \textit{ResNet50} congelada e sua última camada densa é removida, já que originalmente é responsável pela predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir 2048 \textit{features}.
+Utilizando o conjunto de dados \gls{ACDC} como linha de base, foi utilizado os 100 exames de pacientes já previamente divididos para treino, coletando apenas as fatias das imagens de RM apontadas como diástole junto com a máscara já disponível. características de primeira ordem e \gls{GLCM} são extraídas compondo ao todo $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, é utilizada uma rede \textit{ResNet50} congelada e sua última camada densa é removida, já que originalmente é responsável pela predição de 1000 classes, oriundas do conjunto de dados \textit{ImageNet}. A rede, após adaptada, passa a produzir $\DeepFeatures$ características.
 
-O \textit{F-Test} é utilizado como seletor de \textit{features}, aplicado tanto nas \textit{features} radiômicas quanto nas profundas, selecionando um total de 64 \textit{features} em cada abordagem: radiômicas e profundas. Essas \textit{features} são concatenadas, enviadas ao módulo de autoatenção e os resultados armazenados.
+O \textit{F-Test} é utilizado como seletor de características, aplicado tanto nas características radiômicas quanto nas profundas, selecionando um total de $\SelectedFeatures$ características em cada abordagem: radiômicas e profundas. Essas características são concatenadas, enviadas ao módulo de autoatenção e os resultados armazenados.
 
-Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $0,0001$, otimizador \textit{Adam}, tamanho de lote 4 e o treinamento se deu em aproximadamente 300 épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo. Com a saída do modelo é aplicada a função sigmoide, Eq. \ref{eq:sigmoide}, função esta que limita os valores de sua entrada entre 0 e 1. Para fins de classificação, valores maiores que $0,5$ são considerados com \gls{CH} e menor ou iguais considerados normal.
+Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $\LR$, otimizador \textit{Adam}, tamanho de lote $\Batch$ e o treinamento se deu em aproximadamente $\Epochs$ épocas, onde verificou que o erro se torna estável. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele não alcance o tamanho especificado para o mesmo. Com a saída do modelo é aplicada a função sigmoide, Equação. \ref{eq:sigmoide}, função esta que limita os valores de sua entrada entre 0 e 1. Para fins de classificação, valores maiores que $0,5$ são considerados com \gls{CMH} e menor ou iguais considerados normal.
 
 \begin{equation}
 \textit{sigmoide}(x) = \frac{1}{1 + e^x}
