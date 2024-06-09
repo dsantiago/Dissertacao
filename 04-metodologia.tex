@@ -115,7 +115,7 @@ Na fase de pré-processamento será utilizado o conjunto de dados \gls{ACDC}. No
 \section{Extração de Características Radiômicas}
 \label{subsec:cap4_caracteristicas_radiomicas}
 
-Serão extraídas características radiômicas de fase diastólica, representada por um conjunto de fatias variando entre 6 e 18 \textit{frames}, de cada paciente usando \gls{GLCM} e estatísticas baseadas em histograma. Será aplicado o filtro \gls{LoG} com cinco valores diferentes em cada parte para suavizar as imagens e realçar as bordas. Foi calculado características \gls{GLCM} como contraste, entropia, correlação, homogeneidade e energia para cada filtro \gls{LoG}. Também é calculado características de intensidade como média, variância, média dos percentis (10 e 90), desvio robusto da média absoluta, curtose e assimetria usando estatísticas de primeira ordem. Foram obtidos 78 características radiômicas para cada paciente dentro da quantidade de fatias extraídas na fase diastólica.
+Serão extraídas características radiômicas de fase da diástole\footnote{A diástole corresponde à parte do ciclo cardíaco caracterizada pelo relaxamento muscular e enchimento dos ventrículos \cite{brielerCardiomyopathyOverview2017}}, representada por um conjunto de fatias variando entre 6 e 18 \textit{frames}, de cada paciente usando \gls{GLCM} e estatísticas baseadas em histograma. Será aplicado o filtro \gls{LoG} com cinco valores diferentes em cada parte para suavizar as imagens e realçar as bordas. Foi calculado características \gls{GLCM} como contraste, entropia, correlação, homogeneidade e energia para cada filtro \gls{LoG}. Também é calculado características de intensidade como média, variância, média dos percentis (10 e 90), desvio robusto da média absoluta, curtose e assimetria usando estatísticas de primeira ordem. Foram obtidos 78 características radiômicas para cada paciente dentro da quantidade de fatias extraídas na fase diastólica.
 
 %---------------------------------------------------------
 \section{Extração de Características Profundas}
@@ -141,7 +141,7 @@ F_{hd} = \textit{Concat}(F_h, F_d)
 Neste trabalho é empregado o mecanismo de autoatenção para aprender a importância de cada característica e capturar suas dependências de longo alcance. Como ilustrado na Figura \ref{fig:fig011}, o módulo de fusão de autoatenção é utilizado para mapear uma consulta ($Q$), chave ($K$) e valor ($V$) para um valor de atenção. São utilizadas as 128 características concatenadas $F_{hd}$ como \textit{tokens} e projetada cada característica em três matrizes aprendíveis: matriz chave $K$, matriz consulta $Q$ e matriz de valor $V$ por produto escalar com as matrizes $W_{Q}$, $W_{K}$ e $W_{V}$. Logo os valores $Q$, $K$, $V$ são denotados como $W_{Q}F_{gd}$, $W_{K}F_{gd}$, $W_{V}F_{gd}$ respectivamente, onde $W_{Q}$, $W_{K}$ e $W_{V}$ representam a transformação linear para as matrizes $Q$, $K$ e $V$. O módulo de fusão baseado em autoatenção é definido como segue na Equação \ref{eq:attention}, onde $d_{k}$ é a dimensão do valor de $K$. Sem utilizar operações recorrentes ou convolucionais, o módulo de fusão de autoatenção pode modelar as dependências de longo prazo entre as características de entrada.
 Este módulo calcula de forma adaptativa os pesos entre as características com base em sua importância e relevância, capturando de forma mais abrangente as associações entre características radiômicas e profundas. Tal processo realça a capacidade expressiva das características fundidas e permite que o modelo foque mais precisamente nas características mais informativas para prever \gls{CMH} e reduzir a influência de características irrelevantes na previsão. Além disso, o modelo pode alocar dinamicamente atenção a diferentes amostras de imagens de \gls{RMC}. Essa flexibilidade permite com que o modelo se adapte melhor à representação de características de diferentes amostras, melhorando a precisão e a generalização da previsão.
 
-A função de perda utilizada utilizada no modelo é a função de entropia cruzada binária, do termo  \gls{BCE}, que é calculada pela Equação. \ref{eq:bce} onde $\mathcal{L}_{bce}$ denota o \gls{BCE}, $N$ denota o número de imagens de \gls{RMC}, $r$ denota a classe alvo de \gls{CH} e $\hat{r}$ o valor previsto pelo modelo de \gls{CMH}, 1 indica indícios de \gls{CMH} e 0 sua ausência.
+A função de perda utilizada utilizada no modelo é a função de entropia cruzada binária, do termo  \gls{BCE}, que é calculada pela Equação. \ref{eq:bce} onde $\mathcal{L}_{bce}$ denota o \gls{BCE}, $N$ denota o número de imagens de \gls{RMC}, $r$ denota a classe alvo de \gls{CMH} e $\hat{r}$ o valor previsto pelo modelo de \gls{CMH}, 1 indica indícios de \gls{CMH} e 0 sua ausência.
 
 \begin{equation}
 \mathcal{L}_{bce} = -\frac{1}{N} \sum_{i=1}^N
@@ -153,7 +153,9 @@ A função de perda utilizada utilizada no modelo é a função de entropia cruz
 \section{Métricas}
 \label{subsec:cap4_metrics}
 Para medir o desempenho da solução serão aplicadas as seguintes métricas: acurácia, precisão, revocação expressas pelas equações \ref{eq:acc}, \ref{eq:precision} e \ref{eq:recall}.
-Também é calculada a \gls{AUC}, também reconhecida como a área que avalia o modelo em diversos limites contínuos de decisão, verificando a taxa de verdadeiros positivos contra falsos positivos em cada limite.
+
+Também é calculada a \gls{AUC} que é um gráfico com a habilidade de diagnosticar um classificador binário. Esta curva é criada ponde em gráfico a taxa de verdadeiros positivos (TPR) contra a taxa de falsos positivos (FPR) em diversos limites contínuos de decisão. A equação da \gls{AUC} é apresentada na Equação \ref{eq:auc} em formato contínuo embora seja prática comum discretizá-lo.
+
 
 \begin{equation}
   \textit{Acurácia} = \frac{\textit{TP} + \textit{TN}}{\textit{TP} + \textit{TN} + \textit{FP} + \textit{FN}}
@@ -168,6 +170,11 @@ Também é calculada a \gls{AUC}, também reconhecida como a área que avalia o 
 \begin{equation}
   \textit{Revocação} = \frac{\textit{TP}}{\textit{TP} + \textit{FN}}
   \label{eq:recall}
+\end{equation}
+
+\begin{equation}
+  \text{AUC} = \int_{x=0}^{1} \text{TPR}(\text{FPR}^{-1}(x)) \ \, d(x)
+  \label{eq:auc}
 \end{equation}
 
 %---------------------------------------------------------
