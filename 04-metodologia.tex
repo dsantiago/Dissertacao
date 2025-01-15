@@ -1,4 +1,4 @@
-\chapter{Metodologia} 
+\chapter{METODOLOGIA} 
 \label{chap:metodologia}
 
 A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} que unificam características radiômicas e características profundas. Inicialmente, é empregado diversas técnicas de aprendizado de máquina para extrair características manuais de imagens de RM, abrangendo textura, forma, escala de cinza, etc. Posteriormente, uma rede \textit{ResNet50} pré-treinada é utilizada para extrair características profundas que encapsulam informações semânticas de alto nível e de representação das imagens de \gls{RMC}. Estas características são então fundidas em um vetor de características unificado. Para aprimorar a acurácia e a robustez, um módulo foi desenvolvido utilizando o mecanismo de autoatenção, módulo este que otimiza e pondera o vetor de características fundidas de forma eficaz. A Figura \ref{fig:fig015} confere o fluxograma do projeto ilustrando de forma esquemática as fases que serão atuadas.
@@ -76,7 +76,7 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
     \renewcommand{\arraystretch}{1} % default é 1 
     \begin{tabular}{|c|c|c|c|}
     \hline 
-          \textbf{Grupo} & \textbf{Quantidade} & \textbf{C/ CH} & \textbf{S/ CH}  \\ 
+          \textbf{Grupo} & \textbf{Quantidade} & \textbf{C/ CM} & \textbf{S/ CM}  \\ 
     \hline 
         NOR & 30 & 0 & 30 \\ 
         DCM & 30 & 30 & 0\\ 

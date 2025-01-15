@@ -1,17 +1,18 @@
-\chapter{Introdução}
+\chapter{INTRODUÇÃO}
 \label{chap:intro}
 
-A tecnologia tem perpetrado cada vez mais diversas áreas do saber, trazendo diversos benefícios e praticidades a vida contemporânea. Destas diferentes áreas, uma das que mais se beneficiaram com a tecnologia e a inovação foi a área médica. Desde meados dos anos 2000, a quantidade de dados disponível vêm crescendo exponencialmente e alcançando uma projeção de centenas de milhares de \gls{EB} para os anos de 2020 em diante \cite{gantzDIGITALUNIVERSE2020}.
+A tecnologia está presente cada vez mais nas diversas áreas do saber, trazendo diversos benefícios e praticidades a vida contemporânea. Dentre as diferentes áreas do saber, uma das que mais se beneficiaram com a tecnologia e a inovação foi a área médica. Desde meados dos anos 2000, a quantidade de dados disponível tem crescendo exponencialmente alcançando projeções de milhares de \gls{EB} a partir dos anos de 2020 em diante \cite{gantzDIGITALUNIVERSE2020}.
 
-A Medicina vem gerando cada vez mais dados, sejam textuais, clínicos ou de imagem, e se utilizado deles para comporem seus diagnósticos. Tanto a \gls{TC} quanto a \gls{RMC} são exemplos de exames que podem gerar objetos tridimensionais (3D) de estruturas específicas do corpo humano a partir de dezenas de fatias que representam de forma bidimensional (2D), determinada estrutura do corpo humano dado um instante de tempo $t$. A \gls{IA} emergiu como uma das principais inovações no campo da imagem diagnóstica, com um impacto substancial em toda área médica inclusive com a análise de \gls{RMC}. A \gls{IA} estará cada vez mais presente no mundo médico, com forte potencial para maior eficiência e precisão diagnóstica \cite{argentieroApplicationsArtificialIntelligence2022}.
+A medicina vem gerando cada vez mais dados, sejam textuais, clínicos ou de imagem, e se utilizado deles para comporem seus diagnósticos. Tanto a \gls{TC} quanto a \gls{RMC} são exemplos de exames que podem gerar objetos tridimensionais (3D) de estruturas específicas do corpo humano a partir de dezenas de fatias que representam de forma bidimensional (2D), determinada estrutura do corpo humano dado um instante de tempo $t$. A \gls{IA} emergiu como uma das principais inovações no campo da imagem diagnóstica, com um impacto substancial em toda área médica inclusive com a análise de \gls{RMC}. A \gls{IA} estará cada vez mais presente no mundo médico, com forte potencial para maior eficiência e precisão diagnóstica \cite{argentieroApplicationsArtificialIntelligence2022}.
 
-A IA, tem como um de seus componentes as redes neurais profundas, também conhecida como \gls{AP}. O \gls{AP} é utilizado também para resolver problemas do espectro de visão computacional, como: classificadores de imagens, detectores de objetos, segmentadores, etc. Estas redes, com suas múltiplas camadas profundas, geram características discriminantes, uma vez otimizadas a cerca do conjunto de dados em que foi treinada. Outro modelo de rede que vem tendo uso cada vez maior e se encontra em diversas arquiteturas atuais, são as redes \textit{transformers}. As redes \textit{transformers} ficaram populares por serem comumente usadas em redes generativas auto-regressivas para geração sintética de texto, também conhecidas como \gls{LLM}, tendo como como seu exemplo mais conhecido o \textit{ChatGPT}. Os \textit{transformers} são arquiteturas que possuem como ponto forte, sua capacidade de paralelismo e seu mecanismo de autoatenção que permite que o modelo se concentre nas partes relevantes dos dados de entrada, aprimorando a compreensão do contexto e das relações entre os dados \cite{russell2020artificial}.
 
-Outras técnicas de processamento de imagem como a análise de textura, já vem sendo utilizada por várias décadas em diversos domínios da medicina. Em oncologia, a análise de textura de imagens de \gls{TC} mostrou correlação com a biologia tumoral subjacente, ao analisar características histológicas diferentes e mutações genéticas específicas. A biologia tumoral subjacente representa mecanismos biológicos fundamentais que estão na base do desenvolvimento, crescimento e progressão de tumores. Em problemas de tumores malignos já bem estabelecidos, a análise de textura se relaciona com a histologia nos exemplos sólidos comuns (pulmão, colorretal, esofágico, mama), se correlaciona com mutações genéticas específicas e pode acompanhar respostas terapêuticas. Fora da oncologia, mudanças não malignas em órgãos podem ser detectadas, como por exemplo cirrose hepática e pneumonite intersticial. No domínio da análise de imagens cardíacas, a análise de textura aplicada à \gls{RMC} tem avaliado o risco de arritmia pós-infarto do miocárdio. O uso de análise de textura para \gls{RMC} em imagens sem contraste e com realce tardio de gadolínio em pacientes com \gls{CMH} para prever o resultado do exame é uma área particular de interesse \cite{schofieldTextureAnalysisCardiovascular2019a}.
+As redes neurais profundas, um dos componentes da IA, são amplamente utilizadas no \gls{AP}. Esse tipo de aprendizado é aplicado em diversas áreas, como visão computacional, sendo fundamental para tarefas como classificação de imagens, detecção de objetos, segmentação, entre outras. Estas redes, com suas múltiplas camadas profundas, geram características discriminantes, uma vez otimizadas a cerca do conjunto de dados em que foi treinada. Outro modelo de rede que vem tendo uso cada vez maior e se encontra em diversas arquiteturas atuais, são as redes \textit{transformers}. As redes \textit{transformers} ficaram populares por serem comumente usadas em redes generativas auto-regressivas para geração sintética de texto, também conhecidas como \gls{LLM}, tendo como como seu exemplo mais conhecido o \textit{ChatGPT}. Os \textit{transformers} são arquiteturas que possuem como ponto forte, sua capacidade de paralelismo e seu mecanismo de autoatenção que permite que o modelo se concentre nas partes relevantes dos dados de entrada, aprimorando a compreensão do contexto e das relações entre os dados \cite{russell2020artificial}.
+
+Outras técnicas de processamento de imagem como a análise de textura já vem sendo utilizada por várias décadas em diversos domínios da medicina. Em oncologia, a análise de textura de imagens de \gls{TC} mostrou correlação com a biologia tumoral subjacente, ao analisar características histológicas diferentes e mutações genéticas específicas. A biologia tumoral subjacente representa mecanismos biológicos fundamentais que estão na base do desenvolvimento, crescimento e progressão de tumores. Em problemas de tumores malignos já bem estabelecidos, a análise de textura se relaciona com a histologia nos exemplos sólidos comuns (pulmão, colorretal, esofágico, mama), se correlaciona com mutações genéticas específicas e pode acompanhar respostas terapêuticas. Fora da oncologia, mudanças não malignas em órgãos podem ser detectadas, como por exemplo cirrose hepática e pneumonite intersticial. No domínio da análise de imagens cardíacas, a análise de textura aplicada à \gls{RMC} tem avaliado o risco de arritmia pós-infarto do miocárdio. O uso de análise de textura para \gls{RMC} em imagens sem contraste e com realce tardio de gadolínio em pacientes com \gls{CMH} para prever o resultado do exame é uma área particular de interesse \cite{schofieldTextureAnalysisCardiovascular2019a}.
 
 %-----------------------------------------
 
-Uma área que se utiliza desse tipo de técnica é a análise radiômica que consiste no processo em obter dados qualitativos destas imagens de radiografias combinadas, e por vezes, a extração também da textura destas \cite{lambinRadiomicsExtractingMore2012}. A análise radiômica pode até ser usada para avaliar a resposta ao tratamento ou para transmitir certas características prognósticas. Dentre as doenças do coração, a \gls{CMH} é desenvolvida prioritariamente em jovens e pessoas de meia idade, sendo a mais comum das cardiomiopatias . Mesmo que a \gls{CMH} se apresente de forma assintomática em parte dos casos, esta pode culminar em morte súbita cardíaca, insuficiência cardíaca, acidente vascular cerebral e arritmia . A análise radiômica auxilia com o diagnóstico prévio afim de compreender e atuar nos casos de \gls{CMH} que demonstrem risco ao paciente \cite{kwonComparisonMortalityCause2022}.
+Uma área que se utiliza desse tipo de técnica é a análise radiômica que consiste em extrair dados qualitativos de imagens radiográficas combinadas, incluindo, em muitos casos, a análise da textura dessas imagens \cite{lambinRadiomicsExtractingMore2012}. A análise radiômica pode ser usada para avaliar a resposta ao tratamento ou para transmitir certas características prognósticas. Dentre as doenças do coração, a \gls{CMH} é desenvolvida prioritariamente em jovens e pessoas de meia idade, sendo a mais comum das cardiomiopatias . Mesmo que a \gls{CMH} se apresente de forma assintomática em parte dos casos, esta pode culminar em morte súbita cardíaca, insuficiência cardíaca, acidente vascular cerebral e arritmia . A análise radiômica auxilia com o diagnóstico prévio afim de compreender e atuar nos casos de \gls{CMH} que demonstrem risco ao paciente \cite{kwonComparisonMortalityCause2022}.
 
 %-----------------------------------------
 
@@ -26,20 +27,29 @@ A análise radiômica em conjunto com técnicas de \gls{IA} tem um grande potenc
 \section{Objetivo}
 \label{sec:cap1_objetivo}
 
-Dado o contexto na qual o presente projeto de pesquisa está inserido, o objetivo deste será implementar e validar uma estratégia de fusão que combina características manuais extraídas da análise de textura radiômica e características profundas, para melhorar a expressividade e a habilidade de generalização do modelo de \gls{RNP}. Será utilizado imagens de \gls{RMC} e as doenças \gls{CMH} e \gls{CMD} como objetos de estudo para avaliar o desempenho da abordagem. Como objetivos específicos, têm-se:
+Dado o contexto no qual o presente projeto de pesquisa está inserido, o objetivo deste será implementar e validar uma estratégia de fusão que combina características manuais extraídas da análise de textura radiômica e características profundas. Desta fusão, aplicar mecanismos de autoatenção para melhorar a expressividade e a habilidade de generalização do modelo de \gls{RNP}. Será utilizado imagens de \gls{RMC} e as doenças \gls{CMH} e \gls{CMD} como objetos de estudo para avaliar o desempenho da abordagem. Como objetivos específicos, têm-se:
 
 \begin{enumerate}
 
-\item Implementação do modelo, que utiliza características radiômicas e
-características profundas.
-
-\item Coleta de resultados em conjunto de dados públicos, como linha de base da análise.
+\item Implementar e processar modelo que unifica informações radiômicas e profundas, aplicado à análise de câncer do pulmão, em conjunto de dados público e privados de \gls{CMH}.
 
 \item Avaliação dos resultados iniciais.
 
-\item Proposta de novas abordagens tanto no pré-processamento quanto na arquitetura, mediante coleta dos resultados.
+\item Adicionar novas estrutura ao modelo base e treinar com os dados públicos e privados.
 
 \item Iteração e análise dos resultados obtidos, sua documentação e comparação.
+
+
+% \item Implementação do modelo, que utiliza características radiômicas e
+% características profundas.
+
+% \item Coleta de resultados em conjunto de dados públicos, como linha de base da análise.
+
+% \item Avaliação dos resultados iniciais.
+
+% \item Proposta de novas abordagens tanto no pré-processamento quanto na arquitetura, mediante coleta dos resultados.
+
+% \item Iteração e análise dos resultados obtidos, sua documentação e comparação.
 \end{enumerate}
 
 %---------------------------------------------------------
