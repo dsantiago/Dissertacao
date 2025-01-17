@@ -118,6 +118,31 @@ Onde $V$ representa o tamanho do volume de entrada (altura x largura x profundid
 }
 
 %---------------------------------------------------------
+\section{ResNet}
+\label{sec:resnet}
+
+A \textit{ResNet} (Rede Residual) é uma arquitetura de rede neural profunda amplamente utilizada em tarefas de visão computacional, como classificação de imagens, detecção de objetos e segmentação de imagens. Ela foi introduzida por \citeonline{heDeepResidualLearning2015}, e se destacou por ganhar a competição \textit{ImageNet} em 2015 com uma precisão significativamente maior do que as arquiteturas anteriores. A principal característica da \textit{ResNet} é sua capacidade de treinar redes muito profundas sem sofrer com o problema do "desvanecimento do gradiente"\space que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente, problema este muito comum em redes tradicionais muito profundas. A \textit{ResNet} introduz um conceito chave chamado bloco residual que é um componente da rede onde a entrada do bloco é somada à sua saída antes de passar para a próxima camada. Esta conexão direta é chamada de conexão de salto e pode ser conferida na Figura \ref{fig:fig013}.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Conexão de Salto}
+    \includegraphics[width=0.6\textwidth]{figures/fig013.png}
+    \caption*{Fonte: \cite{aiSelfAttentionBasedFusion2023}}
+    \label{fig:fig013}
+\end{figure}
+
+A ResNet é composta por vários blocos residuais empilhados.
+Existem várias versões da \textit{ResNet}, como \textit{ResNet}-18, \textit{ResNet}-34, \textit{ResNet}-50, \textit{ResNet}-101, e \textit{ResNet}-152, onde os números indicam a profundidade total da rede, ou seja, o número de camadas.
+
+%--------------------------------------------------------
+\subsection{Extração de Características Profundas}
+\label{subsec:extract_features}
+
+Para extrair características profundas das imagens de \gls{RMC}, foi empregada a arquitetura pré-treinada de uma rede \textit{ResNet50}. As redes \textit{ResNet50} ficaram muito conhecidas em meados do ano de 2015 por vencer diversas competições em visão computacional, includindo 1º lugar na competição de classificação de imagens \textit{ILSVRC} 2015. As redes \textit{ResNet}, do termo \textit{Residual Networks}, inovaram em sua época trazendo uma forma  de como treinar modelos de maior profundidade, chegando a mais de 100 camadas, com resultados superiores à outros modelos convolucionais competitivos, como o \textit{VGG19}, sem sofrer sintomas comuns a redes neurais muito profundas como o \textit{overfitting} e a saturação ou a ausência dos gradientes em tempo de treino. Os autores da \textit{ResNet} sugeriram o uso de saltos de conexão entre as camadas da rede (Figura \ref{fig:fig013}) afim de manter os gradientes relevantes e controlados entre uma camada e outra.  A \textit{ResNet50} é um modelo de rede neural convolucional profunda de 50 camadas que compreende muitos blocos residuais. A cada bloco, se encontram módulos de convolução e uma conexão de salto que transfere a informação do bloco anterior para o próximo bloco. A conexão de salto ajuda a reter a informação semântica mais baixa aprendida nas camadas anteriores, que de outra forma se tornaria abstrata devido à conexão de longa cadeia. A conexão de salto também evita que o gradiente desapareça nas camadas mais profundas, fornecendo um caminho alternativo para a retropropagação. A informação da conexão de salto é adicionada à informação calculada em cada bloco \cite{heDeepResidualLearning2015}.
+
+Várias abordagens de sucesso aplicaram redes convolucionais para extrair características genéricas para tarefas de recuperação de imagens e obtiveram resultados promissores. Elas utilizam principalmente o poder das características locais para gerar uma representação de uma imagem genérica baseada em redes convolucionais pré-treinadas. As representações das camadas finais da rede convolucional são utilizadas para capturar características semânticas para o fim de nível de categoria à classificação que o modelo se dispõe \cite{alzubiContentbasedImageRetrieval2017b}.
+
+%---------------------------------------------------------
 \section{Squeeze and Excitation Net}
 \label{sec:se_net}
 
@@ -169,44 +194,52 @@ z_c = \mathbf{F}_{sq}(\mathbf{u}_c) = \frac{1}{H \times W} \sum_{i=1}^{H} \sum_{
 \subsection{Excitation: Recalibração Adaptativa}
 \label{subsec:excitation}
 
-Para aproveitar as informações agregadas na operação de \textit{squeeze}, seguimos com uma segunda operação que tem como objetivo capturar completamente as dependências entre os canais. Para cumprir esse objetivo, a função deve atender a dois critérios: primeiro, ela precisa ser flexível (em particular, deve ser capaz de aprender uma interação não linear entre os canais) e, segundo, ela deve aprender uma relação não mutuamente exclusiva, pois queremos garantir que vários canais possam ser enfatizados, em vez de apenas uma ativação \textit{one-hot}. Para atender a esses critérios, optamos por empregar um mecanismo de \textit{gating} simples com uma ativação sigmoide conforme mostrado na Figura \ref{eq:excitation}):
+Para aproveitar as informações agregadas na operação de \textit{squeeze}, seguimos com uma segunda operação que tem como objetivo capturar completamente as dependências entre os canais. Para cumprir esse objetivo, a função deve atender a dois critérios: primeiro, ela precisa ser flexível (em particular, deve ser capaz de aprender uma interação não linear entre os canais) e, segundo, ela deve aprender uma relação não mutuamente exclusiva, pois queremos garantir que vários canais possam ser enfatizados, em vez de apenas uma ativação \textit{one-hot}. Para atender a esses critérios, optamos por empregar um mecanismo de \textit{gating} simples com uma ativação sigmoide conforme demonstrado na Equação \ref{eq:excitation}:
 
 \begin{equation}
-\mathbf{s} = \mathbf{F}_{ex}(\mathbf{z}, \mathbf{W}) = \sigma(g(\mathbf{z}, \mathbf{W})) = \sigma(\mathbf{W}_2 \delta(\mathbf{W}_1 \mathbf{z}))\label{eq:excitation}
+\mathbf{s} = \mathbf{F}_{ex}(\mathbf{z}, \mathbf{W}) = \sigma(g(\mathbf{z}, \mathbf{W})) = \sigma(\mathbf{W}_2 \delta(\mathbf{W}_1 \mathbf{z}))
+\label{eq:excitation}
 \end{equation}
 
+\noindent onde $\delta$ se refere à função de ativação ReLU \cite{nairRectifiedLinearUnits}, $ W_1 \in \mathbb{R}^{C/r \times C}$ e $W_2 \in \mathbb{R}^{C \times C/r})$. Para limitar a complexidade do modelo e auxiliar na generalização, parametrizamos o mecanismo de \textit{gating} formando um gargalo com duas camadas totalmente conectadas ao redor da não linearidade, ou seja, uma camada de redução de dimensionalidade com os parâmetros $W_1$ e razão de redução $r$ (essa escolha de parâmetro é discutida na Seção 6.4), seguida de uma ReLU e, em seguida, uma camada de aumento de dimensionalidade com os parâmetros $W_2$. A saída final do bloco é obtida ao redimensionar a saída da transformação $U$ com as ativações conforme Equação \ref{eq:se_scale}:
 
+\begin{equation}
+\tilde{\mathbf{x}}_c = \mathbf{F}_{scale}(\mathbf{u}_c, s_c) = s_c \cdot \mathbf{u}_c 
+\label{eq:se_scale}
+\end{equation}
+
+\noindent onde $\tilde{\mathbf{X}} = [\tilde{\mathbf{x}}_1, \tilde{\mathbf{x}}_2, \dots, \tilde{\mathbf{x}}_C]$ e $\mathbf{F}_{scale}(\mathbf{u}_c, s_c)$ se referem a multiplicação no nível dos canais entre os mapas de características $\mathbf{u}_c \in \mathbb{R}^{H \times W}$ e o valor escalar $s_c$.
+
+\subsection{Utilização em redes conhecidas: SE-Resnet}
+\label{subsec:util_resnet}
+
+A flexibilidade do bloco \gls{SE} significa que ele pode ser aplicado diretamente a transformações além das convoluções padrão. Para ilustrar esse ponto, desenvolvemos \gls{SE} Nets integrando blocos gls{SE} em arquiteturas modernas com designs sofisticados. A Figura \ref{fig:fig026} demonstra o esquema de um módulo SE-ResNet. Nele, a transformação do bloco SE $F_{tr}$ é considerada o ramo não identidade de um módulo residual. As operações de \textit{squeeze} e \textit{excitation} atuam antes da soma com o ramo identidade.
+
+
+\begin{figure}[h!]
+    \centering
+    \caption{Módulo SE-Resnet}
+    \includegraphics[width=0.6\textwidth]{figures/fig026.png}
+    \caption*{Fonte: Adaptado de \cite{huSqueezeandExcitationNetworks2018}}
+    \label{fig:fig026}
+\end{figure}
+
+Para que o bloco SE proposto seja viável na prática, ele deve fornecer um equilíbrio eficaz entre a complexidade do modelo e o desempenho, o que é importante para escalabilidade. Foi definido uma razão de redução $r$ como 16 em todos os experimentos, exceto onde indicado de outra forma. 
+
+O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e o custo computacional dos blocos \gls{SE} no modelo. O autor do trabalho conduz experimentos baseados no SE-ResNet-50 para uma variedade de valores diferentes de $r$. A comparação vista na Figura  \ref{fig:fig027} revela que o desempenho não melhora monotonicamente com o aumento da capacidade. Isso provavelmente é resultado do bloco SE ajustar em excesso as interdependências de canal do conjunto de treinamento. Definir $r = 16$ alcançou um bom equilíbrio entre precisão e complexidade e, consequentemente, foi o valor utilizado pelos autores nos experimentos.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Conjunto de Validação Aplicado na SE-ResNet-50}
+    \includegraphics[width=0.6\textwidth]{figures/fig027.png}
+    \caption*{Fonte: Adaptado de \cite{huSqueezeandExcitationNetworks2018}}
+    \label{fig:fig027}
+\end{figure}
 
 
 \textcolor{red}{
 -------------------------------------------------------------------------------------------- > >
 }
-
-%---------------------------------------------------------
-\section{ResNet}
-\label{sec:resnet}
-
-A \textit{ResNet} (Rede Residual) é uma arquitetura de rede neural profunda amplamente utilizada em tarefas de visão computacional, como classificação de imagens, detecção de objetos e segmentação de imagens. Ela foi introduzida por \citeonline{heDeepResidualLearning2015}, e se destacou por ganhar a competição \textit{ImageNet} em 2015 com uma precisão significativamente maior do que as arquiteturas anteriores. A principal característica da \textit{ResNet} é sua capacidade de treinar redes muito profundas sem sofrer com o problema do "desvanecimento do gradiente"\space que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente, problema este muito comum em redes tradicionais muito profundas. A \textit{ResNet} introduz um conceito chave chamado bloco residual que é um componente da rede onde a entrada do bloco é somada à sua saída antes de passar para a próxima camada. Esta conexão direta é chamada de conexão de salto e pode ser conferida na Figura \ref{fig:fig013}.
-
-\begin{figure}[h!]
-    \centering
-    \caption{Conexão de Salto}
-    \includegraphics[width=0.6\textwidth]{figures/fig013.png}
-    \caption*{Fonte: \cite{aiSelfAttentionBasedFusion2023}}
-    \label{fig:fig013}
-\end{figure}
-
-A ResNet é composta por vários blocos residuais empilhados.
-Existem várias versões da \textit{ResNet}, como \textit{ResNet}-18, \textit{ResNet}-34, \textit{ResNet}-50, \textit{ResNet}-101, e \textit{ResNet}-152, onde os números indicam a profundidade total da rede, ou seja, o número de camadas.
-
-%--------------------------------------------------------
-\section{Extração de Características Profundas}
-\label{sec:extract_features}
-
-Para extrair características profundas das imagens de \gls{RMC}, foi empregada a arquitetura pré-treinada de uma rede \textit{ResNet50}. As redes \textit{ResNet50} ficaram muito conhecidas em meados do ano de 2015 por vencer diversas competições em visão computacional, includindo 1º lugar na competição de classificação de imagens \textit{ILSVRC} 2015. As redes \textit{ResNet}, do termo \textit{Residual Networks}, inovaram em sua época trazendo uma forma  de como treinar modelos de maior profundidade, chegando a mais de 100 camadas, com resultados superiores à outros modelos convolucionais competitivos, como o \textit{VGG19}, sem sofrer sintomas comuns a redes neurais muito profundas como o \textit{overfitting} e a saturação ou a ausência dos gradientes em tempo de treino. Os autores da \textit{ResNet} sugeriram o uso de saltos de conexão entre as camadas da rede (Figura \ref{fig:fig013}) afim de manter os gradientes relevantes e controlados entre uma camada e outra.  A \textit{ResNet50} é um modelo de rede neural convolucional profunda de 50 camadas que compreende muitos blocos residuais. A cada bloco, se encontram módulos de convolução e uma conexão de salto que transfere a informação do bloco anterior para o próximo bloco. A conexão de salto ajuda a reter a informação semântica mais baixa aprendida nas camadas anteriores, que de outra forma se tornaria abstrata devido à conexão de longa cadeia. A conexão de salto também evita que o gradiente desapareça nas camadas mais profundas, fornecendo um caminho alternativo para a retropropagação. A informação da conexão de salto é adicionada à informação calculada em cada bloco \cite{heDeepResidualLearning2015}.
-
-Várias abordagens de sucesso aplicaram redes convolucionais para extrair características genéricas para tarefas de recuperação de imagens e obtiveram resultados promissores. Elas utilizam principalmente o poder das características locais para gerar uma representação de uma imagem genérica baseada em redes convolucionais pré-treinadas. As representações das camadas finais da rede convolucional são utilizadas para capturar características semânticas para o fim de nível de categoria à classificação que o modelo se dispõe \cite{alzubiContentbasedImageRetrieval2017b}.
-
 
 %--------------------------------------------------------
 \section{Arquitetura Transformers}
@@ -217,7 +250,7 @@ O \textit{transformers} é uma arquitetura que possui como um de seus propósito
 \begin{figure}[htbp]
     \centering
     \caption{Arquitetura \textit{Transformers}}
-    \includegraphics[width=0.6\textwidth]{figures/fig004.png}
+    \includegraphics[scale=0.6]{figures/fig004.png}
     \caption*{Autor: \citeonline{vaswaniAttentionAllYou2023}}
     \label{fig:fig004}
 \end{figure}
