@@ -166,6 +166,17 @@ z_c = \mathbf{F}_{sq}(\mathbf{u}_c) = \frac{1}{H \times W} \sum_{i=1}^{H} \sum_{
 \label{eq:avgpool}
 \end{equation}
 
+\subsection{Excitation: Recalibração Adaptativa}
+\label{subsec:excitation}
+
+Para aproveitar as informações agregadas na operação de \textit{squeeze}, seguimos com uma segunda operação que tem como objetivo capturar completamente as dependências entre os canais. Para cumprir esse objetivo, a função deve atender a dois critérios: primeiro, ela precisa ser flexível (em particular, deve ser capaz de aprender uma interação não linear entre os canais) e, segundo, ela deve aprender uma relação não mutuamente exclusiva, pois queremos garantir que vários canais possam ser enfatizados, em vez de apenas uma ativação \textit{one-hot}. Para atender a esses critérios, optamos por empregar um mecanismo de \textit{gating} simples com uma ativação sigmoide conforme mostrado na Figura \ref{eq:excitation}):
+
+\begin{equation}
+\mathbf{s} = \mathbf{F}_{ex}(\mathbf{z}, \mathbf{W}) = \sigma(g(\mathbf{z}, \mathbf{W})) = \sigma(\mathbf{W}_2 \delta(\mathbf{W}_1 \mathbf{z}))\label{eq:excitation}
+\end{equation}
+
+
+
 
 \textcolor{red}{
 -------------------------------------------------------------------------------------------- > >
