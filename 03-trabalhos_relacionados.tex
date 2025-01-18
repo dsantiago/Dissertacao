@@ -178,17 +178,19 @@ Avaliado em várias métricas de classificação binária, o modelo alcançou a 
 \end{figure}
 
 \textcolor{red}{
+< < --------------------------------------------------------------------------------------------
+}
+
 Por fim, \citeonline{yangNeuralNetworkDesign2024a} demonstra como o mecanismo de atenção auxilia as redes neurais a se concentrar em informações pertinentes nos dados, e sua integração com redes neurais convolucionais aprimora as capacidades de extração de características do modelo como um todo. O trabalho destaca que o mecanismo de atenção pode ser ser categorizado em: atenção seletiva e mecanismo de autoatenção.
-}
 
-\textcolor{red}{
-O mecanismo de atenção seletiva gera um conjunto de pesos de atenção ao prever diretamente a importância de cada parte dos dados em relação ao objetivo da tarefa, adicionando os pesos ponderadamente aos dados de entrada para realçar as informações importantes e suprimir as informações irrelevantes nos dados. A \gls{SENet} é um trabalho representativo nos mecanismos de atenção seletiva. A \gls{SENet} propõe um mecanismo de atenção no domínio dos canais que aprende o valor dos pesos para cada canal no mapa de características, a fim de realçar ou suprimir cada característica do canal. O mecanismo de atenção seletiva é orientado para os objetivos da tarefa e otimiza diretamente as características, mas carece da capacidade de extrair informações globais. O mecanismo de autoatenção consegue capturar informações globais, mas sofre com alta complexidade e dificuldades de otimização. 
-}
+O mecanismo de atenção seletiva gera um conjunto de pesos de atenção ao prever diretamente a importância de cada parte dos dados em relação ao objetivo da tarefa, adicionando os pesos ponderadamente aos dados de entrada para realçar as informações importantes e suprimir as informações irrelevantes nos dados. A \gls{SE}Net é um trabalho representativo nos mecanismos de atenção seletiva. A \gls{SE}Net propõe um mecanismo de atenção no domínio dos canais que aprende o valor dos pesos para cada canal no mapa de características, a fim de realçar ou suprimir cada característica do canal. O mecanismo de atenção seletiva é orientado para os objetivos da tarefa e otimiza diretamente as características, mas carece da capacidade de extrair informações globais. O mecanismo de autoatenção consegue capturar informações globais, mas sofre com alta complexidade e dificuldades de otimização. 
 
-\textcolor{red}{
 \citeonline{yangNeuralNetworkDesign2024a} propuseram um algoritmo com módulo de busca de atenção diferenciável, assim a rede pode extrair as informações cognitivas e semântica das características da imagem. Em seguida, um espaço de busca multi-atenção é estabelecido englobando seis operações de atenção consolidadas em um único módulo de busca. Por fim, para aprimorar a eficiência, o espaço de busca, antes discreto, é convertido para contínuo, empregando um algoritmo de busca diferencial para identificar a rede de atenção ótima. Para validar os resultados, foi aplicada a classificação em imagens  muito detalhadas. A Figura \ref{fig:fig022} e \ref{fig:fig023} demonstram respectivamente a arquitetura proposta no trabalho e o módulo de busca multi-atenção.
-}
 \newline
+
+\textcolor{red}{
+-------------------------------------------------------------------------------------------- > >
+}
 
 \begin{figure}[htbp]
     \centering

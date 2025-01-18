@@ -1,12 +1,17 @@
 \chapter{METODOLOGIA} 
 \label{chap:metodologia}
 
-A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} que unificam características radiômicas e características profundas. Inicialmente, é empregado diversas técnicas de aprendizado de máquina para extrair características manuais de imagens de RM, abrangendo textura, forma, escala de cinza, etc. Posteriormente, uma rede \textit{ResNet50} pré-treinada é utilizada para extrair características profundas que encapsulam informações semânticas de alto nível e de representação das imagens de \gls{RMC}. Estas características são então fundidas em um vetor de características unificado. Para aprimorar a acurácia e a robustez, um módulo foi desenvolvido utilizando o mecanismo de autoatenção, módulo este que otimiza e pondera o vetor de características fundidas de forma eficaz. A Figura \ref{fig:fig015} confere o fluxograma do projeto ilustrando de forma esquemática as fases que serão atuadas.
+A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} que unificam características radiômicas e características profundas. Em uma primeira fase, será aplicado um modelo base ao conjunto de dados público para cadriomiopatia \gls{ACDC}. O modelo base selecionado consta nos trabalhos relacionados e  \cite{aiSelfAttentionBasedFusion2023} e o esquemático de sua arquitetura é visto na Figura \ref{fig:fig008}. Importante ressaltar que o trabalho em questão é aplicado no cenário de câncer de pulmão de células não pequenas e este trabalho as mesmas técnicas para o cenário de cardiomiopatia e com isto obter as percepções. 
+
+Nesta primeira fase, foi aplicado o pré-processamento composto por diversas técnicas de aprendizado de máquina para extrair características manuais de imagens de RM e sua respectiva máscara, abrangendo textura, forma, escala de cinza, etc. Estas características serão chamadas, deste ponto em diante, de características radiômicas. Outra etapa de pré-processamento, processa as imagens de RM em uma rede \textit{ResNet50} pré-treinada, extraindo características que serão intituladas de características profundas. As características profundas encapsulam informações semânticas de alto nível e de representação das imagens de \gls{RMC}. Estas características são então fundidas em um vetor de características unificado e aplicado a um único bloco de autoatenção, e obtendo ao fim da arquitetura do modelo base, as classificação indicando se há ou não cardiomiopatia, ou seja, uma classificação binária.
+
+Na segunda fase, foram feitas diversas adaptações ao modelo base com o intuito de aprimorar a robustez e a acurácia. Algumas adaptações feitas consistem no aumento do tamanho dos vetores semânticos, também conhecidos na literatura como \textit{embeddings}, seu tamanho foi mudado de 12 para 64 no intuito de preservar mais informações ao custo de aumento quase irrelevante de custo computacional. A concatenação dos \textit{embeddings} também foi adaptada se comparada ao modelo original. Na versão original a concatenação se dá na última dimensão enquanto a no modelo resultante do estudo se dá na primeira. Em termos práticos, na abordagem original dois vetores $1\text{x}12$ concatenados resultam em $1\text{x}24$, na abordagem adaptada resultam em $2\text{x}12$. A versão adaptada também conta com uma camada convolucional visando obter informação relevante entre os \textit{embeddings}. Uma camada de atenção seletiva também foi adicionada no formato de um bloco \gls{SE} que precedeo o bloco autoatenção. Testes com os hiperparâmetros também aprimoraram os resultados, ao aplicar a camada de autoatenção $N$ vezes ao invés de uma única vez como acontece no modelo base, também foi perceptível uma melhora nos resultados. Enquanto o bloco de seleção seletiva atua na relação entre os canais dos \textit{embeddings}, o bloco de autoatenção otimiza e pondera o vetor de características fundidas de forma eficaz. A Figura \ref{fig:fig015} confere o fluxograma do projeto ilustrando de forma esquemática as fases que serão atuadas.
+
 
 \begin{figure}[h!]
     \centering
     \caption{Fluxograma do Projeto}
-    \includegraphics[width=0.4\textwidth]{figures/fig015.png}
+    \includegraphics[width=0.5\textwidth]{figures/fig015.png}
     \caption*{Fonte: Autor}
     \label{fig:fig015}
 \end{figure}
@@ -15,7 +20,8 @@ A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} q
 \section{Bases de Dados} 
 \label{subsec:cap4_dataset}
 
-Duas bases de dados serão utilizas para experimento. O primeiro conjunto de dados é o \gls{ACDC}\footnote{https://www.creatis.insa-lyon.fr/Challenge/acdc/databases.html}, sendo seus dados públicos para fins de pesquisa. O segundo conjunto de dados consiste, de um conjunto de dados privado, seu acesso se dá pela parceria existente entre a \gls{FEI} e o \gls{InCor}.
+Duas bases de dados foram utilizadas no experimento. O primeiro conjunto de dados é o \gls{ACDC}\footnote{https://www.creatis.insa-lyon.fr/Challenge/acdc/databases.html}. O segundo conjunto de dados é o The Sunnybrook Cardiac Data (SCD) \footnote{https://www.cardiacatlas.org/sunnybrook-cardiac-data} \cite{radauEvaluationFrameworkAlgorithms2009}. Ambos conjuntos de dados são públicos e destinados a pesquisa.
+
 
 %--------------------------------------------------------
 \subsection{Conjunto de Dados ACDC} 
@@ -91,19 +97,54 @@ Além disso, cada paciente vem com as seguintes informações adicionais: peso, 
     \label{tab:count_dataset}
 \end{table}
 
+
+--------------------------------------------------------
+\subsection{Conjunto de Dados Sunny} 
+\label{subsec:cap4_sunny}
+
+Os conjunto de dados  Sunny, também conhecidos como \textit{2009 Cardiac MR Left Ventricle Segmentation Challenge data}, consiste em 45 imagens de RM de um grupo misto de pacientes e patologias: saudáveis, hipertrofia, insuficiência cardíaca com infarto e insuficiência cardíaca sem infarto. Um subconjunto desses dados foi utilizado pela primeira vez no desafio de segmentação automatizada do miocárdio a partir de imagens de RM em eixo curto, realizado em um workshop do MICCAI em 2009. O conjunto completo de dados agora está disponível no banco de dados CAP com licença de domínio público \cite{radauEvaluationFrameworkAlgorithms2009}. Há quatro grupos patológicos neste conjunto de dados, que foram classificados no seguinte formato:
+
+\begin{enumerate}
+    \item Insuficiência cardíaca com infarto (\textbf{IC-I}): grupo com fração de ejeção (FE) < 40\% e evidência de realce tardio com gadolínio (Gd).
+    \item Insuficiência cardíaca sem infarto (\textbf{IC}): grupo com FE < 40\% e sem realce tardio com gadolínio.
+    \item Hipertrofia do ventrículo esquerdo (\textbf{HIP}): grupo com FE normal (> 55\%) e uma razão de massa do ventrículo esquerdo (LV) sobre a área da superfície corporal > 83 g/m².
+    \item Saudáveis (\textbf{N}): grupo com FE > 55\% e sem hipertrofia.
+\end{enumerate}
+
+\noindent Na tabela \ref{tab:sunny_stats} é conferido como se encontra distribuídos os 45 pacientes:
+
+\newline
+
+\begin{table}[h!]
+\centering
+\caption{Estatísticas dos volumes e função do ventrículo esquerdo escritas como média.}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{}  & \textbf{N (n=9)} & \textbf{HIP (n=12)} & \textbf{IC (n=12)} & \textbf{IC-I (n=12)} \\ \midrule
+\textbf{Vol. Diastólico Final (ml)} & 115.69 (36.89)   & 114.39 (50.46)      & 233.67 (63.21)     & 244.92 (86.02)       \\
+\textbf{Vol. Sistólico Final (ml)}  & 43.10 (14.74)    & 43.11 (24.50)       & 158.28 (56.34)     & 174.34 (90.64)       \\
+\textbf{Fração de Ejeção (\%)}        & 62.93 (3.65)     & 62.72 (9.22)        & 33.09 (13.07)      & 32.01 (12.27)        \\
+\textbf{Massa Ventrículo Esq. (g)} & 130.27 (32.69)   & 175.87 (85.70)      & 193.69 (39.01)     & 201.32 (45.24)       \\ \bottomrule
+\end{tabular}
+\caption*{Fonte: Adaptado de \cite{radauEvaluationFrameworkAlgorithms2009}.}
+\label{tab:sunny_stats}
+\end{table}
+
+
+
 %--------------------------------------------------------
-\subsection{Conjunto de Dados InCor} 
-\label{subsec:cap4_incor}
+% \subsection{Conjunto de Dados InCor} 
+% \label{subsec:cap4_incor}
 
-O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que realizaram exames de \gls{RMC} e que foram classificados por especialistas do \gls{InCor} como casos que continham cardiomiopatia hipertrófica, cardiomiopatia dilatada ou nenhuma das duas anomalias. No total foram adquiridos $400$ casos, distribuídos conforme a Figura \ref{fig:fig012}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
+% O conjunto de dados \gls{InCor} é composto por casos reais de pacientes que realizaram exames de \gls{RMC} e que foram classificados por especialistas do \gls{InCor} como casos que continham cardiomiopatia hipertrófica, cardiomiopatia dilatada ou nenhuma das duas anomalias. No total foram adquiridos $400$ casos, distribuídos conforme a Figura \ref{fig:fig012}, na qual é possível verificar que a maioria dos casos (69\%) pertencem a indivíduos do sexo masculino, enquanto 31\% pertencem a mulheres. Dentro do grupo de homens verificou-se uma predominância de casos sem anomalia para pacientes com idades entre 21 a 41 anos (25\%), enquanto no grupo de mulheres notou-se que o número maior de casos (21\%) era composto por casos hipertróficos em pacientes com idade entre 42 a 62 anos \cite{bergamascoRECUPERACAOOBJETOSMEDICOS2018}.
 
-\begin{figure}[htbp]
-    \centering
-    \caption{Distribuição das anomalias entre diferentes gêneros e idades}
-    \includegraphics[width=1\textwidth]{figures/fig012.png}
-    \caption*{Fonte: Autor}
-    \label{fig:fig012}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \caption{Distribuição das anomalias entre diferentes gêneros e idades}
+%     \includegraphics[width=1\textwidth]{figures/fig012.png}
+%     \caption*{Fonte: Autor}
+%     \label{fig:fig012}
+% \end{figure}
 
 %---------------------------------------------------------
 \section{Pré-Processamento}

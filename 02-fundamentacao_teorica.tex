@@ -226,7 +226,7 @@ A flexibilidade do bloco \gls{SE} significa que ele pode ser aplicado diretament
 
 Para que o bloco SE proposto seja viável na prática, ele deve fornecer um equilíbrio eficaz entre a complexidade do modelo e o desempenho, o que é importante para escalabilidade. Foi definido uma razão de redução $r$ como 16 em todos os experimentos, exceto onde indicado de outra forma. 
 
-O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e o custo computacional dos blocos \gls{SE} no modelo. O autor do trabalho conduz experimentos baseados no SE-ResNet-50 para uma variedade de valores diferentes de $r$. A comparação vista na Figura  \ref{fig:fig027} revela que o desempenho não melhora monotonicamente com o aumento da capacidade. Isso provavelmente é resultado do bloco SE ajustar em excesso as interdependências de canal do conjunto de treinamento. Definir $r = 16$ alcançou um bom equilíbrio entre precisão e complexidade e, consequentemente, foi o valor utilizado pelos autores nos experimentos.
+O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e o custo computacional dos blocos \gls{SE} no modelo. O autor do trabalho conduz experimentos baseados no SE-ResNet-50 para uma variedade de valores diferentes de $r$. A comparação vista na Figura  \ref{fig:fig027} revela que o desempenho não melhora monotonicamente com o aumento da capacidade. Isso provavelmente é resultado do bloco SE ajustar em excesso as interdependências de canal do conjunto de treinamento. Definir $r = 16$ alcançou um bom equilíbrio entre precisão e complexidade e, consequentemente, foi o valor utilizado pelos autores nos experimentos. O Algoritmo \ref{alg:se_block} reflete a implementação do bloco \gls{SE}.
 
 \begin{figure}[h!]
     \centering
@@ -235,6 +235,36 @@ O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e 
     \caption*{Fonte: Adaptado de \cite{huSqueezeandExcitationNetworks2018}}
     \label{fig:fig027}
 \end{figure}
+
+% ----------------- ALGORITMO SQUEEZE AND EXCITATION NET ------------------
+\begin{algorithm}
+\caption{BloclSqueeze-and-Excitation (SE)}
+\label{alg:se_block}
+\textbf{Entrada:} Mapa de características $\mathbf{U} \in \mathbb{R}^{H \times W \times C}$\\
+\textbf{Saída:} Mapa de características recalibrado $\tilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$
+\begin{algorithmic}[1]
+\STATE \textbf{Squeeze:} Execumta um \textit{average pooling} global para agregar as dimensões espaciais:
+\[
+z_c = \frac{1}{H \times W} \sum_{i=1}^H \sum_{j=1}^W u_c(i, j), \quad \forall c \in \{1, \dots, C\}
+\]
+\STATE \textbf{Excitation:} Usa duas camadas totalmente conectadas para modelar a interdependência dos canais:
+\[
+\mathbf{s} = \sigma(\mathbf{W}_2 \delta(\mathbf{W}_1 \mathbf{z}))
+\]
+onde:
+\begin{itemize}
+    \item $\mathbf{W}_1 \in \mathbb{R}^{\frac{C}{r} \times C}$: Camada de redução de dimensionalidade
+    \item $\mathbf{W}_2 \in \mathbb{R}^{C \times \frac{C}{r}}$: Camada de restauração da dimensão original
+    \item $\delta$: Ativação ReLU
+    \item $\sigma$: Ativação Sigmoide
+\end{itemize}
+\STATE \textbf{Rescala:} Recalibra o mapa de características usando as ativações:
+\[
+\tilde{\mathbf{u}}_c = s_c \cdot \mathbf{u}_c, \quad \forall c \in \{1, \dots, C\}
+\]
+\RETURN $\tilde{\mathbf{U}} = [\tilde{\mathbf{u}}_1, \tilde{\mathbf{u}}_2, \dots, \tilde{\mathbf{u}}_C]$
+\end{algorithmic}
+\end{algorithm}
 
 
 \textcolor{red}{
