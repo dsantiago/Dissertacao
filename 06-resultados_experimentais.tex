@@ -78,7 +78,7 @@ Os resultados foram obtidos aplicando a metodologia previamente apresentada, for
 \end{figure}
 
 
-Para o registro dos resultados foi utilizado a ferramenta \textit{CometML}. O \textit{CometML} pode registrar, em tempo de execução, informações como erro por lote, erro por época, acurácia de validação, etc, podem ser armazenados enquanto o processo de treinamento é executado. Por fim métricas como acurácia e matriz de confusão podem ser geradas também.O serviço é acessado  por uma \gls{API} externa. As Figuras \ref{fig:fig028} e \ref{fig:fig029} demonstram respectivamente os painéis adaptáveis ao fim do treino e os valores armazenado de erro, acurácia, etc, coletados durante o treino.
+Para o registro dos resultados foi utilizado a ferramenta \textit{CometML}. O \textit{CometML} pode registrar, em tempo de execução, informações como erro por lote, erro por época, acurácia de validação, etc, podem ser armazenados enquanto o processo de treinamento é executado. Por fim métricas como acurácia e matriz de confusão podem ser geradas também.O serviço é acessado  por uma \gls{API} externa. As Figuras \ref{fig:fig028} e \ref{fig:fig029} demonstram respectivamente os painéis adaptáveis ao fim do treino e os valores armazenado de erro, acurácia, etc, coletados durante o treino. É possível notar que o modelo se sobre-ajusta nos dados de treino, predizendo corretamente todos os valores porém, nos dados de treino,  a assertividade cai drasticamente para $0,58$. Também é possível notar que após $2500$ passos no treinamento, o erro estabiliza e o demais processamento não necessariamente se faria necessário.
 
 \begin{figure}[h!]
     \centering
