@@ -127,12 +127,12 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 
 \begin{table}[htbp]
 \centering
-\caption{Tabela de Métricas - Adaptação do Modelo Original}
+\caption{Métricas ACDC - Adaptação do Modelo Original}
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
 \midrule
-\textcolor{orange}{24} & \textcolor{orange}{1} & \textcolor{orange}{0.58} & \textcolor{orange}{0.47} & \textcolor{orange}{0.45} & \textcolor{orange}{0.46} & \textcolor{orange}{0.55} \\
+\textcolor{orange}{\textbf{24}} & \textcolor{orange}{\textbf{1}} & \textcolor{orange}{\textbf{0.58}} & \textcolor{orange}{\textbf{0.47}} & \textcolor{orange}{\textbf{0.45}} & \textcolor{orange}{\textbf{0.46}} & \textcolor{orange}{\textbf{0.55}} \\
 24 & 2 & 0.58 & 0.48 & 0.60 & 0.53 & 0.58 \\
 24 & 4 & 0.54 & 0.44 & 0.55 & 0.49 & 0.54 \\
 24 & 6 & 0.50 & 0.41 & 0.55 & 0.47 & 0.51 \\
@@ -149,13 +149,13 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 \bottomrule
 \end{tabular}
 \caption*{Fonte: Autor}
-\label{tab:metrics_orig}
+\label{tab:metrics_acdc_orig}
 \end{table}
 
 
 \begin{table}[htbp]
 \centering
-\caption{Tabela de Métricas - Adaptação do Modelo Original Com Máscaras}
+\caption{Métricas ACDC - Adaptação do Modelo Original Com Máscaras}
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
@@ -177,13 +177,13 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 \bottomrule
 \end{tabular}
 \caption*{Fonte: Autor}
-\label{tab:metrics_orig_mask}
+\label{tab:metrics_acdc_orig_mask}
 \end{table}
 
 
 \begin{table}[htbp]
 \centering
-\caption{Tabela de Métricas - Adaptação Adicionando Blocos Conv. e SE}
+\caption{Métricas ACDC - Adaptação Adicionando Blocos Conv. e SE}
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
@@ -200,18 +200,18 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 \hline
 64 & 1 & 0.64 & 0.54 & 0.65 & 0.59 & 0.64 \\
 64 & 2 & 0.72 & 0.64 & 0.70 & 0.67 & 0.72 \\
-\textcolor{blue}{64} & \textcolor{blue}{4} & \textcolor{blue}{0.80} & \textcolor{blue}{0.73} & \textcolor{blue}{0.80} & \textcolor{blue}{0.76} & \textcolor{blue}{0.80} \\
+\textcolor{blue}{\textbf{64}} & \textcolor{blue}{\textbf{4}} & \textcolor{blue}{\textbf{0.78}} & \textcolor{blue}{\textbf{0.76}} & \textcolor{blue}{\textbf{0.65}} & \textcolor{blue}{\textbf{0.70}} & \textcolor{blue}{\textbf{0.76}} \\
 64 & 6 & 0.76 & 0.65 & 0.85 & 0.74 & 0.77 \\
 \bottomrule
 \end{tabular}
 \caption*{Fonte: Autor}
-\label{tab:metrics_se}
+\label{tab:metrics_acdc_se}
 \end{table}
 
 
 \begin{figure}[h!]
     \centering
-    \caption{Visão dos Modelos c/ Bloco SE - \textit{CometML}}
+    \caption{Modelos c/ Bloco SE e sua Acurácia - \textit{CometML}}
     \includegraphics[width=1\textwidth]{figures/fig032.png}
     \caption*{Fonte: Autor}
     \label{fig:fig032}
@@ -221,7 +221,88 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 \subsection{Resultados dos Modelos Adaptados - \textit{SunnyBrook}}
 \label{subsec:resultados_sunny_adaptado}
 
-Os experimentos no conjunto de dados \textit{SunnyBrook} foram praticamente igualis aos aplicados ao conjunto de dados \gls{ACDC}. Houver uma etapa extra no pré-processamento, para gerar as máscaras das imagens de RM precisa-se interpolar os valores de um arquivo de texto que vem anexo com os dados. A máscara também é composta apenas pela região de interesse contanto apenas valores 0 e 1.
+Os experimentos no conjunto de dados \textit{SunnyBrook} foram praticamente iguais aos aplicados ao conjunto de dados \gls{ACDC}. No conjunto de dados \textit{SunnyBrook}, houve uma etapa extra de pré-processamento para gerar as máscaras. Foi necessário interpolar os valores de um arquivo de texto que vem anexo com os dados. A máscara também é composta apenas pela região de interesse contanto apenas valores 0 e 1. Esta é a única característica específica deste conjunto de dados que diverge do \gls{ACDC}.
+
+Como o \textit{SunnyBrook} tem poucos dados, apenas $45$, sendo $30$ para treino e $15$ para teste. Removendo as classes de infarto (IC e IC-I), sobram $21$ registros sedo $13$ para treino e $8$ para teste. Foi considerado que um treinamento neste conjunto de dados não seria benéfico e foi feito apenas a inferência utilizando todos os $21$ registros, sendo $12$ casos de \gls{CMH} e $9$ casos em condições normais. Os modelos utilizados são os previamente treinados no \gls{ACDC}. Os resultados são conferidos nas tabelas \ref{tab:metrics_sunny_orig}, \ref{tab:metrics_sunny_orig_mask} e \ref{tab:metrics_sunny_se}. O modelo base consta em laranja e o melhor resultado consta em azul, indo de encontro aos resultados obtidos no \gls{ACDC}. É possível notar que o conjunto de dados, por ser pequeno, compromete a classificação pois mesmo que o modelo possua um pequeno aprimoramento de uma arquitetura para outra, pode não ser suficiente para converter uma nova classificação, o que da a aparência de que dados a alguns resultados empatados, eles possuem a mesma assertividade o que não é a realidade.
+
+
+\begin{table}[htbp]
+\centering
+\caption{Métricas SunnyBrook - Adaptação do Modelo Original}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
+\midrule
+\textcolor{orange}{\textbf{24}} & \textcolor{orange}{\textbf{1}} & \textcolor{orange}{\textbf{0.48}} & \textcolor{orange}{\textbf{0.54}} & \textcolor{orange}{\textbf{0.58}} & \textcolor{orange}{\textbf{0.56}} & \textcolor{orange}{\textbf{0.46}} \\
+24 & 2 & 0.52 & 0.60 & 0.50 & 0.55 & 0.53 \\
+24 & 4 & 0.52 & 0.60 & 0.50 & 0.55 & 0.53 \\
+24 & 6 & 0.52 & 0.57 & 0.67 & 0.62 & 0.50 \\
+48 & 1 & 0.48 & 0.56 & 0.42 & 0.48 & 0.49 \\
+48 & 2 & 0.48 & 0.55 & 0.50 & 0.52 & 0.47 \\
+48 & 4 & 0.52 & 0.58 & 0.58 & 0.58 & 0.51 \\
+48 & 6 & 0.52 & 0.60 & 0.50 & 0.55 & 0.53 \\
+64 & 1 & 0.52 & 0.57 & 0.67 & 0.62 & 0.50 \\
+64 & 2 & 0.57 & 0.64 & 0.58 & 0.61 & 0.57 \\
+64 & 4 & 0.57 & 0.67 & 0.50 & 0.57 & 0.58 \\
+64 & 6 & 0.52 & 0.57 & 0.67 & 0.62 & 0.50 \\
+\bottomrule
+\end{tabular}
+\caption*{Fonte: Autor}
+\label{tab:metrics_sunny_orig}
+\end{table}
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{Métricas SunnyBrook - Adaptação do Modelo Original Com Máscaras}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
+\midrule
+24 & 1 & 0.48 & 0.54 & 0.58 & 0.56 & 0.46 \\
+24 & 2 & 0.52 & 0.62 & 0.42 & 0.50 & 0.54 \\
+24 & 4 & 0.57 & 0.67 & 0.50 & 0.57 & 0.58 \\
+24 & 6 & 0.52 & 0.58 & 0.58 & 0.58 & 0.51 \\
+48 & 1 & 0.52 & 0.58 & 0.58 & 0.58 & 0.51 \\
+48 & 2 & 0.57 & 0.64 & 0.58 & 0.61 & 0.57 \\
+48 & 4 & 0.62 & 0.67 & 0.67 & 0.67 & 0.61 \\
+48 & 6 & 0.52 & 0.58 & 0.58 & 0.58 & 0.51 \\
+64 & 1 & 0.57 & 0.62 & 0.67 & 0.64 & 0.56 \\
+64 & 2 & 0.62 & 0.67 & 0.67 & 0.67 & 0.61 \\
+64 & 4 & 0.71 & 0.80 & 0.67 & 0.73 & 0.72 \\
+64 & 6 & 0.62 & 0.64 & 0.75 & 0.69 & 0.60 \\
+\bottomrule
+\end{tabular}
+\caption*{Fonte: Autor}
+\label{tab:metrics_sunny_orig_mask}
+\end{table}
+
+
+\begin{table}[htbp]
+\centering
+\caption{Métricas SunnyBrook - Adaptação Adicionando Blocos Conv. e SE}
+\begin{tabular}{ccccccc}
+\toprule
+\textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
+\midrule
+24 & 1 & 0.67 & 0.73 & 0.67 & 0.70 & 0.67 \\
+24 & 2 & 0.71 & 0.80 & 0.67 & 0.73 & 0.72 \\
+24 & 4 & 0.76 & 0.77 & 0.83 & 0.80 & 0.75 \\
+24 & 6 & 0.71 & 0.75 & 0.75 & 0.75 & 0.71 \\
+48 & 1 & 0.71 & 0.80 & 0.67 & 0.73 & 0.72 \\
+48 & 2 & 0.76 & 0.82 & 0.75 & 0.78 & 0.76 \\
+48 & 4 & 0.76 & 0.73 & 0.92 & 0.81 & 0.74 \\
+48 & 6 & 0.76 & 0.89 & 0.67 & 0.76 & 0.78 \\
+64 & 1 & 0.76 & 0.82 & 0.75 & 0.78 & 0.76 \\
+64 & 2 & 0.81 & 0.90 & 0.75 & 0.82 & 0.82 \\
+\textcolor{blue}{\textbf{64}} & \textcolor{blue}{\textbf{4}} & \textcolor{blue}{\textbf{0.86}} & \textcolor{blue}{\textbf{0.85}} & \textcolor{blue}{\textbf{0.92}} & \textcolor{blue}{\textbf{0.88}} & \textcolor{blue}{\textbf{0.85}} \\
+64 & 6 & 0.81 & 0.90 & 0.75 & 0.82 & 0.82 \\
+\bottomrule
+\end{tabular}
+\caption*{Fonte: Autor}
+\label{tab:metrics_sunny_se}
+\end{table}
 
 %--------------------------------------------------------
 \section{Considerações Finais do Capítulo} 
