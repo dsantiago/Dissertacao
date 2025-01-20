@@ -1,5 +1,5 @@
-\chapter{RESULTADOS PRELIMINARES}
-\label{chap:resultados_discussao}
+\chapter{RESULTADOS EXPERIMENTAIS}
+\label{chap:resultados_experimentais}
 
 Este capítulo apresenta os resultados da prova de conceito realizada com os algoritmos desenvolvidos, tanto o modelo base quanto os modelos adaptados, com o intuito de compará-los aos objetivos traçados nesta dissertação. Os testes realizados buscam avaliar a eficiência dos algoritmos em diversas sob adaptações baseadas na intuição que a literatura ofereceu. O desempenho é analisado como também é discutido os resultados obtidos, este capítulo também oferece uma visão abrangente sobre os conjuntos de dados utilizados, destacando a relevância desses dados para a análise proposta.
 
@@ -52,7 +52,7 @@ Os resultados foram obtidos aplicando a metodologia previamente apresentada, for
     \hline 
         Precisão & 0.47 \\ 
     \hline 
-        Revocação & 0.40 \\ 
+        Revocação & 0.45 \\ 
     \hline 
         AUC & 0.55 \\ 
     \hline 
@@ -308,5 +308,7 @@ Como o \textit{SunnyBrook} tem poucos dados, apenas $45$, sendo $30$ para treino
 \section{Considerações Finais do Capítulo} 
 \label{sec:cap6_consideracoes_finais}
 
-Os resultados obtidos, aplicando a arquitetura proposta por \citeonline{aiSelfAttentionBasedFusion2023} com modificações na quantidade de características utilizadas e aplicado em imagens de \gls{RMC} para identificação de cardiomiopatias, em contraste com o trabalho mencionado que foi aplicado à identificação de câncer no pulmão, obteve resultados menos relevantes que o original. Isto indica que há espaço para exploração e melhorias a serem proposta para o âmbito de cardiomiopatia. Algumas, abordagens ainda são tidas em vista como manipular o seletor de características e a sua quantidade, testar novos hiperparâmetros para os modelos, ao invés de ter um único módulo de autoatenção, aplicar vários em cascata, etc.
+Os resultados obtidos, aplicando a arquitetura original proposta por \citeonline{aiSelfAttentionBasedFusion2023} e a aplicação de diversas modificações, como a forma de concatenar para propiciar um módulo convolucional de extrair informações inter-relacionadas entre características extraídas de diferentes técnicas, a adição de um mecanismo de atenção seletiva na forma de um bloco \gls{SE} antecedente ao mecanismo de autoatenção. Enquanto a atenção seletiva procura gera um conjunto de pesos ao ao prever diretamente a importância de cada parte dos dados, aprendendo o valor dos pesos para cada canal no mapa de características com o objetivo de realçar ou suprimir as características de cada canal. O mecanismo de autoatenção envolve a utilização da correlação entre os conteúdos das camadas ocultas para calcular os pesos de atenção, que são então aplicados para agregar informações das camadas ocultas em uma escala global. 
+
+Seguindo a intuição de utilizar diferentes mecanismos de atenção, conforme proposto pelos autores \cite{yangNeuralNetworkDesign2024a}, trouxe melhoras significativas comparadas ao modelo base. Outras adaptações mais diretas também surtiram efeito, como aumentar o tamanho das características utilizadas, aplicar mais blocos de autoatenção de forma recorrente, a adição das máscaras, que por sua vez, indicam as regiões de interesse, etc. Os experimentos indicam que há espaço para exploração e melhorias a serem propostas para o âmbito de cardiomiopatia hipertrófica.
 
