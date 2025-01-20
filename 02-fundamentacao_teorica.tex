@@ -79,7 +79,7 @@ Métodos Baseados em Transformadas, incluindo transformadas de \textit{Fourier},
 \label{sec:cnn}
 
 \textcolor{red}{
-< < --------------------------------------------------------------------------------------------
+< < -------- NOVA FUNDAMENTAÇÃO TEÓRICA - CNN (solicitada na quali) --------
 }
 
 \cite{lecunHandwrittenDigitRecognition1989} pesquisaramm sobre o reconhecimento de caracteres em documentos escritos à mão, criando a arquitetura LeNet, uma rede que consiste em camadas convolucionais seguidas por camadas de \textit{pooling}, e finalizando com camadas totalmente conectadas. Os autores introduziram o \textit{backpropagation} a redes convolucionais, permitindo o aprendizado automático e substituindo o uso de técnicas para escolha manual de coeficientes. \cite{lecunHandwrittenDigitRecognition1989}, ainda estudando a classificação de caracteres, expandem a LeNet para a LeNet-5, uma rede que firmou a superioridade das redes convolucionais na tarefa de classificação de imagens se comparado a outros métodos da época.
@@ -147,8 +147,7 @@ Várias abordagens de sucesso aplicaram redes convolucionais para extrair caract
 \label{sec:se_net}
 
 \textcolor{red}{
-< < --------------------------------------------------------------------------------------------
-\newline
+< < ----------------- NOVA FUNDAMENTAÇÃO TEÓRICA - BLOCO SE -----------------
 }
 
 Para cada camada convolucional, um conjunto de filtros é aprendido para expressar padrões de conectividade espacial local ao longo dos canais de entrada. Em outras palavras, espera-se que os filtros convolucionais sejam combinações informativas ao fundir informações espaciais e baseadas nos canais dentro de campos receptivos locais.
@@ -161,7 +160,7 @@ Os blocos \gls{SE} podem ser construídos para qualquer transformação conforme
 \label{eq:se_transform}
 \end{equation}
 
-Sendo $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_C]$ os filtros de aprendidos onde $\mathbf{v}_C]$ se refere parâmetro $c$-ésimo. As saídas das convoluções podem ser escritas da seguinte forma: $\mathcal{F}_{tr} \como \mathbf{U} = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_C]$, sendo o termo $\mathbf{u}_C$ descrito na equação \ref{eq:se}. 
+Sendo $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_C]$ os filtros de aprendidos onde $\mathbf{v}_C]$ se refere parâmetro $c$-ésimo. As saídas das convoluções podem ser escritas da seguinte forma: $\mathcal{F}_{tr} \mathbf{U} = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_C]$, sendo o termo $\mathbf{u}_C$ descrito na equação \ref{eq:se}. 
 
 \begin{equation}
 \mathbf{u}_c = \mathbf{v}_c \ast \mathbf{X} = \sum_{s=1}^{C'} \mathbf{v}_c^s \ast \mathbf{x}^s
@@ -238,7 +237,7 @@ O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e 
 
 % ----------------- ALGORITMO SQUEEZE AND EXCITATION NET ------------------
 \begin{algorithm}
-\caption{BloclSqueeze-and-Excitation (SE)}
+\caption{Bloco Squeeze-and-Excitation (SE)}
 \label{alg:se_block}
 \textbf{Entrada:} Mapa de características $\mathbf{U} \in \mathbb{R}^{H \times W \times C}$\\
 \textbf{Saída:} Mapa de características recalibrado $\tilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$
