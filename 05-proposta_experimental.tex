@@ -50,7 +50,7 @@ Este trabalho visa realizar os experimentos em duas bases distintas com imagens 
 O modo de operação será o mesmo para ambos os conjuntos de dados com exceção do pré-processamento dado o fato de ambos os conjuntos serem diferentes quanto aos dados.
 
 %--------------------------------------------------------
-\subsection{Experimentos Modelo de Base}
+\subsection{Experimentos Modelo Base}
 \label{subsec:cap5_experimentos_base}
 
 Uma prova de conceito foi aplicada ao conjunto de dados \gls{ACDC} utilizando o modelo de linha de base para uma primeira avaliação de referência. O modelo base foi implementado seguindo o artigo e sua implementação é conferida na Figura \ref{fig:fig008}. O conjunto de dados para treino é composto por $100$ exames de pacientes, coletando apenas as fatias das imagens da fase diastólica. Características de primeira ordem e \gls{GLCM} são extraídas, utilizando a blbioteca \textit{PyRadiomics}, resultando em $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, foi utilizado uma rede \textit{ResNet50} congelada sem sua última camada linear, responsável pela classificação originalmente de $1000$ classes oriundas do conjunto de dados \textit{ImageNet}, obtendo como resultado final um vetor com $\DeepFeatures$ valores características profundas.
@@ -64,7 +64,7 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 \label{eq:sigmoide}
 \end{equation}
 
---------------------------------------------------------
+% --------------------------------------------------------
 \subsection{Experimentos Modelos Adaptados}
 \label{subsec:cap5_experimentos_adaptados}
 
