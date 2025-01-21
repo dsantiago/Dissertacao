@@ -11,7 +11,7 @@ A \gls{RMC} se tornou um dos principais métodos em imagem médica para avaliar 
 Usando a tecnologia atual de \gls{RMC}, os investigadores podem obter percepções únicas sobre a função ventricular, por exemplo, deformação ventricular regional \textit{in vivo}, movimento da parede e mecânica dos fluidos, por exemplo, visualização \textit{in vivo} de perfis de velocidade além de aumentar a precisão de medidas padrão aceitas pela fisiologia ou função ventricular, por exemplo, débito cardíaco, volumes ventriculares e massa. Devido ao rápido avanço da tecnologia, muitas técnicas de \gls{RMC} são experimentais ou ainda estão em fase de desenvolvimento clínico; no entanto, há muitas técnicas que são clinicamente úteis, por exemplo, medição do volume ventricular em pacientes com tamanho ventricular esquerdo limítrofe. Como muitas das técnicas experimentais atuais serão, sem dúvida, empregadas na prática clínica no futuro, os médicos devem estar cientes de todo o espectro de capacidades da \gls{RMC} \cite{fogelAssessmentCardiacFunction2000}.
 
 Em muitos cenários clínicos, as limitações técnicas da ecocardiografia e a expressão fenotípica heterogênea tornaram tal avaliação difícil e a \gls{RMC} cardíaca emergiu como uma modalidade de imagem complementar útil para incorporar a ecocardiografia transtorácica de rotina. A \gls{RMC} cardíaca é única em sua alta resolução espacial e temporal com excelente contraste entre o \textit{pool} sanguíneo e o miocárdio, sem limitação de janela de imagem ou plano de imagem.
-A heterogeneidade fenotípica da miocardiopatia hipertrófica é bem reconhecida pela dificuldade em sua identificação. Isto se complica ainda mais pois nem todos os pacientes com hipertrofia ventricular esquerda têm CMH, enquanto uma fisiopatologia semelhante à CMH com obstrução dinâmica do trato de saída do ventrículo esquerdo pode ser observada sem hipertrofia do ventrículo esquerdo, em um subgrupo de pacientes com anormalidades na válvula mitral e/ou no músculo papilar.
+A heterogeneidade fenotípica da miocardiopatia hipertrófica é bem reconhecida pela dificuldade em sua identificação. Isto se complica ainda mais pois nem todos os pacientes com hipertrofia ventricular esquerda têm CMH, enquanto uma fisiopatologia semelhante à CMH com obstrução dinâmica do trato de saída do ventrículo esquerdo pode ser observada sem hipertrofia do ventrículo esquerdo, em um subgrupo de pacientes com anormalidades na válvula mitral e/ou no músculo papilar \cite{pontoneClinicalApplicationsCardiac2022}.
 
 A CMH é uma doença heterogênea com expressão morfológica complexa que requer uma caracterização precisa da doença para um planejamento terapêutico ótimo e estratificação de risco. A \gls{RMC} cardíaca emergiu como um complemento útil para esses propósitos. Com a incorporação crescente de imagem multimodal na avaliação clínica da CMH, o entendimento sobre a importância de diferenças morfológicas sutis continuará a crescer, e pesquisas adicionais definirão novos marcadores prognósticos e melhorarão as estratégias de tratamentos atuais \cite{toCardiacMagneticResonance2011c}.
 
@@ -26,15 +26,15 @@ A CMH é uma doença heterogênea com expressão morfológica complexa que reque
 \section{Análise Radiômica}
 \label{sec:analise_radiomica}
 
-A análise radiômica é um campo de pesquisa em rápida evolução, preocupada com a extração de informações quantitativas, incluindo padrões complexos que são difíceis de reconhecer ou quantificar pelo olho humano dentro de imagens médicas, características estas chamadas de características radiômicas. As características radiômicas podem capturar características de tecidos e lesões, como forma e heterogeneidade, e podem, sozinhas ou em combinação com dados demográficos, histológicos, genômicos ou proteômicos, ser usadas para a resolução de problemas clínicos.
+A análise radiômica é um campo de pesquisa em rápida evolução, preocupada com a extração de informações quantitativas, incluindo padrões complexos que são difíceis de reconhecer ou quantificar pelo olho humano a cerca de imagens médicas, características estas chamadas de características radiômicas. As características radiômicas podem capturar características de tecidos e lesões, como forma e heterogeneidade, e podem, sozinhas ou em combinação com dados demográficos, histológicos, genômicos ou proteômicos, ser usadas para a resolução de problemas clínicos.
 
-Mesmo que características radiômicas individuais podem se correlacionar com dados genômicos ou dados clínicos, o impacto da análise radiômica se torna mais relevante a medida que mais informações são por ela extraídas. Tipicamente centenas de características, uma fração das do total extraído, contribuem para identificação de uma doença específica e é processada usando técnicas de aprendizado de máquina. As características radiômicas podem ser subdivididas em estatísticas, incluindo as baseadas em histograma e textura; modelo; transformação; e forma. A extração pode ser dada em regiões de interesse de 2-dimensões (2D) e 3-dimensões (3D)  \cite{mayerhoeferIntroductionRadiomics2020}.
+Mesmo que características radiômicas individuais podem se correlacionar com dados genômicos ou dados clínicos, o impacto da análise radiômica se torna mais relevante a medida que mais informações são por ela extraídas. Tipicamente centenas de características, uma fração do total que é extraído, contribuem para identificação de uma doença específica e é processada usando técnicas de aprendizado de máquina. As características radiômicas podem ser subdivididas em estatísticas, incluindo as baseadas em histograma e textura; modelo; transformação; e forma. A extração pode ser dada em regiões de interesse de 2-dimensões (2D) e 3-dimensões (3D)  \cite{mayerhoeferIntroductionRadiomics2020}.
 
  O objetivo desta seção é fornecer uma introdução ao campo, cobrindo o fluxo de trabalho básico da análise radiômica: cálculo e seleção de características, redução de dimensionalidade e processamento de dados.
 %--------------------------------------------------------
 \subsection{Características por Histograma}
 
-Os descritores estatísticos mais simples são baseados no histograma global de níveis de cinza e incluem média de nível de cinza, máximo, mínimo, variância e percentis. Como essas características são baseadas em análises de \textit{pixel} único ou \textit{voxel} único (3D), elas são chamadas de características de primeira ordem. Algumas características mais sofisticadas incluem assimetria e curtose que descrevem a forma da distribuição da intensidade dos dados: a assimetria reflete a assimetria da curva da distribuição de dados para a esquerda (assimetria negativa, abaixo da média) ou direita (assimetria positiva, acima da média), enquanto a curtose reflete a caudalidade de uma distribuição de dados em relação a uma distribuição gaussiana devido a \textit{outliers}. Outras características incluem histograma entrópico e uniformidade, também chamado de energia.
+Os descritores estatísticos mais simples são baseados no histograma global de níveis de cinza e incluem média de nível de cinza, máximo, mínimo, variância e percentis. Como essas características são baseadas em análises de \textit{pixel} único ou \textit{voxel} único (3D), elas são chamadas de características de primeira ordem. Algumas características mais sofisticadas incluem assimetria e curtose que descrevem a forma da distribuição da intensidade dos dados: a assimetria reflete a assimetria da curva da distribuição de dados para a esquerda (assimetria negativa, abaixo da média) ou direita (assimetria positiva, acima da média), enquanto a curtose reflete a caudalidade de uma distribuição de dados em relação a uma distribuição gaussiana devido a \textit{outliers}. Outras características incluem histograma entrópico e uniformidade, e também é comumente chamado de energia.
 
 %--------------------------------------------------------
 \subsection{Características de Textura}
@@ -82,9 +82,9 @@ Métodos Baseados em Transformadas, incluindo transformadas de \textit{Fourier},
 < < -------- NOVA FUNDAMENTAÇÃO TEÓRICA - CNN (solicitada na quali) --------
 }
 
-\cite{lecunHandwrittenDigitRecognition1989} pesquisaramm sobre o reconhecimento de caracteres em documentos escritos à mão, criando a arquitetura LeNet, uma rede que consiste em camadas convolucionais seguidas por camadas de \textit{pooling}, e finalizando com camadas totalmente conectadas. Os autores introduziram o \textit{backpropagation} a redes convolucionais, permitindo o aprendizado automático e substituindo o uso de técnicas para escolha manual de coeficientes. \cite{lecunHandwrittenDigitRecognition1989}, ainda estudando a classificação de caracteres, expandem a LeNet para a LeNet-5, uma rede que firmou a superioridade das redes convolucionais na tarefa de classificação de imagens se comparado a outros métodos da época.
+Os autores \cite{lecunHandwrittenDigitRecognition1989} pesquisaram sobre o reconhecimento de caracteres em documentos escritos à mão, criando a arquitetura LeNet, uma rede que consiste em camadas convolucionais seguidas por camadas de \textit{pooling}, e finalizando com camadas totalmente conectadas. Os autores introduziram o \textit{backpropagation} a redes convolucionais, permitindo o aprendizado automático e substituindo o uso de técnicas para escolha manual de coeficientes. \cite{lecunHandwrittenDigitRecognition1989}, ainda estudando a classificação de caracteres, expandem a LeNet para a LeNet-5, uma rede que firmou a superioridade das redes convolucionais na tarefa de classificação de imagens se comparado a outros métodos da época.
 
-Como o nome sugere, a camada convolucional desempenha um papel vital no funcionamento das \gls{CNN}. Os parâmetros das camadas concentram-se no uso de \textit{kernels} treináveis. Esses \textit{kernels} geralmente são pequenos em dimensionalidade espacial, mas se estendem por toda a profundidade da entrada. Quando os dados passam por uma camada convolucional, ela aplica cada filtro na dimensionalidade espacial da entrada para produzir um mapa de ativação 2D. À medida que percorremos a entrada, o produto escalar é calculado para cada valor nesse \textit{kernel} A partir disso, a rede aprenderá \textit{kernels} que "disparam" quando detectam uma característica específica em uma determinada posição espacial da entrada. Esses são comumente conhecidos como ativações \ref{fig:fig024}.
+Como o nome sugere, a camada convolucional desempenha um papel vital no funcionamento da \gls{CNN}. Os parâmetros das camadas concentram-se no uso de \textit{kernels} treináveis. Esses \textit{kernels} geralmente são pequenos em dimensionalidade espacial, mas se estendem por toda a profundidade da entrada. Quando os dados passam por uma camada convolucional, ela aplica cada filtro na dimensionalidade espacial da entrada para produzir um mapa de ativação 2D. À medida que percorremos a entrada, o produto escalar é calculado para cada valor nesse \textit{kernel}. A partir disso, a rede aprenderá \textit{kernels} que ``disparam'' quando detectam uma característica específica em uma determinada posição espacial da entrada. Esses são comumente conhecidos como ativações conforme visto na Figura \ref{fig:fig024}.
 
 \begin{figure}[h!]
     \centering
@@ -96,7 +96,7 @@ Como o nome sugere, a camada convolucional desempenha um papel vital no funciona
 
 Cada \textit{kernel} terá um mapa de ativação correspondente, que será empilhado ao longo da dimensão de profundidade para formar o volume completo de saída da camada convolucional. Como mencionado anteriormente, treinar redes neurais artificiais tendo imagens como entrada resulta em modelos demasiadamente grandes para serem treinados de forma eficaz. Isso ocorre devido à conexão totalmente densa dos neurônios padrão das redes neurais artificiais. Para mitigar esse problema, cada neurônio em uma camada convolucional é conectado apenas a uma pequena região do volume de entrada. 
 
-A dimensionalidade dessa região é comumente chamada de ``tamanho do campo receptivo'' do neurônio. A magnitude da conectividade ao longo da profundidade geralmente é igual à profundidade da entrada. Por exemplo, se o entrada para a rede for uma imagem de tamanho 64x64x3 (uma imagem colorida RGB com dimensionalidade de 64x64) e definirmos o tamanho do campo receptivo como 6x6, teríamos um total de 108 pesos em cada neurônio dentro da camada convolucional (6x6x3, onde 3 é a magnitude da conectividade na profundidade do volume). Para colocar isso em perspectiva, um neurônio padrão visto em outras formas de redes neurais artificiais conteria 12.288 pesos cada. 
+A dimensionalidade dessa região é comumente chamada de ``tamanho do campo receptivo'' do neurônio. A magnitude da conectividade ao longo da profundidade geralmente é igual à profundidade da entrada. Por exemplo, se o entrada para a rede for uma imagem de tamanho 64x64x3 (uma imagem colorida RGB com dimensionalidade de 64x64) e definirmos o tamanho do campo receptivo como 6x6, teríamos um total de 108 pesos em cada neurônio dentro da camada convolucional (6x6x3, onde 3 é a magnitude da conectividade na profundidade do volume). Para colocar isso em perspectiva, um neurônio padrão visto em outras formas de redes neurais artificiais conteria $12.288$ pesos cada. 
 
 Camadas convolucionais também conseguem reduzir significativamente a complexidade do modelo através da otimização de sua saída. Essas otimizações são feitas por meio de três hiperparâmetros: profundidade, \textit{stride} e \textit{zero-padding}. 
 
@@ -111,7 +111,7 @@ O \textit{zero-padding} é o simples processo de adicionar bordas à entrada, se
 \label{eq:cnn_output}
 \end{equation}
 
-Onde $V$ representa o tamanho do volume de entrada (altura x largura x profundidade), $R$ representa o tamanho do campo receptivo, $Z$ é a quantidade de \textit{zero-padding} definida e $S$ refere-se ao \textit{stride}. Se o resultado calculado a partir desta equação não for um número inteiro, o \textit{stride} foi configurado incorretamente, pois os neurônios não conseguirão se ajustar perfeitamente à entrada.
+Onde $V$ representa o tamanho do volume de entrada (altura x largura x profundidade), $R$ representa o tamanho do campo receptivo, $Z$ é a quantidade de \textit{zero-padding} definida e $S$ refere-se ao \textit{stride}. Se o resultado calculado a partir desta equação não for um número inteiro, o \textit{stride} foi configurado incorretamente, pois os neurônios não conseguirão se ajustar perfeitamente à entrada \cite{osheaIntroductionConvolutionalNeural2015c}.
 
 \textcolor{red}{
 -------------------------------------------------------------------------------------------- > >
@@ -121,7 +121,7 @@ Onde $V$ representa o tamanho do volume de entrada (altura x largura x profundid
 \section{ResNet}
 \label{sec:resnet}
 
-A \textit{ResNet} (Rede Residual) é uma arquitetura de rede neural profunda amplamente utilizada em tarefas de visão computacional, como classificação de imagens, detecção de objetos e segmentação de imagens. Ela foi introduzida por \citeonline{heDeepResidualLearning2015}, e se destacou por ganhar a competição \textit{ImageNet} em 2015 com uma precisão significativamente maior do que as arquiteturas anteriores. A principal característica da \textit{ResNet} é sua capacidade de treinar redes muito profundas sem sofrer com o problema do "desvanecimento do gradiente"\space que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente, problema este muito comum em redes tradicionais muito profundas. A \textit{ResNet} introduz um conceito chave chamado bloco residual que é um componente da rede onde a entrada do bloco é somada à sua saída antes de passar para a próxima camada. Esta conexão direta é chamada de conexão de salto e pode ser conferida na Figura \ref{fig:fig013}.
+A \textit{ResNet} (Rede Residual) é uma arquitetura de rede neural profunda amplamente utilizada em tarefas de visão computacional, como classificação de imagens, detecção de objetos e segmentação de imagens. Ela foi introduzida por \citeonline{heDeepResidualLearning2015}, e se destacou por ganhar a competição \textit{ImageNet} em 2015 com uma precisão significativamente maior do que as arquiteturas anteriores. A principal característica da \textit{ResNet} é sua capacidade de treinar redes muito profundas sem sofrer com o problema do ``desvanecimento do gradiente'' que afeta principalmente redes neurais profundas e impede o treinamento de progredir por conta de valores muito baixos de gradiente, problema este muito comum em redes tradicionais muito profundas. A \textit{ResNet} introduz um conceito chave chamado bloco residual que é um componente da rede onde a entrada do bloco é somada à sua saída antes de passar para a próxima camada. Esta conexão direta é chamada de conexão de salto e pode ser conferida na Figura \ref{fig:fig013}.
 
 \begin{figure}[h!]
     \centering
@@ -138,12 +138,12 @@ Existem várias versões da \textit{ResNet}, como \textit{ResNet}-18, \textit{Re
 \subsection{Extração de Características Profundas}
 \label{subsec:extract_features}
 
-Para extrair características profundas das imagens de \gls{RMC}, foi empregada a arquitetura pré-treinada de uma rede \textit{ResNet50}. As redes \textit{ResNet50} ficaram muito conhecidas em meados do ano de 2015 por vencer diversas competições em visão computacional, includindo 1º lugar na competição de classificação de imagens \textit{ILSVRC} 2015. As redes \textit{ResNet}, do termo \textit{Residual Networks}, inovaram em sua época trazendo uma forma  de como treinar modelos de maior profundidade, chegando a mais de 100 camadas, com resultados superiores à outros modelos convolucionais competitivos, como o \textit{VGG19}, sem sofrer sintomas comuns a redes neurais muito profundas como o \textit{overfitting} e a saturação ou a ausência dos gradientes em tempo de treino. Os autores da \textit{ResNet} sugeriram o uso de saltos de conexão entre as camadas da rede (Figura \ref{fig:fig013}) afim de manter os gradientes relevantes e controlados entre uma camada e outra.  A \textit{ResNet50} é um modelo de rede neural convolucional profunda de 50 camadas que compreende muitos blocos residuais. A cada bloco, se encontram módulos de convolução e uma conexão de salto que transfere a informação do bloco anterior para o próximo bloco. A conexão de salto ajuda a reter a informação semântica mais baixa aprendida nas camadas anteriores, que de outra forma se tornaria abstrata devido à conexão de longa cadeia. A conexão de salto também evita que o gradiente desapareça nas camadas mais profundas, fornecendo um caminho alternativo para a retropropagação. A informação da conexão de salto é adicionada à informação calculada em cada bloco \cite{heDeepResidualLearning2015}.
+Para extrair características profundas das imagens de \gls{RMC}, foi empregada a arquitetura pré-treinada de uma rede \textit{ResNet50}. As redes \textit{ResNet50} ficaram muito conhecidas em meados do ano de 2015 por vencer diversas competições em visão computacional, includindo 1º lugar na competição de classificação de imagens \textit{ILSVRC} 2015. As redes \textit{ResNet}, do termo \textit{Residual Networks}, inovaram em sua época trazendo uma nova forma de treinar modelos que possuem maior profundidade, chegando a mais de 100 camadas, com resultados superiores à outros modelos convolucionais competitivos, como o \textit{VGG19}, sem sofrer sintomas comuns a redes neurais muito profundas como o \textit{overfitting} e a saturação ou a ausência dos gradientes em tempo de treino. Os autores da \textit{ResNet} sugeriram o uso de saltos de conexão entre as camadas da rede afim de manter os gradientes relevantes e controlados entre uma camada e outra.  A \textit{ResNet50} é um modelo de rede neural convolucional profunda de $50$ camadas que compreende muitos blocos residuais. A cada bloco, se encontram módulos de convolução e uma conexão de salto que transfere a informação do bloco anterior para o próximo bloco. A conexão de salto ajuda a reter a informação semântica mais baixa aprendida nas camadas anteriores, que de outra forma se tornaria abstrata devido à conexão de longa cadeia. A conexão de salto também evita que o gradiente desapareça nas camadas mais profundas, fornecendo um caminho alternativo para a retropropagação. A informação da conexão de salto é adicionada à informação calculada em cada bloco \cite{heDeepResidualLearning2015}.
 
 Várias abordagens de sucesso aplicaram redes convolucionais para extrair características genéricas para tarefas de recuperação de imagens e obtiveram resultados promissores. Elas utilizam principalmente o poder das características locais para gerar uma representação de uma imagem genérica baseada em redes convolucionais pré-treinadas. As representações das camadas finais da rede convolucional são utilizadas para capturar características semânticas para o fim de nível de categoria à classificação que o modelo se dispõe \cite{alzubiContentbasedImageRetrieval2017b}.
 
 %---------------------------------------------------------
-\section{Squeeze and Excitation Net}
+\section{Rede Squeeze and Excitation}
 \label{sec:se_net}
 
 \textcolor{red}{
@@ -151,7 +151,7 @@ Várias abordagens de sucesso aplicaram redes convolucionais para extrair caract
 }
 
 Para cada camada convolucional, um conjunto de filtros é aprendido para expressar padrões de conectividade espacial local ao longo dos canais de entrada. Em outras palavras, espera-se que os filtros convolucionais sejam combinações informativas ao fundir informações espaciais e baseadas nos canais dentro de campos receptivos locais.
-Ao empilhar uma série de camadas convolucionais intercaladas com não linearidades e redução de amostragem, as \gls{CNN}s são capazes de capturar padrões hierárquicos com campos receptivos globais, funcionando como descrições de imagem poderosas. Estudos demonstraram que o desempenho das redes pode ser aprimorado ao incorporar explicitamente mecanismos de aprendizado que ajudam a capturar correlações espaciais, sem a necessidade de supervisão adicional. Neste sentido, foi proposto um mecanismo que permite à rede realizar a recalibração de características, através do qual ela pode aprender a usar informações globais para enfatizar seletivamente características informativas e suprimir aquelas menos úteis. Este estudo intitulado \gls{SE} Net, investiga um aspecto diferente no design arquitetural, a relação entre canais ao introduzir o bloco \gls{SE}.\cite{huSqueezeandExcitationNetworks2018}
+Ao empilhar uma série de camadas convolucionais intercaladas com não linearidades e redução de amostragem, as \gls{CNN}s são capazes de capturar padrões hierárquicos com campos receptivos globais, funcionando como descrições de imagem poderosas. Estudos demonstraram que o desempenho das redes pode ser aprimorado ao incorporar explicitamente mecanismos de aprendizado que ajudam a capturar correlações espaciais, sem a necessidade de supervisão adicional. Neste sentido, foi proposto um mecanismo que permite à rede realizar a recalibração de características, através do qual ela pode aprender a usar informações globais para enfatizar seletivamente características informativas e suprimir aquelas menos úteis. Este estudo intitulado \gls{SE} Net, investiga um aspecto diferente no design arquitetural, a relação entre canais ao introduzir o bloco \gls{SE} \cite{huSqueezeandExcitationNetworks2018}.
 
 Os blocos \gls{SE} podem ser construídos para qualquer transformação conforme a indica a equação \ref{eq:se_transform}. 
 
@@ -160,7 +160,7 @@ Os blocos \gls{SE} podem ser construídos para qualquer transformação conforme
 \label{eq:se_transform}
 \end{equation}
 
-Sendo $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_C]$ os filtros de aprendidos onde $\mathbf{v}_C]$ se refere parâmetro $c$-ésimo. As saídas das convoluções podem ser escritas da seguinte forma: $\mathcal{F}_{tr} \mathbf{U} = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_C]$, sendo o termo $\mathbf{u}_C$ descrito na equação \ref{eq:se}. 
+Sendo $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_C]$ os filtros de aprendidos onde $\mathbf{v}_C$ se refere aos parâmetro de $c$-ésimo filtro. As saídas das convoluções podem ser escritas da seguinte forma: $\mathcal{F}_{tr} \mathbf{U} = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_C]$, sendo o termo $\mathbf{u}_C$ descrito na equação \ref{eq:se}. 
 
 \begin{equation}
 \mathbf{u}_c = \mathbf{v}_c \ast \mathbf{X} = \sum_{s=1}^{C'} \mathbf{v}_c^s \ast \mathbf{x}^s
@@ -168,7 +168,7 @@ Sendo $\mathbf{V} = [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_C]$ os filtr
 \end{equation}
 
 Onde o $\ast$ denota convolução, $\mathbf{v}_c$ é um filtro espacial 2D e representa um único canal de $\mathbf{v}_c$ que atua no canal correspondente de $\mathbf{X}$. 
-Tendo como o objeto garantir que a rede seja capaz de aumentar sua sensibilidade a características informativas, para que possam ser exploradas por transformações subsequentes, e suprimir as menos úteis. Foi proposto um modelo explícito das interdependências de canal para recalibrar as respostas dos filtros em duas etapas — \textit{squeeze} e \textit{excitation} —, antes de serem alimentadas na transformação subsequente. Um diagrama de um bloco de construção \gls{SE} é demonstrado na Figura \ref{fig:fig025} mostra.
+Tendo como o objeto garantir que a rede seja capaz de aumentar sua sensibilidade a características informativas, para que possam ser exploradas por transformações subsequentes, e suprimir as menos úteis. Foi proposto um modelo explícito das interdependências de canal para recalibrar as respostas dos filtros em duas etapas — \textit{squeeze} e \textit{excitation} —, antes de serem alimentadas na transformação subsequente. Um diagrama de um bloco de construção \gls{SE} é demonstrado na Figura \ref{fig:fig025}.
 
 \begin{figure}[h!]
     \caption{Bloco SE}
@@ -178,10 +178,11 @@ Tendo como o objeto garantir que a rede seja capaz de aumentar sua sensibilidade
 \end{figure}
 
 
+%---------------------------------------------------------
 \subsection{Squeeze: Informação Global}
 \label{subsec:squeeze}
 
-Para lidar com o problema de explorar as dependências de canal, é considerado o primeiro o sinal de cada canal nas características de saída. Cada um dos filtros aprendidos opera com um campo receptivo local e, consequentemente, cada unidade da saída da transformação $\mathbf{U}$ é incapaz de explorar informações contextuais fora dessa região. Esse problema se torna ainda mais grave nas camadas mais baixas da rede, cujos campos receptivos são menores.
+Para lidar com o problema de explorar as dependências entre os canais, é considerado o primeiro sinal de cada canal nas características de saída. Cada um dos filtros aprendidos opera com um campo receptivo local e, consequentemente, cada unidade da saída da transformação $\mathbf{U}$ é incapaz de explorar informações contextuais fora dessa região. Esse problema se torna ainda mais grave nas camadas mais baixas da rede, cujos campos receptivos são menores.
 
 Para mitigar esse problema, foi proposto comprimir as informações espaciais globais em um descritor de canal. Isso é obtido por meio de uma instrução de \textit{average pooling} global para gerar estatísticas específicas de cada canal. O cálculo do \textit{average pooling} pode ser conferido na Equação \ref{eq:avgpool}.
 
@@ -190,6 +191,7 @@ z_c = \mathbf{F}_{sq}(\mathbf{u}_c) = \frac{1}{H \times W} \sum_{i=1}^{H} \sum_{
 \label{eq:avgpool}
 \end{equation}
 
+%---------------------------------------------------------
 \subsection{Excitation: Recalibração Adaptativa}
 \label{subsec:excitation}
 
@@ -200,7 +202,7 @@ Para aproveitar as informações agregadas na operação de \textit{squeeze}, se
 \label{eq:excitation}
 \end{equation}
 
-\noindent onde $\delta$ se refere à função de ativação ReLU \cite{nairRectifiedLinearUnits}, $ W_1 \in \mathbb{R}^{C/r \times C}$ e $W_2 \in \mathbb{R}^{C \times C/r})$. Para limitar a complexidade do modelo e auxiliar na generalização, parametrizamos o mecanismo de \textit{gating} formando um gargalo com duas camadas totalmente conectadas ao redor da não linearidade, ou seja, uma camada de redução de dimensionalidade com os parâmetros $W_1$ e razão de redução $r$ (essa escolha de parâmetro é discutida na Seção 6.4), seguida de uma ReLU e, em seguida, uma camada de aumento de dimensionalidade com os parâmetros $W_2$. A saída final do bloco é obtida ao redimensionar a saída da transformação $U$ com as ativações conforme Equação \ref{eq:se_scale}:
+\noindent onde $\delta$ se refere à função de ativação ReLU \cite{nairRectifiedLinearUnits}, $W_1 \in \mathbb{R}^{\frac{C}{r} \times C}$ e $W_2 \in \mathbb{R}^{C \times \frac{C}{r}}$. Para limitar a complexidade do modelo e auxiliar na generalização, o mecanismo de \textit{gating} é parametrizado formando um gargalo com duas camadas totalmente conectadas ao redor da não linearidade, ou seja, uma camada de redução de dimensionalidade com os parâmetros $W_1$ e razão de redução $r$, seguida de uma ReLU e, em seguida, uma camada de aumento de dimensionalidade com os parâmetros $W_2$. A saída final do bloco é obtida ao redimensionar a saída da transformação $U$ com as ativações conforme Equação \ref{eq:se_scale}.
 
 \begin{equation}
 \tilde{\mathbf{x}}_c = \mathbf{F}_{scale}(\mathbf{u}_c, s_c) = s_c \cdot \mathbf{u}_c 
@@ -209,10 +211,11 @@ Para aproveitar as informações agregadas na operação de \textit{squeeze}, se
 
 \noindent onde $\tilde{\mathbf{X}} = [\tilde{\mathbf{x}}_1, \tilde{\mathbf{x}}_2, \dots, \tilde{\mathbf{x}}_C]$ e $\mathbf{F}_{scale}(\mathbf{u}_c, s_c)$ se referem a multiplicação no nível dos canais entre os mapas de características $\mathbf{u}_c \in \mathbb{R}^{H \times W}$ e o valor escalar $s_c$.
 
+%---------------------------------------------------------
 \subsection{Utilização em redes conhecidas: SE-Resnet}
 \label{subsec:util_resnet}
 
-A flexibilidade do bloco \gls{SE} significa que ele pode ser aplicado diretamente a transformações além das convoluções padrão. Para ilustrar esse ponto, desenvolvemos \gls{SE} Nets integrando blocos gls{SE} em arquiteturas modernas com designs sofisticados. A Figura \ref{fig:fig026} demonstra o esquema de um módulo SE-ResNet. Nele, a transformação do bloco SE $F_{tr}$ é considerada o ramo não identidade de um módulo residual. As operações de \textit{squeeze} e \textit{excitation} atuam antes da soma com o ramo identidade.
+A flexibilidade do bloco \gls{SE} significa que ele pode ser aplicado diretamente a transformações além das convoluções padrão. Para ilustrar esse ponto, os autores desenvolveram as redes \gls{SE}  integrando blocos \gls{SE} em arquiteturas modernas com \textit{designs} sofisticados. A Figura \ref{fig:fig026} demonstra o esquema de um módulo SE-ResNet. Nele, a transformação do bloco \gls{SE}, $F_{tr}$, é considerada o ramo não identidade de um módulo residual. As operações de \textit{squeeze} e \textit{excitation} atuam antes da soma com o ramo identidade.
 
 
 \begin{figure}[h!]
@@ -225,7 +228,7 @@ A flexibilidade do bloco \gls{SE} significa que ele pode ser aplicado diretament
 
 Para que o bloco SE proposto seja viável na prática, ele deve fornecer um equilíbrio eficaz entre a complexidade do modelo e o desempenho, o que é importante para escalabilidade. Foi definido uma razão de redução $r$ como 16 em todos os experimentos, exceto onde indicado de outra forma. 
 
-O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e o custo computacional dos blocos \gls{SE} no modelo. O autor do trabalho conduz experimentos baseados no SE-ResNet-50 para uma variedade de valores diferentes de $r$. A comparação vista na Figura  \ref{fig:fig027} revela que o desempenho não melhora monotonicamente com o aumento da capacidade. Isso provavelmente é resultado do bloco SE ajustar em excesso as interdependências de canal do conjunto de treinamento. Definir $r = 16$ alcançou um bom equilíbrio entre precisão e complexidade e, consequentemente, foi o valor utilizado pelos autores nos experimentos. O Algoritmo \ref{alg:se_block} reflete a implementação do bloco \gls{SE}.
+O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e o custo computacional dos blocos \gls{SE} no modelo. O autor do trabalho conduz experimentos baseados no SE-ResNet-50 para uma variedade de valores diferentes de $r$. A comparação vista na Figura  \ref{fig:fig027}, revela que o desempenho não melhora monotonicamente com o aumento da capacidade. Isso provavelmente é resultado do bloco SE ajustar em excesso as interdependências de canal do conjunto de treinamento. Definir $r = 16$ alcançou um bom equilíbrio entre precisão e complexidade e, consequentemente, foi o valor utilizado pelos autores nos experimentos. O algoritmo \ref{alg:se_block} reflete a implementação do bloco \gls{SE}.
 
 \begin{figure}[h!]
     \centering
@@ -242,7 +245,7 @@ O valor $r$ é um hiperparâmetro importante pois permite variar a capacidade e 
 \textbf{Entrada:} Mapa de características $\mathbf{U} \in \mathbb{R}^{H \times W \times C}$\\
 \textbf{Saída:} Mapa de características recalibrado $\tilde{\mathbf{U}} \in \mathbb{R}^{H \times W \times C}$
 \begin{algorithmic}[1]
-\STATE \textbf{Squeeze:} Execumta um \textit{average pooling} global para agregar as dimensões espaciais:
+\STATE \textbf{Squeeze:} Executa o \textit{average pooling} global para agregar as dimensões espaciais:
 \[
 z_c = \frac{1}{H \times W} \sum_{i=1}^H \sum_{j=1}^W u_c(i, j), \quad \forall c \in \{1, \dots, C\}
 \]
@@ -263,6 +266,7 @@ onde:
 \]
 \RETURN $\tilde{\mathbf{U}} = [\tilde{\mathbf{u}}_1, \tilde{\mathbf{u}}_2, \dots, \tilde{\mathbf{u}}_C]$
 \end{algorithmic}
+% \caption*{Fonte: Autor}
 \end{algorithm}
 
 
@@ -294,7 +298,7 @@ O \textit{transformers} é composto por um \textit{Encoder} e um \textit{Decoder
     \label{fig:fig005}
 \end{figure}
 
-O mecanismo de atenção é particularmente chamado de "Atenção de Produto Escalar Dimensionado", visto na Figura \ref{fig:fig005}. A entrada consiste em \textit{queries} e chaves de dimensão $d_{k}$, e valores de dimensão $d_{v}$. É calculado os produtos escalares da consulta com todas as chaves e dividido por $\sqrt{d_{k}}$, para fins de controle dos valores em uma menor amplitude. Em seguida, aplica-se uma função \textit{softmax} para obter as probabilidades sobre os valores. Na prática, é calculada a função de atenção em um conjunto de consultas simultaneamente, agrupadas em uma matriz $Q$. As chaves e os valores também são agrupados em matrizes $K$ e $V$. Calcula-se a matriz de saídas como:
+O mecanismo de atenção é particularmente chamado de ``Atenção de Produto Escalar Dimensionado'', visto na Figura \ref{fig:fig005}. A entrada consiste em \textit{queries} e chaves de dimensão $d_{k}$ e valores de dimensão $d_{v}$. É calculado os produtos escalares da consulta com todas as chaves e dividido por $\sqrt{d_{k}}$, para fins de controle dos valores em uma menor amplitude. Em seguida, aplica-se uma função \textit{softmax} para obter as probabilidades sobre os valores. Na prática, é calculada a função de atenção em um conjunto de consultas simultaneamente, agrupadas em uma matriz $Q$. As chaves e os valores também são agrupados em matrizes $K$ e $V$. Calcula-se a matriz de saídas como:
 
 \begin{equation}
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
@@ -311,19 +315,20 @@ Toda rede neural é treinada aplicando otimização em uma determinada função 
 
 O método \gls{Adam}, introduzido por \citeonline{kingmaAdamMethodStochastic2014}, é um método popular para o treinamento de modelos de \gls{AP}. O \gls{Adam} combina os benefícios de outras duas técnicas de otimização, o \textit{AdaGrad} e o \textit{RMSProp}. O \gls{Adam} é um método de otimização estocástica eficiente que requer apenas gradientes de primeira ordem com pouca exigência de memória. O método calcula taxas de aprendizado adaptativas individuais para diferentes parâmetros a partir de estimativas dos primeiros e segundos momentos dos gradientes.
 
-Algumas das vantagens do \gls{Adam} são: taxas de aprendizado adptativas, que levam a uma convergência mais rápida e eficiente comparadas com métodos de aprendizado fixos; robustez, que suportam gradientes esparsos de forma efetiva o qual é crucial para diversas aplicações de \gls{AP} atuais; fácil de utilizar, pois requer menos ajustes de parâmetros a tornando amigável ao usuário e acessível a uma grande gama de tarefas.
+Algumas das vantagens do \gls{Adam} podem ser elencadas: taxas de aprendizado adaptativas, que levam a uma convergência mais rápida e eficiente se comparadas com métodos de aprendizado fixos; robustez, que suportam gradientes esparsos de forma efetiva o qual é crucial para diversas aplicações de \gls{AP} atuais; fácil de utilizar, pois requer menos ajustes de parâmetros a tornando amigável ao usuário e acessível a uma grande gama de tarefas.
 
 
 %--------------------------------------------------------
 \section{Considerações Finais do Capitulo}
 \label{sec:consideracoes_finais}
 
-Os métodos de avaliação de cardiomiopatias, tanto via análise radiômicas por extração de textura quanto por aprendizado profundo obtiveram êxitos em análise de imagens médicas. Mesmo sabendo que estas técnicas de \textit{Machine Learning}, utilizando estes dados de textura podem ser insuficientes em capturar a complexidade e diversidade de informações a cerca do ventrículo como também pode ser afetada pela qualidade da imagem. Métodos de aprendizado profundo podem aprender automaticamente semânticas de alto nível e informações representativas de imagens de \gls{RMC} sem necessidade de características extraídas manualmente.
+Os métodos de avaliação de cardiomiopatias, tanto via análise radiômica por extração de textura quanto por aprendizado profundo obtiveram êxito em análise de imagens médicas. Vale pontuar que estas técnicas de \textit{Machine Learning}, utilizando dados de textura podem ser insuficientes em capturar a complexidade e diversidade de informações a cerca do ventrículo como também pode ser afetada pela qualidade da imagem. Métodos de aprendizado profundo podem aprender automaticamente semânticas de alto nível e informações representativas de imagens de \gls{RMC} sem necessidade de características extraídas manualmente.
 Métodos de aprendizado profundo tem obtido ótimos resultados em diagnósticos, segmentação, estadiamento e prognósticos. Todavia, o mesmo tem suas limitações como limitação dos dados, desafio geral na área médica, \textit{overfitting} e pouca interpretabilidade do modelo em si.
 
-Dadas as vantagens e limitações discutidas, este trabalho tem como proposta a fusão de uma arquitetura de aprendizado profundo baseada no mecanismo de atenção que integra características radiômicas e profundas para a identificação de \gls{CMH}. A arquitetura proposta é composta por: extração de características radiômicas e profundas; redução de dimensionalidade para que ambas possuam tamanhos similares, aplicação do mecanismo de atenção e classificação binária do resultado. A arquitetura proposta é apresentada na Figura \ref{fig:fig011-01}.
+Dadas as vantagens e limitações discutidas, este trabalho tem como proposta a fusão de uma arquitetura de aprendizado profundo baseada no mecanismo de atenção que integra características radiômicas e profundas para a identificação de \gls{CMH}. A arquitetura proposta é composta por: extração de características radiômicas e profundas; redução de dimensionalidade para que ambas possuam tamanhos similares, aplicação dos mecanismos de atenção seletivo e autoatenção e classificação binária do resultado. A arquitetura proposta é apresentada na Figura \ref{fig:fig011-01}.
+\newline
 
-\begin{figure}[htbp]
+\begin{figure}[hbtp]
     \centering
     \caption{Arquitetura Proposta}
     \includegraphics[width=1\textwidth]{figures/fig011.png}
