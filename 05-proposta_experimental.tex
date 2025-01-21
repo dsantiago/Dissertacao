@@ -1,16 +1,17 @@
 \chapter{RESULTADOS EXPERIMENTAIS}
 \label{chap:proposta_experimental}
 
-Este capítulo traz informações relacionadas com as ferramentas utilizadas no experimento, como linguagem, biblioteca, entre outros. Informações sobre o conjunto de dados \gls{ACDC} e SunnyBrook, o consumo de ambos no modelo base e nas versões adaptadas. Por fim, são apresentados resultados experimentais com o conjunto de dados \gls{ACDC}. 
+Este capítulo traz informações relacionadas com as ferramentas utilizadas no experimento, como linguagem, bibliotecas utilizadas, entre outros. Informações sobre o consumo de dados das bases \gls{ACDC} e SunnyBrook, fase de pré-processamento, inferência nos modelos implementados, sendo estes, modelo linha de base e derivados, e modelos adaptados. Por fim, são apresentados os resultados experimentais com o conjunto de dados \gls{ACDC}. 
 
 %--------------------------------------------------------
 \section{Materiais} 
 \label{sec:cap5_materiais}
 
-Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o \textit{software}, como também as principais bibliotecas utilizadas e suas versões nos experimentos para fins de reprodução. A Tabela \ref{tab:hardware_software} estrutura estas informações. Outra ferramenta utilizada no registro dos experimentos foi o CometML\footnote{https://www.comet.com}. Esta auxiliar armazenar informações como erro no processamento do lote, acurácia de do conjuntos de validação, entre outros no treino de modelo de redes neurais.
+Esta seção visa trazer informações sobre o \textit{hardware} e o \textit{software} utilizados como também as principais bibliotecas utilizadas e suas versões para fins de reprodução. A Tabela \ref{tab:hardware_software} estrutura estas informações. Outra ferramenta utilizada no registro dos experimentos foi o CometML\footnote{https://www.comet.com}. Esta ferramenta auxilia no registro do experimento, armazenando valores como: erro do lote no treinamento, acurácia do conjuntos de validação no treinamento, métricas resultantes como acurácia, hiperparâmetros como taxa de aprendizado, épocas, etc.
 \newline
 
 \begin{table}[hbtp]
+    \caption{Fonte: Componentes Utilizados}
     \centering
     \renewcommand{\arraystretch}{1} % default é 1 
     % \begin{tabular}{|>{\centering\arraybackslash}p{2cm}|p{12cm}|}
@@ -37,7 +38,7 @@ Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o 
        Versão \textit{comet-ml} & 3.47.4 \\
     \hline 
     \end{tabular} 
-    \caption{Fonte: Autor}
+    \caption*{Fonte: Autor}
     \label{tab:hardware_software}
 \end{table}
 
@@ -45,19 +46,19 @@ Esta seção visa trazer informações sobre tanto o \textit{hardware} quanto o 
 \section{Conjunto de Dados} 
 \label{subsec:cap5_dataset}
 
-Este trabalho visa realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. Testes iniciais foram feitos no conjunto de dados \gls{ACDC}. O \gls{ACDC} possui $30$ casos de \gls{CMH}, $30$ casos de \gls{CMD} e $90$ casos normais. Da base \gls{ACDC} se pretende utilizar apenas as fatias da fase diastólica. O segundo conjunto de dados é o SunnyBrook, possuindo imagens na fase diastólica contendo as classes NOR(normal) e HIP(hipertrofia do ventrículo esquerdo)três classes de interesse previamente mencionadas. 
+Este trabalho visa realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. Testes iniciais foram feitos no conjunto de dados \gls{ACDC} que possui $30$ casos de \gls{CMH}, $30$ casos de \gls{CMD} e $90$ casos normais, resultando em $60$ casos de cardiomiopatia e $90$ casos normais. Da base \gls{ACDC} se pretende utilizar apenas as fatias da fase diastólica. O segundo conjunto de dados é o \textit{SunnyBrook}, possuindo imagens na fase diastólica contendo as classes $9$ classes NOR(normal) e $12$ HIP(hipertrofia do ventrículo esquerdo).
 
-O modo de operação será o mesmo para ambos os conjuntos de dados com exceção do pré-processamento dado o fato de ambos os conjuntos serem diferentes quanto aos dados.
+O modo de operação será o mesmo para ambos os conjuntos de dados com exceção do pré-processamento dado ao fato da forma como o conjunto de dados \textit{SunnyBrook} disponibiliza as máscaras.
 
 %--------------------------------------------------------
 \subsection{Experimentos Modelo Base}
 \label{subsec:cap5_experimentos_base}
 
-Uma prova de conceito foi aplicada ao conjunto de dados \gls{ACDC} utilizando o modelo de linha de base para uma primeira avaliação de referência. O modelo base foi implementado seguindo o artigo e sua implementação é conferida na Figura \ref{fig:fig008}. O conjunto de dados para treino é composto por $100$ exames de pacientes, coletando apenas as fatias das imagens da fase diastólica. Características de primeira ordem e \gls{GLCM} são extraídas, utilizando a blbioteca \textit{PyRadiomics}, resultando em $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, foi utilizado uma rede \textit{ResNet50} congelada sem sua última camada linear, responsável pela classificação originalmente de $1000$ classes oriundas do conjunto de dados \textit{ImageNet}, obtendo como resultado final um vetor com $\DeepFeatures$ valores características profundas.
+Uma prova de conceito foi aplicada ao conjunto de dados \gls{ACDC} utilizando o modelo de linha de base para avaliação inicial, avaliação esta também utilizada como linha de base. O modelo base foi implementado seguindo o artigo e sua implementação é conferida na Figura \ref{fig:fig008}. O conjunto de dados para treino é composto por $100$ exames de pacientes, coletando apenas as fatias das imagens da fase diastólica. Características de primeira ordem e \gls{GLCM} são extraídas, utilizando a blbioteca \textit{PyRadiomics}, resultando em $\RadiomicFeatures$ valores que compõem as características radiômicas. Para extração das características profundas, foi utilizado uma rede \textit{ResNet50} congelada sem sua última camada linear, responsável pela classificação originalmente de $1000$ classes oriundas do conjunto de dados \textit{ImageNet}, obtendo como resultado final um vetor com $\DeepFeatures$ características profundas.
 
-O \textit{F-Test} é utilizado como um seletor de características inicial, aplicado tanto nas características radiômicas e profundas, com um total de $\text{EMBED}_{size}$ igual a $12$  no modelo base. As características resultantes do \textit{F-Test}, agora com tamanhos agora iguais, são concatenadas e enviadas ao módulo de autoatenção e os resultados armazenados.
+% O \textit{F-Test} é utilizado como um seletor de características inicial, aplicado tanto nas características radiômicas quanto nas profundas, reduzindo garantindo que os vetores possuam m profundas, com um total de $\text{EMBED}_{size}$ igual a $12$  no modelo base. As características resultantes do \textit{F-Test}, agora com tamanhos agora iguais, são concatenadas e enviadas ao módulo de autoatenção e os resultados armazenados.
 
-Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $\LR$, otimizador \textit{Adam}, tamanho de lote $\Batch$ e o treinamento se deu com aproximadamente $\Epochs$ épocas, onde verificou que o erro se torna estável em tempo de treinamento. Também foi empregada a estratégia de aleatorizar as entradas do modelo e descartar o último lote caso ele seja menor que os demais lotes processados. Com a saída do modelo é aplicada a função sigmoide, Equação. \ref{eq:sigmoide}, função esta que limita os valores de sua entrada entre 0 e 1. Para fins de classificação, foi considerado valores maiores que $0,5$ são considerados com \gls{CMH} e menores ou iguais a $0,5$ são considerados normais.
+Neste experimento foi treinado o modelo utilizando, como função objetivo a entropia cruzada binária, taxa de aprendizado de $\LR$, otimizador \textit{Adam}, tamanho de lote $\Batch$ e o treinamento se deu com aproximadamente $\Epochs$ épocas, onde verificou que o erro se torna estável em tempo de treinamento. Também foi empregada a estratégia de aleatorizar as entradas no modelo em tempo de treinamento. Ao vetor resultante da saída do modelo é aplicada a função sigmoide, conforme Equação. \ref{eq:sigmoide}, função esta que limita os valores de sua entrada entre 0 e 1. Para fins de classificação, foi considerado valores maiores que $0,5$ são considerados com cardiomiopatia e menores ou iguais a $0,5$ são considerados normais.
 
 \begin{equation}
 \textit{sigmoide}(x) = \frac{1}{1 + e^{-x}}
@@ -70,7 +71,21 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 
 Os modelos adaptados refletem os experimentos desmembrados do modelo base, adaptações estas com a finalidade de verificar se mudanças, seja nos hiperparâmetros, seja em partes da arquitetura, podem trazer resultados promissores em relação aos resultados base.
 
-As mudanças podem ser elencadas em: mudanças do $\text{EMBED}_{size}$ onde se foi testado os valores $[24, 48, 64]$ na tentativa de preservar mais informações originais. Na versão adaptada também há o consumo das respectivas máscaras que são futuramente concatenadas as características radiômicas e profundas. A concatenação é feita de forma diferente também, assumindo por exemplo $\text{EMBED}_{size} = 12$, na versão original temos como resultado $1\times24$ porém na versão adaptada essa concatenação é feita na primeira dimensão, resultando neste exemplo em $2\times12$. Isto se dá pois é apresentado um novo bloco ao modelo original o bloco convolucional, composto de convolução e blocos \gls{SE}. A parte restante da arquitetura segue de acordo com a original, exceto que também podemos variar $N$ vezes o bloco de autoatenção, ou seja, sua saída volta sendo sua entrada $N$ vezes e este valor de $N$ também pode ser imaginado como um dos hiperparâmetros do experimento.
+As mudanças podem ser elencadas em: mudanças do $\text{EMBED}_{size}$ onde se foi testado os valores $[24, 48, 64]$ na tentativa de preservar mais informações originais. Na versão adaptada também há o consumo das respectivas máscaras que são futuramente concatenadas as características radiômicas e profundas. A concatenação é feita de forma diferente também, assumindo por exemplo $\text{EMBED}_{size}$ igual a $12$, na versão original temos como resultado $1\times24$ porém na versão adaptada essa concatenação é feita na primeira dimensão, resultando neste exemplo em $2\times12$. Isto se dá pois é apresentado um novo bloco ao modelo original o bloco convolucional, composto de convolução e blocos \gls{SE}.
+
+A parte restante da arquitetura segue de acordo com a original, exceto que também podemos variar $N$ vezes o bloco de autoatenção, ou seja, sua saída volta sendo sua entrada $N$ vezes e este valor de $N$ também pode ser considerado como um dos hiperparâmetros do experimento. Os valores de $N$ utilizados foram $[1, 2, 4, 6]$. Estas mudanças não mudam a estrutura da arquitetura incial fazendo com que o módulo autoatenção seja executado $N$ vezes conforme trabalho de \cite{vaswaniAttentionAllYou2023} e pode ser visualizada na Figura \ref{fig:fig030}.
+\newline
+
+\begin{figure}[h!]
+    \centering
+    \caption{Recorrência do Módulo de Autoatenção}
+    \includegraphics[width=0.7\textwidth]{figures/fig030.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig030}
+\end{figure}
+
+
+
 
 % Posso elencar novamente de forma sucinta os hiperparamentros aqui: EMBED_SIZE, N attention blocks, imagems de mascara e nova forma de concatenar. 
 

@@ -1,7 +1,7 @@
 \chapter{RESULTADOS EXPERIMENTAIS}
 \label{chap:resultados_experimentais}
 
-Este capítulo apresenta os resultados da prova de conceito realizada com os algoritmos desenvolvidos, tanto o modelo base quanto os modelos adaptados, com o intuito de compará-los aos objetivos traçados nesta dissertação. Os testes realizados buscam avaliar a eficiência dos algoritmos em diversas sob adaptações baseadas na intuição que a literatura ofereceu. O desempenho é analisado como também é discutido os resultados obtidos, este capítulo também oferece uma visão abrangente sobre os conjuntos de dados utilizados, destacando a relevância desses dados para a análise proposta.
+Este capítulo apresenta os resultados da prova de conceito realizada com os algoritmos desenvolvidos, tanto o modelo base quanto os modelos adaptados, com o intuito de compará-los aos objetivos traçados nesta dissertação. Os testes realizados buscam avaliar a eficiência do algoritmo sob as diversas adaptações discutidas. Os resultados obtidos são demonstrados, cabendo a reflexão sobre os resultado quando pertinente.
 
 %--------------------------------------------------------
 \section{RESULTADOS ACDC}
@@ -37,7 +37,9 @@ O conjunto de dados \gls{ACDC} foi a referência inicial, principalmente para a 
 \subsection{RESULTADOS MODELO BASE}
 \label{subsec:resultados_acdc_base}
 
-Os resultados foram obtidos aplicando a metodologia previamente apresentada, foram extraídas as características radiômicas e profundas, após foi aplicado o \textit{F-Test} para seleção de características e o resultado concatenado na última dimensão, sendo $\text{EMBED}_{size}$ igual a $12$, o resultado é um vetor de características de $1\times24$. Em seguida, o modelo de autoatenção foi aplicado uma única vez conforma modelo original. Os hiperparâmetros utilizados são: taxa de aprendizado $\LR$, otimizador \gls{Adam}, tamanho de lote $\Batch$ e aproximadamente $\Epochs$ épocas. Por fim, é aplicada a função matemática sigmoide e definido o limite de $0,5$ para corte onde os valores acima deste limite são classificados como \gls{CMH} e os demais como normal. As métricas resultantes podem ser conferidas na Tabela \ref{tab:metrics}. A matriz de confusão é apresentada na Figura \ref{fig:fig016} e um gráfico ilustrando da \gls{ROC} é apresentado na Figura \ref{fig:fig017}.
+Com os dados pré-processados e previamente armazenados, o treinameneto é efetuado com os vetores radiômicos e profundos. As métricas parciais foram sendo salvas em tempo de treinamento. Para o modelo base os hiperparâmetros são: $\text{EMBED}_{size}$ igual a $12$, $N$ igual 1, ou seja, apenas um bloco de auto atenção, dimensão de concatenação $1$, taxa de aprendizado $\LR$, otimizador \gls{Adam}, tamanho de lote $\Batch$ e aproximadamente $\Epochs$ épocas. Uma vez treinado, foi feita a inferência no conjunto de dados de teste, aplicando a função sigmoide e definindo $0,5$ como o valor de corte onde os valores acima deste limite são classificados como \gls{CMH} e os demais como normal. 
+
+As métricas resultantes podem ser conferidas na Tabela \ref{tab:metrics}. A matriz de confusão é apresentada na Figura \ref{fig:fig016} e um gráfico ilustrando da \gls{ROC} é apresentado na Figura \ref{fig:fig017}.
 \newline
 
 \begin{table}[h!]
@@ -78,7 +80,7 @@ Os resultados foram obtidos aplicando a metodologia previamente apresentada, for
 \end{figure}
 
 
-Para o registro dos resultados foi utilizado a ferramenta \textit{CometML}. O \textit{CometML} pode registrar, em tempo de execução, informações como erro por lote, erro por época, acurácia de validação, etc, podem ser armazenados enquanto o processo de treinamento é executado. Por fim métricas como acurácia e matriz de confusão podem ser geradas também.O serviço é acessado  por uma \gls{API} externa. As Figuras \ref{fig:fig028} e \ref{fig:fig029} demonstram respectivamente os painéis adaptáveis ao fim do treino e os valores armazenado de erro, acurácia, etc, coletados durante o treino. É possível notar que o modelo se sobre-ajusta nos dados de treino, predizendo corretamente todos os valores porém, nos dados de treino,  a assertividade cai drasticamente para $0,58$. Também é possível notar que após $2500$ passos no treinamento, o erro estabiliza e o demais processamento não necessariamente se faria necessário.
+Para o registro dos resultados foi utilizado a ferramenta \textit{CometML}. O \textit{CometML} pode registrar, em tempo de execução, informações como erro por lote, erro por época, acurácia de validação, etc, podem ser armazenados enquanto o processo de treinamento é executado. Por fim métricas como acurácia e matriz de confusão podem ser armazenadas também. O serviço é acessado  por uma \gls{API} externa. As Figuras \ref{fig:fig028} e \ref{fig:fig029} demonstram respectivamente os painéis adaptáveis com alguns dos hiperparâmetros e métricas coletadas durante e ao terminar o treino. É possível notar que o modelo se sobre-ajusta nos dados de treino, acom acurácia $1$, predizendo corretamente todos os valores porém, nos dados de teste a assertividade cai drasticamente para $0,58$. Também é possível notar que após $2500$ passos no treinamento, o erro de treinamento estabiliza e os demais processamentos não se fazem necessários.
 
 \begin{figure}[h!]
     \centering
@@ -102,17 +104,9 @@ Para o registro dos resultados foi utilizado a ferramenta \textit{CometML}. O \t
 \subsection{Resultados dos Modelos Adaptados - ACDC}
 \label{subsec:resultados_acdc_adaptado}
 
-Para as versões adaptadas, buscou mudar os hiperparâmetros e até mesmo a arquitetura do modelo com o intuito comparar os resultados com a versão base. Os primeiros experimentos foram aplicados mudando o $\text{EMBED}_{size}$ para outros valores, também foi aplicado $N$ vezes o bloco de autoatenção ao invés de uma única vez. Os valores de $N$ utilizados foram $[1, 2, 4, 6]$. Estas mudanças não mudaram a estrutura da arquitetura fazendo com que o módulo autoatenção seja executado $N$ vezes conforme trabalho de \cite{vaswaniAttentionAllYou2023} e pode ser visualizada na Figura \ref{fig:fig030}.
+Para as versões adaptadas, se buscou mudar os hiperparâmetros e até mesmo a arquitetura do modelo com o intuito comparar os resultados com a versão base. Os primeiros experimentos foram aplicados variando o $\text{EMBED}_{size}$, também foi aplicado $N$ vezes o bloco de autoatenção ao invés de uma única vez. Os experimentos foram executado gerando a combinatória destes hiperparâmetros para cobrir o máximo de cenários possíveis dentro da metodologia.
 
-\begin{figure}[h!]
-    \centering
-    \caption{Recorrência do Módulo de Autoatenção}
-    \includegraphics[width=0.7\textwidth]{figures/fig030.png}
-    \caption*{Fonte: Autor}
-    \label{fig:fig030}
-\end{figure}
-
-Também foi introduzido, nas versões adaptadas, um módulo convolucional, que antecede o módulo de auto atenção. Este módulo convolucional contém uma camada convolucional 1D, um bloco \gls{SE} e por fim outro bloco convolucional 1D. Dado o fato de termos três vetores de características, com a adição da máscara, identificar relações intrínsecas entre estes vetores previamente ao módulo de autoatenção foi um dos experimentos. A concatenação agora da na primei dimensão faz cada vetor de característica ser interpretado como um canal. Uma primeira camada de convolução 1D aumenta o número de canais para 16, ou seja, 16 filtros são aplicado para extração de informação espacial. O bloco \gls{SE} representa uma camada de atenção seletiva que dá importância aos canais mais importantes. Ela identifica a relevância de cada canal e finaliza escalando os canais na entrada original com um valor escalar otimizado em tempo de treinamento, detalhes podem ser vistos na Figura \ref{fig:fig031}. O bloco \gls{SE} neste projeto é adaptado para ser 1D, diferente do trabalho original que visa sua aplicação em modelos de visão computacional já consolidados. O valor de $r$ no bloco \gls{SE} ficou fixo em $16$, os autores do trabalho original fazem testes empíricos e confirmam que o valor de $16$ é que traz melhores resultados.
+Também foi introduzido, nas versões adaptadas, um módulo convolucional, que antecede o módulo de autoatenção. Este módulo convolucional é composto de três blocos: uma camada convolucional 1D, um bloco \gls{SE} e outro bloco convolucional 1D. Com a possibilidade de se ter adicionar opcionalmente um terceiro vetor de características, sendo este a máscara, foi possível identificar relações intrínsecas entre mais este vetor. A concatenação agora na primeira dimensão faz cada vetor de característica se tornar um canal. No módulo convolucional, uma primeira camada de convolução 1D aumenta o número de canais para $16$, ou seja, $16$ filtros são aplicado para extração de informação espacial. O bloco \gls{SE} representa a camada de atenção seletiva que dá importância aos canais mais importantes, identificando a relevância de cada canal e finaliza escalando os canais na entrada original com um valor escalar otimizado em tempo de treinamento. Detalhes podem ser vistos na Figura \ref{fig:fig031}. O bloco \gls{SE} neste projeto é adaptado para ser 1D, diferente do trabalho original que visa sua aplicação em modelos de visão computacional já consolidados. O valor de $r$ no bloco \gls{SE} ficou fixo em $16$, os autores do trabalho original fazem testes empíricos e confirmam que o valor de $16$ é que traz melhores resultados.
 
 \begin{figure}[h!]
     \centering
@@ -122,7 +116,7 @@ Também foi introduzido, nas versões adaptadas, um módulo convolucional, que a
     \label{fig:fig031}
 \end{figure}
 
-As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na versão original adaptada na Tabela \ref{tab:metrics_orig}, um versão adicionando as máscaras como terceiro vetor de características na Tabela \ref{tab:metrics_orig_mask} e, por fim, a versão que adiciona os blocos convolucionais e \gls{SE} na Tabela \ref{tab:metrics_se}. Alguns pontos são notados no experimento, o treinamento quase sempre sofre sobre-ajuste ficando muito próximo de 100\% de assertividade, isso pode se dar ao fato de haver poucos exemplares para treinamento. Outro ponto notado é que quanto maior o tamanho do vetor de características (Emb) melhor costuma ser o resultado. Quantidades maiores de blocos de autoatenção (N\_Attn) costumam trazer melhores, exceto no caso em que são configurados em $6$ pois os melhores resultados são quando configurados em $4$. Isso se deve ao fato de trazer excesso de complexidade ao modelo que não exige dado ao fato de um conjunto de dados limitado. Os melhores resultados são conferidos nas versões que adicionam o bloco \gls{SE}, se verificando o melhor experimento que alcançou $80\%$ de assertividade em azul. A visualização dos modelos com bloco \gls{SE}, armazenados no \textit{CometML} é visto na Figura
+As tabelas que seguem demonstram respectivamente: o conjuntos de experimentos na versão original e suas adaptações na Tabela \ref{tab:metrics_acdc_orig}, experimentos coma a adição das máscaras como terceiro vetor de características na Tabela \ref{tab:metrics_acdc_orig_mask} e, por fim, a versão que adiciona os blocos convolucionais e \gls{SE} na Tabela \ref{tab:metrics_acdc_se}. Alguns pontos podem ser notados no experimento, o treinamento quase sempre sofre sobre-ajuste ficando muito próximo de 100\% de assertividade, isso pode se justificado dado o fato de haver poucos exemplares para treinamento. Outro ponto notado é que quanto maior o tamanho do vetor de características (Emb) melhor costuma ser o resultado. Quantidades maiores no múmero de blocos de autoatenção (N\_Attn) também melhoram os resultados, exceto no caso em que são configurados em $6$. A justificativa se deve ao fato de tornar o modelo mais complexos se comparados a quantidade de dados para treino, prejudicando a sua capacidade de generalização. Os melhores resultados são conferidos nas versões que adicionam o bloco \gls{SE}, sendo que o melhor experimento obteve $78\%$ de assertividade e aparece em azul. A visualização dos modelos com bloco \gls{SE}, coletados no \textit{CometML} é visto na Figura \ref{fig:fig032}.
 
 
 \begin{table}[htbp]
@@ -155,7 +149,7 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 
 \begin{table}[htbp]
 \centering
-\caption{Métricas ACDC - Adaptação do Modelo Original Com Máscaras}
+\caption{Métricas ACDC - Adaptação do Modelo Original + Máscaras}
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
@@ -183,7 +177,7 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 
 \begin{table}[htbp]
 \centering
-\caption{Métricas ACDC - Adaptação Adicionando Blocos Conv. e SE}
+\caption{Métricas ACDC - Modelos Adaptados - Blocos Conv. + SE}
 \begin{tabular}{lcccccc}
 \toprule
 \textbf{Emb} & \textbf{N\_Attn} & \textbf{Acc} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{AUC} \\
@@ -221,9 +215,9 @@ As tabelas que seguem demonstram respectivamente um conjuntos de experimentos na
 \subsection{Resultados dos Modelos Adaptados - \textit{SunnyBrook}}
 \label{subsec:resultados_sunny_adaptado}
 
-Os experimentos no conjunto de dados \textit{SunnyBrook} foram praticamente iguais aos aplicados ao conjunto de dados \gls{ACDC}. No conjunto de dados \textit{SunnyBrook}, houve uma etapa extra de pré-processamento para gerar as máscaras. Foi necessário interpolar os valores de um arquivo de texto que vem anexo com os dados. A máscara também é composta apenas pela região de interesse contanto apenas valores 0 e 1. Esta é a única característica específica deste conjunto de dados que diverge do \gls{ACDC}.
+Os experimentos no conjunto de dados \textit{SunnyBrook} foram praticamente os mesmos aplicados ao conjunto de dados \gls{ACDC}. No conjunto de dados \textit{SunnyBrook}, houve uma etapa extra de pré-processamento para gerar as máscaras. Foi necessário interpolar os valores de um arquivo de texto que vem anexo com os dados. A máscara também é composta apenas pela região de interesse com valores entre 0 e 1.
 
-Como o \textit{SunnyBrook} tem poucos dados, apenas $45$, sendo $30$ para treino e $15$ para teste. Removendo as classes de infarto (IC e IC-I), sobram $21$ registros sedo $13$ para treino e $8$ para teste. Foi considerado que um treinamento neste conjunto de dados não seria benéfico e foi feito apenas a inferência utilizando todos os $21$ registros, sendo $12$ casos de \gls{CMH} e $9$ casos em condições normais. Os modelos utilizados são os previamente treinados no \gls{ACDC}. Os resultados são conferidos nas tabelas \ref{tab:metrics_sunny_orig}, \ref{tab:metrics_sunny_orig_mask} e \ref{tab:metrics_sunny_se}. O modelo base consta em laranja e o melhor resultado consta em azul, indo de encontro aos resultados obtidos no \gls{ACDC}. É possível notar que o conjunto de dados, por ser pequeno, compromete a classificação pois mesmo que o modelo possua um pequeno aprimoramento de uma arquitetura para outra, pode não ser suficiente para converter uma nova classificação, o que da a aparência de que dados a alguns resultados empatados, eles possuem a mesma assertividade o que não é a realidade.
+Como o \textit{SunnyBrook} tem poucos dados, apenas $45$, sendo $30$ para treino e $15$ para teste e removendo as classes de infarto (IC e IC-I), sobram $21$ registros sendo $13$ para treino e $8$ para teste. Foi considerado que o treinamento neste conjunto de dados não seria benéfico, pela quantidade limitada. Foi aplicado apenas as inferências considerando os $21$ registros, sendo $12$ casos de \gls{CMH} e $9$ casos em condições normais. Os modelos utilizados são os previamente treinados no \gls{ACDC}. Os resultados são conferidos nas tabelas \ref{tab:metrics_sunny_orig}, \ref{tab:metrics_sunny_orig_mask} e \ref{tab:metrics_sunny_se}. O modelo base consta em laranja e o melhor resultado consta em azul, indo de encontro aos resultados obtidos no \gls{ACDC}. É possível notar que o conjunto de dados, por ser pequeno, compromete a classificação pois mesmo que o modelo possua um pequeno aprimoramento de uma arquitetura para outra, pode não ser suficiente para converter uma nova classificação, o que da a aparência de que alguns modelos possuem a mesma capacidade, o que não é a realidade.
 
 
 \begin{table}[htbp]
@@ -308,7 +302,9 @@ Como o \textit{SunnyBrook} tem poucos dados, apenas $45$, sendo $30$ para treino
 \section{Considerações Finais do Capítulo} 
 \label{sec:cap6_consideracoes_finais}
 
-Os resultados obtidos, aplicando a arquitetura original proposta por \citeonline{aiSelfAttentionBasedFusion2023} e a aplicação de diversas modificações, como a forma de concatenar para propiciar um módulo convolucional de extrair informações inter-relacionadas entre características extraídas de diferentes técnicas, a adição de um mecanismo de atenção seletiva na forma de um bloco \gls{SE} antecedente ao mecanismo de autoatenção. Enquanto a atenção seletiva procura gera um conjunto de pesos ao ao prever diretamente a importância de cada parte dos dados, aprendendo o valor dos pesos para cada canal no mapa de características com o objetivo de realçar ou suprimir as características de cada canal. O mecanismo de autoatenção envolve a utilização da correlação entre os conteúdos das camadas ocultas para calcular os pesos de atenção, que são então aplicados para agregar informações das camadas ocultas em uma escala global. 
+Os resultados obtidos, aplicando a arquitetura original proposta por \citeonline{aiSelfAttentionBasedFusion2023} e a aplicação de diversas modificações, como a forma de concatenar para propiciar um módulo convolucional de extrair informações inter-relacionadas entre características extraídas de diferentes técnicas, a adição de um mecanismo de atenção seletiva na forma de um bloco \gls{SE} antecedente ao mecanismo de autoatenção, seguiram um padrão de resultados esperados. Conforme o modelo aumenta, seus resultados também melhoram mas com ganhos mínimos dependendo do caso. Adicionar técnicas relevantes como o bloco \gls{SE} aprimorou os resultados significativamente.
 
-Seguindo a intuição de utilizar diferentes mecanismos de atenção, conforme proposto pelos autores \cite{yangNeuralNetworkDesign2024a}, trouxe melhoras significativas comparadas ao modelo base. Outras adaptações mais diretas também surtiram efeito, como aumentar o tamanho das características utilizadas, aplicar mais blocos de autoatenção de forma recorrente, a adição das máscaras, que por sua vez, indicam as regiões de interesse, etc. Os experimentos indicam que há espaço para exploração e melhorias a serem propostas para o âmbito de cardiomiopatia hipertrófica.
+A atenção seletiva procura gera um conjunto de pesos ao ao prever diretamente a importância de cada parte dos dados, aprendendo o valor dos pesos para cada canal no mapa de características com o objetivo de realçar ou suprimir as características de cada canal. O mecanismo de autoatenção envolve a utilização da correlação entre os conteúdos das camadas ocultas para calcular os pesos de atenção, que são então aplicados para agregar informações das camadas ocultas em uma escala global. Seguindo a intuição de utilizar diferentes mecanismos de atenção, conforme proposto pelos autores \cite{yangNeuralNetworkDesign2024a}, trouxe melhoras significativas comparadas ao modelo base. 
+
+Outras adaptações mais simplórias também surtiram efeito, como aumentar o tamanho das características utilizadas, aplicar mais blocos de autoatenção, a adição das máscaras, etc. Os experimentos indicam que há espaço para exploração e melhorias, como por exemplo, outros mecanismos de atenção, podem trazer resultados ainda mais promissores para o âmbito de cardiomiopatia hipertrófica. 
 
