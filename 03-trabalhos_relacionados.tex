@@ -83,16 +83,16 @@ Critérios de inclusão também foram aplicados e são apresentados na Tabela \r
 
 O diagrama com o funil de seleção aplicado é apresentado na Figura \ref{fig:fig021}. É possível verificar na imagem, por exemplo, que foram removidos $28$ artigos dos $49$ artigos selecionados inicialmente, restando $21$. Aplicando os critérios de qualidade, foram selecionados $18$ artigos. Dentre os artigos selecionados, $3$ foram excluídos por não agregarem o suficiente ou por serem redundantes.
 
-\textcolor{red}{
-< < ----- MENCIONO QUE ADICIONEI 2 LITERATURAS POSTERIORES ??? -----
-}
+% \textcolor{red}{
+% < < ----- MENCIONO QUE ADICIONEI 2 LITERATURAS POSTERIORES ??? -----
+% }
 
-Por fim, duas novas literaturas foram adicionadas as já elencadas pela revisão sistemática. Isto ocorre na fase em que são feitos diversos testes e coletados os resultados, mediante diversas interações, abordagens como o \gls{SE}-Net foram identificadas e, dada sua revisão, incorporadas ao modelo base utilizado obtendo resultados significativamente superiores se comparados ao do modelo base.
+% Por fim, duas novas literaturas foram adicionadas as já elencadas pela revisão sistemática. Isto ocorre na fase em que são feitos diversos testes e coletados os resultados, mediante diversas interações, abordagens como o \gls{SE}-Net foram identificadas e, dada sua revisão, incorporadas ao modelo base utilizado obtendo resultados significativamente superiores se comparados ao do modelo base.
 
 
-\textcolor{red}{
--------------------------------------------------------------------------------------------- > >
-}
+% \textcolor{red}{
+% -------------------------------------------------------------------------------------------- > >
+% }
 
 \begin{figure}[h!]
     \centering
@@ -118,7 +118,7 @@ No contexto da pesquisa contínua em imagens médicas e diagnóstico de câncer,
 
 \begin{figure}[htbp]
     \centering
-    \caption{Arquitetura Proposta}
+    \caption{Arquitetura Proposta de \citeonline{jiangMRIBasedRadiomics2021}}
     \includegraphics[width=0.8\textwidth]{figures/fig007.png}
     \caption*{Fonte: \cite{jiangMRIBasedRadiomics2021}}
     \label{fig:fig007}
@@ -144,9 +144,9 @@ Este estudo exemplifica a aplicação de técnicas avançadas de aprendizado de 
 
 \begin{figure}[htbp]
     % \centering
-    \caption{Arquitetura Proposta}
+    \caption{Arquitetura Proposta de \citeonline{aiSelfAttentionBasedFusion2023}}
     \includegraphics[scale=0.5]{figures/fig008.png}
-    \caption*{Fonte: Adaptado de \citeonline{aiSelfAttentionBasedFusion2023}}
+    \caption*{Fonte: \cite{aiSelfAttentionBasedFusion2023}}
     \label{fig:fig008}
 \end{figure}
 %---------------------------------------------------------
@@ -164,7 +164,7 @@ O modelo introduzido pela equipe utiliza uma combinação de mecanismos de aten�
     \caption{Método proposto. \textit{DenseNet} é o modelo base, a saída da rede densa é alimentada pela rede de atenção que prioriza as fatias e regiões e gera a classificação binária do status de metilação do MGMT.
     }
     \includegraphics[width=1\textwidth]{figures/fig009.png}
-    \caption*{Fonte: Adaptado de \cite{iranmehrImprovedPredictionMGMT2022}}
+    \caption*{Fonte: \cite{iranmehrImprovedPredictionMGMT2022}}
     \label{fig:fig009}
 \end{figure}
 
@@ -180,37 +180,49 @@ Avaliado em várias métricas de classificação binária, o modelo alcançou a 
     \label{fig:fig010}
 \end{figure}
 
-\noindent \textcolor{red}{
-< < --- ADC. TRAB. QUE DEMONSTRA VÁRIOS MECANISMOS DE ATENÇÃO ----
-}
 
 Por fim, \citeonline{yangNeuralNetworkDesign2024a} demonstra como o mecanismo de atenção auxilia as redes neurais a se concentrar em informações pertinentes nos dados, e sua integração com redes neurais convolucionais aprimora as capacidades de extração de características do modelo como um todo. O trabalho destaca que o mecanismo de atenção pode ser ser categorizado em: mecanismo de atenção seletiva e mecanismo de autoatenção.
 
 O mecanismo de atenção seletiva gera um conjunto de pesos de atenção ao prever diretamente a importância de cada parte dos dados em relação ao objetivo da tarefa, adicionando os pesos ponderadamente aos dados de entrada para realçar as informações importantes e suprimir as informações irrelevantes nos dados. A \gls{SE}Net é um trabalho representativo nos mecanismos de atenção seletiva. A \gls{SE}Net propõe um mecanismo de atenção no domínio dos canais que aprende o valor dos pesos para cada canal no mapa de características, a fim de realçar ou suprimir cada característica do canal. O mecanismo de atenção seletiva é orientado para os objetivos da tarefa e otimiza diretamente as características, mas carece da capacidade de extrair informações globais. O mecanismo de autoatenção consegue capturar informações globais, mas sofre com alta complexidade e dificuldades de otimização. 
 
-\citeonline{yangNeuralNetworkDesign2024a} propuseram um algoritmo com módulo de busca de atenção diferenciável, assim a rede pode extrair as informações cognitivas e semântica das características da imagem. Em seguida, um espaço de busca multi-atenção é estabelecido englobando seis operações de atenção consolidadas em um único módulo de busca. Por fim, para aprimorar a eficiência, o espaço de busca, antes discreto, é convertido para contínuo, empregando um algoritmo de busca diferencial para identificar a rede de atenção ótima. Para validar os resultados, foi aplicada a classificação em imagens  muito detalhadas. A Figura \ref{fig:fig022} e \ref{fig:fig023} demonstram respectivamente a arquitetura proposta no trabalho e o módulo de busca multi-atenção.
-\newline
+\citeonline{yangNeuralNetworkDesign2024a} propuseram um algoritmo com módulo de busca de atenção diferenciável, assim a rede pode extrair as informações cognitivas e semântica das características da imagem. Em seguida, um espaço de busca multi-atenção é estabelecido englobando seis operações de atenção consolidadas em um único módulo de busca. Por fim, para aprimorar a eficiência, o espaço de busca, antes discreto, é convertido para contínuo, empregando um algoritmo de busca diferencial para identificar a rede de atenção ótima. Para validar os resultados, foi aplicada a classificação em imagens  muito detalhadas. 
 
-\textcolor{red}{
--------------------------------------------------------------------------------------------- > >
-}
+Como resultado o método alcançou acurácia de 87,4\% no conjunto de dados CUB-200-2011, apresentando um ganho de desempenho de 1,1\%, 0,9\% e 2,1\% em relação ao módulo de atenção seletiva por canal, ao módulo de atenção seletiva espacial e ao módulo de autoatenção espacial, respectivamente. Por fim, os autores concluem que o módulo de atenção encontrado incorpora as vantagens de diferentes mecanismos de atenção e pode ajudar o modelo a melhor extrair e utilizar características discriminativas \cite{yangNeuralNetworkDesign2024a}.
 
-\begin{figure}[htbp]
-    \centering
-    \caption{Arquitetura Multi-Atenção Proposta}
-    \includegraphics[width=1\textwidth]{figures/fig022.png}
-    \caption*{Fonte: \cite{yangNeuralNetworkDesign2024a}}
-    \label{fig:fig022}
-\end{figure}
+% \begin{figure}[htbp]
+%     \centering
+%     \caption{Arquitetura Multi-Atenção Proposta}
+%     \includegraphics[width=1\textwidth]{figures/fig022.png}
+%     \caption*{Fonte: \cite{yangNeuralNetworkDesign2024a}}
+%     \label{fig:fig022}
+% \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \caption{Módulo Multi-Atenção}
-    \includegraphics[width=1\textwidth]{figures/fig023.png}
-    \caption*{Adaptado de \cite{yangNeuralNetworkDesign2024a}}
-    \label{fig:fig023}
-\end{figure}
-%---------------------------------------------------------
-% \section{Considerações Finais do Capítulo}
-% \label{sec:rcond_cap_3}
-% \lipsum[2-4]
+% \begin{figure}[htbp]
+%     \centering
+%     \caption{Módulo Multi-Atenção}
+%     \includegraphics[width=1\textwidth]{figures/fig023.png}
+%     \caption*{Adaptado de \cite{yangNeuralNetworkDesign2024a}}
+%     \label{fig:fig023}
+% \end{figure}
+
+
+%--------------------------------------------------------
+\section{Considerações Finais do Capitulo}
+\label{sec:consideracoes_finais}
+
+Os métodos de avaliação de cardiomiopatias, tanto via análise radiômica por extração de textura quanto por aprendizado profundo obtiveram êxito em análise de imagens médicas. Vale pontuar que estas técnicas de Aprendizado de Máquina, utilizando dados de textura podem ser insuficientes em capturar a complexidade e diversidade de informações a cerca do ventrículo como também pode ser afetada pela qualidade da imagem. Métodos de aprendizado profundo podem aprender automaticamente semânticas de alto nível e informações representativas de imagens de \gls{RMC} sem necessidade de características extraídas manualmente.
+Métodos de aprendizado profundo tem obtido ótimos resultados em diagnósticos, segmentação, estadiamento e prognósticos. Todavia, o mesmo tem suas limitações como limitação dos dados, desafio geral na área médica, \textit{overfitting} e pouca interpretabilidade do modelo em si.
+
+Dadas as vantagens e limitações discutidas, este trabalho tem como proposta a fusão de uma arquitetura de aprendizado profundo baseada no mecanismo de atenção que integra características radiômicas e profundas para a identificação de \gls{CMH}. 
+
+
+% A arquitetura proposta é composta por: extração de características radiômicas e profundas; redução de dimensionalidade para que ambas possuam tamanhos similares, aplicação dos mecanismos de atenção seletivo e autoatenção e classificação binária do resultado. A arquitetura proposta é apresentada na Figura \ref{fig:fig011-01}.
+% \newline
+
+% \begin{figure}[hbtp]
+%     \centering
+%     \caption{Arquitetura Proposta}
+%     \includegraphics[width=1\textwidth]{figures/fig011.png}
+%     \caption*{Fonte: Autor}
+%     \label{fig:fig011-01}
+% \end{figure}

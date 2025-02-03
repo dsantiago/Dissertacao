@@ -1,13 +1,14 @@
-\chapter{RESULTADOS EXPERIMENTAIS}
+\chapter{RESULTADOS E DISCUSSÕES}
 \label{chap:proposta_experimental}
 
-Este capítulo traz informações relacionadas com as ferramentas utilizadas no experimento, como linguagem, bibliotecas utilizadas, entre outros. Informações sobre o consumo de dados das bases \gls{ACDC} e SunnyBrook, fase de pré-processamento, inferência nos modelos implementados, sendo estes, modelo linha de base e derivados, e modelos adaptados. Por fim, são apresentados os resultados experimentais com o conjunto de dados \gls{ACDC}. 
+Este capítulo traz informações relacionadas com as ferramentas utilizadas no experimento, como linguagem, bibliotecas utilizadas, entre outros. Assim como, informações sobre o consumo de dados das bases \gls{ACDC} e SunnyBrook, fase de pré-processamento, inferência nos modelos implementados, sendo estes, modelo linha de base e derivados, e modelos adaptados. Por fim, são apresentados os resultados considerando as métricas apresentadas na seção \ref{subsec:cap4_metrics} utilizando as bases de dados ACDC e SunnyBrook e cada uma das abordagens: o modelo base e o modelo proposto.
+
 
 %--------------------------------------------------------
 \section{Materiais} 
 \label{sec:cap5_materiais}
 
-Esta seção visa trazer informações sobre o \textit{hardware} e o \textit{software} utilizados como também as principais bibliotecas utilizadas e suas versões para fins de reprodução. A Tabela \ref{tab:hardware_software} estrutura estas informações. Outra ferramenta utilizada no registro dos experimentos foi o CometML\footnote{https://www.comet.com}. Esta ferramenta auxilia no registro do experimento, armazenando valores como: erro do lote no treinamento, acurácia do conjuntos de validação no treinamento, métricas resultantes como acurácia, hiperparâmetros como taxa de aprendizado, épocas, etc.
+A Tabela \ref{tab:hardware_software} apresenta as ferramentas que foram utilizadas nesse projeto. Destaca-se que foram utilizadas majoritariamente ferramentas open-source como a linguagem \textit{python}, bibliotecas como \textit{pyradiomics}, \textit{torch}, \textit{numpy}, entre outras. Para registro dos experimentos, foi utilizada a ferramenta CometML\footnote{https://www.comet.com}. No CometML é possível armazenar valores como: erro do lote no treinamento, acurácia do conjuntos de validação no treinamento, métricas resultantes como acurácia, hiperparâmetros como taxa de aprendizado, épocas, etc.
 \newline
 
 \begin{table}[hbtp]
@@ -46,7 +47,7 @@ Esta seção visa trazer informações sobre o \textit{hardware} e o \textit{sof
 \section{Conjunto de Dados} 
 \label{subsec:cap5_dataset}
 
-Este trabalho visa realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. Testes iniciais foram feitos no conjunto de dados \gls{ACDC} que possui $30$ casos de \gls{CMH}, $30$ casos de \gls{CMD} e $90$ casos normais, resultando em $60$ casos de cardiomiopatia e $90$ casos normais. Da base \gls{ACDC} se pretende utilizar apenas as fatias da fase diastólica. O segundo conjunto de dados é o \textit{SunnyBrook}, possuindo imagens na fase diastólica contendo as classes $9$ classes NOR(normal) e $12$ HIP(hipertrofia do ventrículo esquerdo).
+Este trabalho visou realizar os experimentos em duas bases distintas com imagens de \gls{RMC}, informações a cerca do paciente e rótulos que indicam presença ou não de cardiomiopatia. Testes iniciais foram feitos no conjunto de dados \gls{ACDC} que possui $30$ casos de \gls{CMH}, $30$ casos de \gls{CMD} e $90$ casos normais, resultando em $60$ casos de cardiomiopatia e $90$ casos normais. Da base \gls{ACDC} se pretende utilizar apenas as fatias da fase diastólica. O segundo conjunto de dados é o \textit{SunnyBrook}, possuindo imagens na fase diastólica contendo as classes $9$ classes NOR(normal) e $12$ HIP(hipertrofia do ventrículo esquerdo).
 
 O modo de operação será o mesmo para ambos os conjuntos de dados com exceção do pré-processamento dado ao fato da forma como o conjunto de dados \textit{SunnyBrook} disponibiliza as máscaras.
 
@@ -69,9 +70,18 @@ Neste experimento foi treinado o modelo utilizando, como função objetivo a ent
 \subsection{Experimentos Modelos Adaptados}
 \label{subsec:cap5_experimentos_adaptados}
 
-Os modelos adaptados refletem os experimentos desmembrados do modelo base, adaptações estas com a finalidade de verificar se mudanças, seja nos hiperparâmetros, seja em partes da arquitetura, podem trazer resultados promissores em relação aos resultados base.
+Os modelos adaptados refletem os experimentos desmembrados do modelo base, adaptações estas com a finalidade de verificar se mudanças, seja nos hiperparâmetros, seja em partes da arquitetura, podem trazer resultados promissores em relação aos resultados base. As mudanças podem ser elencadas em: 
 
-As mudanças podem ser elencadas em: mudanças do $\text{EMBED}_{size}$ onde se foi testado os valores $[24, 48, 64]$ na tentativa de preservar mais informações originais. Na versão adaptada também há o consumo das respectivas máscaras que são futuramente concatenadas as características radiômicas e profundas. A concatenação é feita de forma diferente também, assumindo por exemplo $\text{EMBED}_{size}$ igual a $12$, na versão original temos como resultado $1\times24$ porém na versão adaptada essa concatenação é feita na primeira dimensão, resultando neste exemplo em $2\times12$. Isto se dá pois é apresentado um novo bloco ao modelo original o bloco convolucional, composto de convolução e blocos \gls{SE}.
+\begin{enumerate}
+
+\item Mudanças do $\text{EMBED}_{size}$ onde se foi testado os valores $[24, 48, 64]$ na tentativa de preservar mais informações originais.
+
+\item No caso das versões adaptadas, também há a adição do consumo das respectivas máscaras que são futuramente concatenadas as características radiômicas e profundas.
+
+\item A concatenação é feita de forma diferente também, assumindo por exemplo $\text{EMBED}_{size}$ igual a $12$, na versão original temos como resultado $1\times24$ porém na versão adaptada essa concatenação é feita na primeira dimensão, resultando neste exemplo em $2\times12$. Isto se dá pois é apresentado um novo bloco ao modelo original o bloco convolucional, composto de convolução e blocos \gls{SE}.
+
+\end{enumerate}
+
 
 A parte restante da arquitetura segue de acordo com a original, exceto que também podemos variar $N$ vezes o bloco de autoatenção, ou seja, sua saída volta sendo sua entrada $N$ vezes e este valor de $N$ também pode ser considerado como um dos hiperparâmetros do experimento. Os valores de $N$ utilizados foram $[1, 2, 4, 6]$. Estas mudanças não mudam a estrutura da arquitetura incial fazendo com que o módulo autoatenção seja executado $N$ vezes conforme trabalho de \cite{vaswaniAttentionAllYou2023} e pode ser visualizada na Figura \ref{fig:fig030}.
 \newline
