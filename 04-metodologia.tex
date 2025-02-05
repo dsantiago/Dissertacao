@@ -7,29 +7,47 @@ A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} q
 
 Na segunda fase, diversas adaptações foram aplicadas ao modelo base com o intuito de aprimorar a robustez e a acurácia. Algumas das adaptações feitas consistem no aumento do tamanho dos vetores semânticos, também conhecidos na literatura como \textit{embeddings}, seu tamanho foi variado também entre $12$, $24$, $48$ e $64$, valores testados de forma análoga a um hiperparâmetro, com a premissa de preservar mais das informações originais ao custo do aumento quase irrelevante de custo computacional.
 
-A concatenação dos \textit{embeddings} também foi adaptada se comparada ao modelo original. Na versão original a concatenação se dá na última dimensão enquanto que nas versões adaptadas se dá na primeira dimensão. Em termos práticos, na versão original dois vetores $1\text{x}12$ concatenados resultam em $1\text{x}24$, na abordagem adaptada resultam em $2\text{x}12$. A mudança na forma de concatenar é proposital pois a versão adaptada conta com uma camada convolucional inédita se comparada com a versão original, visando extrair informação relevante da junção dos \textit{embeddings}. A versão adaptada adiciona também uma camada de atenção seletiva no formato de um bloco \gls{SE} que precede o bloco de autoatenção. Outra mundaça na versão adaptada é o bloco de autoatenção ser aplicado $N$ vezes ao invés de uma única vez como acontece no modelo base trazendo uma perceptível melhora nos resultados. Lembrando que ambos mecanismos de atenção tem propostas diferentes, enquanto o bloco de atenção seletiva atua na relação entre os canais dos \textit{embeddings}, o bloco de autoatenção otimiza e pondera o vetor de características fundidas de forma eficaz. A intuição de aplicar mecanismos de atenção com propósitos diferentes vem do trabalho de \cite{yangNeuralNetworkDesign2024a}. A Figura \ref{fig:fig015} confere o fluxograma do projeto ilustrando de forma esquemática as fases que serão atuadas.
+A concatenação dos \textit{embeddings} também foi adaptada se comparada ao modelo original. Na versão original a concatenação se dá na última dimensão enquanto que nas versões adaptadas se dá na primeira dimensão. Em termos práticos, na versão original dois vetores $1\text{x}12$ concatenados resultam em $1\text{x}24$, na abordagem adaptada resultam em $2\text{x}12$. 
 
-\begin{figure}[h!]
+A mudança na forma de concatenar é feita de forma proposital pois a versão adaptada conta com uma camada convolucional inédita se comparada com a versão original, visando extrair informação relevante da junção dos \textit{embeddings}. A versão adaptada adiciona também uma camada de atenção seletiva no formato de um bloco \gls{SE} que precede o bloco de autoatenção. Outra mudança na versão adaptada é o bloco de autoatenção ser aplicado $N$ vezes ao invés de uma única vez como acontece no modelo base trazendo uma perceptível melhora nos resultados. Lembrando que ambos mecanismos de atenção tem propostas diferentes, enquanto o bloco de atenção seletiva atua na relação entre os canais dos \textit{embeddings}, o bloco de autoatenção otimiza e pondera o vetor de características fundidas de forma eficaz. A intuição de aplicar mecanismos de atenção com propósitos diferentes vem do trabalho de \cite{yangNeuralNetworkDesign2024a}. 
+
+A Figuras \ref{fig:fig015-01} e \ref{fig:fig015-02} demonstram o fluxograma do projeto na fase de pré-processamento e o fluxograma da execução da arquitetura proposta respectivamente.
+
+\begin{figure}[H]
     \centering
-    \caption{Fluxograma do Projeto}
-    \includegraphics[scale=0.44]{figures/fig015.png}
+    \caption{Fluxograma - Pré-Processamento}
+    \includegraphics[scale=0.36]{figures/fig015-01.png}
     \caption*{Fonte: Autor}
-    \label{fig:fig015}
+    \label{fig:fig015-01}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Fluxograma - Arquitetura}
+    \includegraphics[scale=0.38]{figures/fig015-02.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig015-02}
 \end{figure}
 
 %--------------------------------------------------------
 \section{Bases de Dados} 
 \label{subsec:cap4_dataset}
 
-Duas bases de dados foram utilizadas no experimento: o primeiro conjunto de dados é o \gls{ACDC}\footnote{https://www.creatis.insa-lyon.fr/Challenge/acdc/databases.html}. O segundo conjunto de dados é o Sunnybrook Cardiac Data (SCD) \footnote{https://www.cardiacatlas.org/sunnybrook-cardiac-data} \cite{radauEvaluationFrameworkAlgorithms2009}. Ambos conjuntos de dados são públicos e destinados a pesquisa.
+Duas bases de dados foram utilizadas no experimento: o primeiro conjunto de dados é o \gls{ACDC}\footnote{https://www.creatis.insa-lyon.fr/Challenge/acdc/databases.html}. O segundo conjunto de dados é o SunnyBrook Cardiac Data (SCD) \footnote{https://www.cardiacatlas.org/sunnybrook-cardiac-data} \cite{radauEvaluationFrameworkAlgorithms2009}. Ambos conjuntos de dados são públicos e destinados a pesquisa.
+
+\textcolor{red}{
+O conjunto de dados ACDC é composto por $150$ imagens sendo $100$ para treino e $50$ para testes distribuídas em 5 classes igualmente distribuídas: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. O conjunto de dados SunnyBrook é composto por $45$ imagens sendo e, respeitando as proporções determinadas no ACDC, foi escolhido $30$ imagens para treino e $15$ para testes. As classes são NOR, IC, IC-I e HIP. Detalhes das classes são descritas nas seções que seguem destinadas a cada conjunto de dados.
+}
 
 %--------------------------------------------------------
 \subsection{Conjunto de Dados ACDC} 
 \label{subsec:cap4_acdc}
 
-O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adquiridos no hospital universitário de Dijon (França). Os dados adquiridos foram totalmente anonimizados e tratados de acordo com as regulamentações estabelecidas pelo comitê ético local do hospital de Dijon. O conjunto de dados cobre várias patologias bem definidas com casos suficientes para (1) treinar adequadamente métodos de aprendizado de máquina e (2) avaliar claramente as variações dos principais parâmetros fisiológicos obtidos a partir de cine-RM (em particular volume diastólico e fração de ejeção). O conjunto de dados é composto por $150$ exames (todos de pacientes diferentes) divididos em cinco subgrupos distribuídos de forma igualitária, sendo quatro patológicos e um grupo de sujeitos saudáveis. Dentre as cinco classes distintas, tem-se: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. As classes \gls{DCM} e \gls{HCM} são interpretadas como passíveis de \gls{CAR} e as demais; \gls{NOR}, \gls{MINF} e \gls{RV}; são interpretadas como o coração em condições normais, detalhes das classes podem ser verificados na Tabela \ref{tab:conditions}. As máscara de segmentação também acompanham o conjunto de dados, para possíveis aplicações de segmentação. Os valores dos rótulos variam de $0$ a $3$ e representam voxels pertencentes ao fundo (0), à cavidade do ventrículo direito (1), ao miocárdio (2) e à cavidade do ventrículo esquerdo (3).
+O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adquiridos no hospital universitário de Dijon (França). Os dados adquiridos foram totalmente anonimizados e tratados de acordo com as regulamentações estabelecidas pelo comitê ético local do hospital de Dijon. O conjunto de dados cobre várias patologias bem definidas com casos suficientes para (1) treinar adequadamente métodos de aprendizado de máquina e (2) avaliar claramente as variações dos principais parâmetros fisiológicos obtidos a partir de cine-RM (em particular volume diastólico e fração de ejeção). O conjunto de dados é composto por $150$ exames (todos de pacientes diferentes) divididos em cinco subgrupos distribuídos de forma igualitária, sendo quatro patológicos e um grupo de sujeitos saudáveis. Dentre as cinco classes distintas, tem-se: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. As classes \gls{DCM} e \gls{HCM} são interpretadas como passíveis de \gls{CAR} e as demais; \gls{NOR}, \gls{MINF} e \gls{RV}; são interpretadas como o coração em condições normais, detalhes das classes podem ser verificados na Tabela \ref{tab:conditions}. 
 
-\begin{table}[hbtp]
+As máscara de segmentação também acompanham o conjunto de dados, para possíveis aplicações de segmentação. Os valores dos rótulos variam de $0$ a $3$ e representam voxels pertencentes ao fundo (0), à cavidade do ventrículo direito (1), ao miocárdio (2) e à cavidade do ventrículo esquerdo (3). As Figuras \ref{fig:fig033-01}, \label{fig:fig033-02} e \label{fig:fig033-03} representam as imagens e suas máscaras das classes \gls{DCM}, \gls{HCM} e \gls{NOR}. Nas máscaras é possível ver três níveis de tons de cinza respectivos a segmentação citada.
+
+\begin{table}[H]
     \centering
     \caption{Classes ACDC -Descrição}
     \renewcommand{\arraystretch}{1} % default é 1 
@@ -75,7 +93,7 @@ O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adq
 
 Os dados tem composição balanceada e sua distribuição pode ser conferida na Tabela \ref{tab:count_dataset}. É possível notar, que após o agrupamento das classes como especificado, estas tornam-se minimamente desbalanceadas, em uma proporção de $40/60$. As informações de cada paciente também é composta pelas seguintes informações: peso, altura, bem como o instante da fase diastólica e sistólica \cite{bernardDeepLearningTechniques2018a}.
 
-\begin{table}[hbtp]
+\begin{table}[H]
     \centering
     \caption{Classes do ACDC}
     \renewcommand{\arraystretch}{1} % default é 1 
@@ -97,6 +115,30 @@ Os dados tem composição balanceada e sua distribuição pode ser conferida na 
 \end{table}
 
 
+\begin{figure}[H]
+    \centering
+    \caption{Classe DCM + Máscara}
+    \includegraphics[width=0.8\textwidth]{figures/fig033-01.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig033-01}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Classe HCM + Máscara}
+    \includegraphics[width=0.8\textwidth]{figures/fig033-02.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig033-02}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Classe NOR + Máscara}
+    \includegraphics[width=0.8\textwidth]{figures/fig033-03.png}
+    \caption*{Fonte: Autor}
+    \label{fig:fig033-03}
+\end{figure}
+
 % --------------------------------------------------------
 \subsection{Conjunto de Dados Sunny} 
 \label{subsec:cap4_sunny}
@@ -112,7 +154,7 @@ Há quatro grupos patológicos neste conjunto de dados, que foram classificados 
     \item Normais (\textbf{NOR}): grupo com \gls{FE} > $55$\% e sem hipertrofia.
 \end{enumerate}
 
-\noindent Para o presente trabalho foi utilizado as classes \textbf{HIP} e \textbf{NOR} para classificação de cenário com cardiomiopatia e normal respectivamente. A tabela \ref{tab:sunny_stats} demonstra como se encontram distribuídos os $45$ pacientes e os valores relacionados as atividades cardiovasculares utilizados para fins de classificação dos pacientes:
+\noindent Para o presente trabalho foi utilizado as classes \textbf{HIP} e \textbf{NOR} para classificação de cenário com cardiomiopatia e normal respectivamente. A Tabela \ref{tab:sunny_stats} demonstra como se encontram distribuídos os $45$ pacientes e os valores relacionados as atividades cardiovasculares utilizados para fins de classificação dos pacientes:
 \newline
 
 \begin{table}[h!]
@@ -233,13 +275,15 @@ Também foi calculada a \gls{AUC}, que consistem em um gráfico com a habilidade
 \section{Arquitetura Proposta}
 \label{subsec:cap4_architecture}
 
-O esquemático da arquitetura proposta é observado na Figura \ref{fig:fig011}. A características profundas são extraídas das imagens e máscaras via ResNet50 e sofrem uma transformação linear com o valor de $\DeepFeaturesPostLinear$ conforme trabalho original. As características radiômicas são extraídas via aplicação de diversos modelos estatísticos resultando no valor de $\RadiomicFeatures$. Um conjuntos de F-Test são aplicados nos vetores para garantir que possuam o mesmo tamanho, tamanho este decidido pelo parâmetro $\text{EMBED}_{size}$. As características selecionadas são concatenadas e enviadas ao módulo de convolução composto respectivamente por: convolução 1D, bloco \gls{SE} e convolução 1D. A primeira convolução converte o número de canais para $16$, o bloco \gls{SE} mantém a dimensionalidade e a segunda convolução converte os canais de $16$ para $1$. O processo segue no módulo se auto atenção e, por fim, tem-se uma camada linear com um único neurônio para a classificação binária. A arquitetura proposta tem como base o trabalho de \cite{aiSelfAttentionBasedFusion2023}.
+% A arquitetura proposta é composta por: extração de características radiômicas e profundas; redução de dimensionalidade para que ambas possuam tamanhos similares, aplicação dos mecanismos de atenção seletivo e autoatenção e classificação binária do resultado.
 
-\begin{figure}[htbp]
+O esquemático da arquitetura proposta é observado na Figura \ref{fig:fig011}. As características profundas são extraídas das imagens e máscaras via ResNet50 e sofrem uma transformação linear com o valor de $\DeepFeaturesPostLinear$ conforme trabalho original. As características radiômicas são extraídas via aplicação de diversos modelos estatísticos resultando no valor de $\RadiomicFeatures$. Um conjunto de F-Test são aplicados nos vetores para garantir que possuam o mesmo tamanho, tamanho este decidido pelo parâmetro $\text{EMBED}_{size}$. As características selecionadas são concatenadas e enviadas ao módulo de convolução composto respectivamente por: convolução 1D, bloco \gls{SE} e convolução 1D. A primeira convolução converte o número de canais para $16$, o bloco \gls{SE} mantém a dimensionalidade e a segunda convolução converte os canais de $16$ para $1$. O processo segue no módulo se autoatenção e, por fim, uma camada linear com um único neurônio faz a classificação binária. A arquitetura proposta neste trabalho tem como base o trabalho de \cite{aiSelfAttentionBasedFusion2023}.
+\newline
+
+\begin{figure}[H]
     \centering
-    \caption{Arquitetura Adaptada Proposta}
-    % \includegraphics[width=1\textwidth]{figures/fig011.png}
-    \includegraphics[scale=0.26]{figures/fig011.png}
+    \caption{Arquitetura Proposta}
+    \includegraphics[width=1.02\textwidth]{figures/fig011.png}
     \caption*{Fonte: Autor}
     \label{fig:fig011}
 \end{figure}
