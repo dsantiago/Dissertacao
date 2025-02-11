@@ -16,24 +16,22 @@ Adicionalmente, técnicas de processamento de imagem como a análise de textura 
 
 % Em oncologia, a análise de textura de imagens de \gls{TC} mostrou correlação com a biologia tumoral subjacente, ao analisar características histológicas diferentes e mutações genéticas específicas. A biologia tumoral subjacente representa mecanismos biológicos fundamentais que estão na base do desenvolvimento, crescimento e progressão de tumores. Em problemas de tumores malignos já bem estabelecidos, a análise de textura se relaciona com a histologia nos exemplos sólidos comuns (pulmão, colorretal, esofágico, mama), se correlaciona com mutações genéticas específicas e pode acompanhar respostas terapêuticas. Fora da oncologia, mudanças não malignas em órgãos podem ser detectadas, como por exemplo cirrose hepática e pneumonite intersticial. 
 
-No domínio da análise de imagens cardíacas, a análise de textura aplicada à \gls{RMC} tem avaliado o risco de arritmia pós-infarto do miocárdio. O uso de análise de textura para \gls{RMC} em imagens sem contraste e com realce tardio de gadolínio em pacientes com \gls{CMH} para prever o resultado do exame é uma área particular de interesse \cite{schofieldTextureAnalysisCardiovascular2019a}.
+No domínio da análise de imagens cardíacas, a análise de textura aplicada à \gls{RMC} tem avaliado o risco de arritmia pós-infarto do miocárdio. O uso de análise de textura para \gls{RMC} em imagens sem contraste e com realce tardio de gadolínio em pacientes com cardiomiopatia para prever o resultado do exame é uma área particular de interesse \cite{schofieldTextureAnalysisCardiovascular2019a}.
 
-A \gls{CMH} é uma das cardiomiopatias mais comuns, frequentemente diagnosticada em jovens e indivíduos de meia-idade. Embora em muitos casos seja assintomática, a doença pode levar a condições graves, como insuficiência cardíaca e acidente vascular cerebral. Isso torna o diagnóstico precoce essencial para prevenir desfechos adversos \cite{kwonComparisonMortalityCause2022}. Neste sentido a análise radiômica que consiste em extrair dados qualitativos de imagens médicas, incluindo, em muitos casos, a análise da textura dessas imagens \cite{lambinRadiomicsExtractingMore2012}. A análise radiômica pode auxiliar com o diagnóstico prévio afim de compreender e atuar nos casos de \gls{CMH} que demonstrem risco ao paciente.
+A \gls{CMH} é uma das cardiomiopatias mais comuns, frequentemente diagnosticada em jovens e indivíduos de meia-idade. Embora em muitos casos seja assintomática, a doença pode levar a condições graves, como insuficiência cardíaca e acidente vascular cerebral. Isso torna o diagnóstico precoce essencial para prevenir desfechos adversos \cite{kwonComparisonMortalityCause2022}. Neste sentido a análise radiômica que consiste em extrair dados qualitativos de imagens médicas, incluindo, em muitos casos, a análise da textura dessas imagens \cite{lambinRadiomicsExtractingMore2012}. A análise radiômica pode auxiliar com o diagnóstico prévio afim de compreender e atuar nos casos de cardiomiopatia que demonstrem risco ao paciente.
 
 %-----------------------------------------
 
-Neste cenário, combinar técnicas de \gls{IA} e análise radiômica representa uma estratégia promissora para a detecção de \gls{CMH} e outras condições cardíacas. Estudos recentes, como o de \citeonline{aiSelfAttentionBasedFusion2023}, demonstraram que a integração de características profundas e radiômicas podem melhorar significativamente o desempenho preditivo de modelos diagnósticos de câncer de pulmão via imagens de \gls{TC}. Esses modelos baseiam-se em mecanismos de autoatenção para identificar padrões relevantes em dados concatenados, alcançando acurácia de até $82,35\%$ e \gls{AUC} de $0,74$.
+Neste cenário, combinar técnicas de \gls{IA} e análise radiômica representa uma estratégia promissora para a detecção de cardiomiopatias entre outras condições cardíacas. Estudos recentes, como o de \citeonline{aiSelfAttentionBasedFusion2023}, demonstraram que a integração de características profundas e radiômicas podem melhorar significativamente o desempenho preditivo de modelos diagnósticos de câncer de pulmão via imagens de \gls{TC}. Esses modelos baseiam-se em mecanismos de autoatenção para identificar padrões relevantes em dados concatenados, alcançando acurácia de até $82,35\%$ e \gls{AUC} de $0,74$.
 
 
-% A análise radiômica em conjunto com técnicas de \gls{IA} tem um grande potencial e há pesquisas que já tentam unificar os dois campos. O trabalho de \citeonline{aiSelfAttentionBasedFusion2023}, propôs a união de características radiômicas e características profundas, assim chamadas por serem extraídas de um modelo de \gls{AP}. O modelo proposto utiliza mecanismo de autoatenção para analisar e prever \gls{CMH}, tendo como entrada as características concatenadas. O uso destas duas abordagens aliadas na extração de características a cerca da doença, tem o potencial de obter melhores resultados preditivos se comparados as técnicas isoladas. Os resultado deste trabalho obtiveram acurácia de $\Acc\%$ e AUC de $\Auc$.
-
-Assim, o presente trabalho propõe a implementação e validação de uma estratégia de fusão que combine características radiômicas e profundas, com o uso de mecanismos de autoatenção, para melhorar a classificação de \gls{CMH}. Além de avançar o estado da arte em diagnósticos médicos, esta pesquisa busca contribuir para a adoção de soluções mais eficazes e acessíveis no apoio à decisão clínica.
+Assim, o presente trabalho propõe a implementação e validação de uma estratégia de fusão que combine características radiômicas e profundas, com o uso de mecanismos de autoatenção, para melhorar a classificação de cardiomiopatias. Além de avançar o estado da arte em diagnósticos médicos, esta pesquisa busca contribuir para a adoção de soluções mais eficazes e acessíveis no apoio à decisão clínica.
 
 %---------------------------------------------------------
 \section{OBJETIVOS}
 \label{sec:cap1_objetivo}
 
-Os objetivos deste trabalho consistem em propor e validar uma abordagem inovadora para a classificação de \gls{CMH} utilizando técnicas de inteligência artificial e análise radiômica. Estes objetivos foram definidos para responder às necessidades clínicas e avançar o estado da arte na área de diagnóstico médico. Com isso, o objetivo geral do presente projeto é desenvolver, implementar e validar um modelo de classificação de cardiomiopatias, com ênfase na \gls{CMH}, utilizando a integração de características radiômicas e profundas mediadas por mecanismos de autoatenção. Os objetivos específicos, por sua vez, são elencados conforme os itens abaixo:
+Os objetivos deste trabalho consistem em propor e validar uma abordagem inovadora para a classificação de cardiomiopatias utilizando técnicas de inteligência artificial e análise radiômica. Estes objetivos foram definidos para responder às necessidades clínicas e avançar o estado da arte na área de diagnóstico médico. Com isso, o objetivo geral do presente projeto é desenvolver, implementar e validar um modelo de classificação de cardiomiopatias, utilizando a integração de características radiômicas e profundas mediadas por mecanismos de autoatenção. Os objetivos específicos, por sua vez, são elencados conforme os itens abaixo:
 
 
 \begin{enumerate}
@@ -48,29 +46,9 @@ Os objetivos deste trabalho consistem em propor e validar uma abordagem inovador
 \item Comparar o desempenho do modelo proposto com técnicas existentes na literatura, identificando avanços e limitações em relação às abordagens tradicionais.
 \end{enumerate}
 
-% \begin{enumerate}
-% \item Implementar e processar modelo que unifica informações radiômicas e profundas, aplicado à análise de câncer do pulmão, em conjunto de dados público e privados de \gls{CMH}.
-
-% \item Avaliação dos resultados iniciais.
-
-% \item Adicionar novas estrutura ao modelo base e treinar com os dados públicos e privados.
-
-% \item Iteração e análise dos resultados obtidos, sua documentação e comparação.
-
-% % \item Implementação do modelo, que utiliza características radiômicas e
-% % características profundas.
-
-% % \item Coleta de resultados em conjunto de dados públicos, como linha de base da análise.
-
-% % \item Avaliação dos resultados iniciais.
-
-% % \item Proposta de novas abordagens tanto no pré-processamento quanto na arquitetura, mediante coleta dos resultados.
-
-% % \item Iteração e análise dos resultados obtidos, sua documentação e comparação.
-% \end{enumerate}
 
 %---------------------------------------------------------
-\section{Estrutura do trabalho}
+\section{ESTRUTURA DO TRABALHO}
 \label{sec:cap1_estrutura_trabalho}
 
 Este trabalho está organizado em sete capítulos, cada um projetado para abordar diferentes aspectos da pesquisa e sua implementação. A seguir, apresenta-se a estrutura detalhada desta pesquisa:
