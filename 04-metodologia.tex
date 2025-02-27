@@ -1,7 +1,7 @@
 \chapter{METODOLOGIA} 
 \label{chap:metodologia}
 
-A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} que unificam características radiômicas e características profundas. O modelo base selecionado é uma versão adaptada do trabalho de \cite{aiSelfAttentionBasedFusion2023}, mencionado nos trabalhos relacionados e o esquemático de sua arquitetura pode ser visto na Figura \ref{fig:fig008}. Importante ressaltar que o trabalho em questão é aplicado no cenário de câncer de pulmão de células não pequenas em imagens de \gls{TC} e este trabalho pretende aplicar o mesmo estudo no cenário de cardiomiopatia.
+A metodologia deste trabalho visa propor e investigar arquiteturas de \gls{AP} que unificam características radiômicas e características profundas. O modelo base selecionado é uma versão adaptada do trabalho de \cite{aiSelfAttentionBasedFusion2023}, mencionado nos trabalhos relacionados e o esquemático de sua arquitetura pode ser visto na Figura \ref{fig:fig008}. Importante ressaltar que o trabalho em questão é aplicado no cenário de câncer de pulmão de células não pequenas em imagens de \gls{TC} e este trabalho pretende aplicar o mesmo estudo no cenário de cardiomiopatia sendo este o modelo linha de base. Também será aplicado adaptações a esta arquitetura original como: quantidade de execuções nos transformers, aumento dos vetores profundos e radiômicos, mudança na forma de concatená-los, entre outros.
 
  Os experimentos foram divididos em duas fases. Na primeira fase, foi aplicado o modelo base, ao conjunto de dados público selecionado. Na etapa de pré-processamento desta fase, foram aplicadas diversas técnicas de aprendizado de máquina para extrair características manuais de imagens de \gls{RMC} e sua respectiva máscara, abrangendo textura, forma, escala de cinza, etc. Estas características serão chamadas, deste ponto em diante, de características radiômicas. Seguindo com o pré-processamento, as imagens de \gls{RMC} foram processadas por uma rede \textit{ResNet50} pré-treinada, extraindo características que serão intituladas de características profundas. As características profundas encapsulam informações semânticas de alto nível e de representação das imagens de \gls{RMC}. Estas características, radiômicas e profundas, são então fundidas em um vetor de características unificado e aplicado a um único bloco de autoatenção, e obtendo ao fim da arquitetura do modelo base, as classificação indicando se há ou não cardiomiopatia, ou seja, uma classificação binária.
 
@@ -35,15 +35,13 @@ A Figuras \ref{fig:fig015-01} e \ref{fig:fig015-02} demonstram o fluxograma do p
 
 Duas bases de dados foram utilizadas no experimento: o primeiro conjunto de dados é o \gls{ACDC}\footnote{https://www.creatis.insa-lyon.fr/Challenge/acdc/databases.html}. O segundo conjunto de dados é o SunnyBrook Cardiac Data (SCD) \footnote{https://www.cardiacatlas.org/sunnybrook-cardiac-data} \cite{radauEvaluationFrameworkAlgorithms2009}. Ambos conjuntos de dados são públicos e destinados a pesquisa.
 
-\textcolor{red}{
 O conjunto de dados ACDC é composto por $150$ imagens sendo $100$ para treino e $50$ para testes distribuídas em 5 classes igualmente distribuídas: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. O conjunto de dados SunnyBrook é composto por $45$ imagens sendo e, respeitando as proporções determinadas no ACDC, foi escolhido $30$ imagens para treino e $15$ para testes. As classes são NOR, IC, IC-I e HIP. Detalhes das classes são descritas nas seções que seguem destinadas a cada conjunto de dados.
-}
 
 %--------------------------------------------------------
 \subsection{Conjunto de Dados ACDC} 
 \label{subsec:cap4_acdc}
 
-O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adquiridos no hospital universitário de Dijon (França). Os dados adquiridos foram totalmente anonimizados e tratados de acordo com as regulamentações estabelecidas pelo comitê ético local do hospital de Dijon. O conjunto de dados cobre várias patologias bem definidas com casos suficientes para (1) treinar adequadamente métodos de aprendizado de máquina e (2) avaliar claramente as variações dos principais parâmetros fisiológicos obtidos a partir de cine-RM (em particular volume diastólico e fração de ejeção). O conjunto de dados é composto por $150$ exames (todos de pacientes diferentes) divididos em cinco subgrupos distribuídos de forma igualitária, sendo quatro patológicos e um grupo de sujeitos saudáveis. Dentre as cinco classes distintas, tem-se: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. As classes \gls{DCM} e \gls{HCM} são interpretadas como passíveis de \gls{CAR} e as demais; \gls{NOR}, \gls{MINF} e \gls{RV}; são interpretadas como o coração em condições normais, detalhes das classes podem ser verificados na Tabela \ref{tab:conditions}. 
+O conjunto de dados \gls{ACDC} foi criado a partir de exames clínicos reais adquiridos no hospital universitário de Dijon (França). Os dados adquiridos foram totalmente anonimizados e tratados de acordo com as regulamentações estabelecidas pelo comitê ético local do hospital de Dijon. O conjunto de dados cobre várias patologias bem definidas com casos suficientes para (1) treinar adequadamente métodos de aprendizado de máquina e (2) avaliar claramente as variações dos principais parâmetros fisiológicos obtidos a partir de cine-RM (em particular volume diastólico e fração de ejeção). O conjunto de dados é composto por $150$ exames (todos de pacientes diferentes) divididos em cinco subgrupos distribuídos de forma igualitária, sendo quatro patológicos e um grupo de sujeitos saudáveis. Dentre as cinco classes distintas, tem-se: \gls{DCM}, \gls{HCM}, \gls{NOR}, \gls{MINF} e \gls{RV}. As classes \gls{DCM} e \gls{HCM} são interpretadas como passíveis de \gls{CAR} e as demais; \gls{NOR}, \gls{MINF} e \gls{RV}; são interpretadas como o coração em condições sem cardiomiopatia, detalhes das classes podem ser verificados na Tabela \ref{tab:conditions}. 
 
 As máscara de segmentação também acompanham o conjunto de dados, para possíveis aplicações de segmentação. Os valores dos rótulos variam de $0$ a $3$ e representam voxels pertencentes ao fundo (0), à cavidade do ventrículo direito (1), ao miocárdio (2) e à cavidade do ventrículo esquerdo (3). As Figuras \ref{fig:fig033-01}, \ref{fig:fig033-02} e \ref{fig:fig033-03} representam as imagens e suas máscaras das classes \gls{DCM}, \gls{HCM} e \gls{NOR}. Nas máscaras é possível ver três níveis de tons de cinza respectivos a segmentação citada.
 
@@ -71,19 +69,19 @@ As máscara de segmentação também acompanham o conjunto de dados, para possí
         \textbf{Característica}: A parede do ventrículo esquerdo está significativamente espessada, o que pode restringir o volume sanguíneo e o fluxo de saída. \\ 
     \hline
         \textbf{NOR} & 
-        Esta classe representa corações normais sem qualquer condição patológica. 
+        Esta classe representa corações normais (sem cardiomiopatia) sem qualquer condição patológica. 
         \newline \newline
         \textbf{Característica}: Estruturas e funções cardíacas normais, sem dilatações ou hipertrofias significativas. \\ 
-    % \hline
-    %     \textbf{MINF} & 
-    %     O infarto do miocárdio, ou ataque cardíaco, ocorre quando o fluxo sanguíneo para uma parte do coração é bloqueado por um período suficiente para causar danos ao músculo cardíaco. 
-    %     \newline \newline
-    %     \textbf{Característica}: Áreas do coração mostram cicatrizes ou fibrose devido ao infarto anterior, frequentemente visível nas imagens de ressonância magnética. \\ 
-    % \hline
-    %     \textbf{RV} & 
-    %     A hipertrofia do ventrículo direito é uma condição em que o ventrículo direito do coração está aumentado. 
-    %     \newline \newline
-    %     \textbf{Característica}: Espessamento da parede do ventrículo direito, que pode ser devido a diversas condições, como hipertensão pulmonar ou doenças congênitas do coração. \\
+    \hline
+        \textbf{MINF} & 
+        O infarto do miocárdio, ou ataque cardíaco, ocorre quando o fluxo sanguíneo para uma parte do coração é bloqueado por um período suficiente para causar danos ao músculo cardíaco. 
+        \newline \newline
+        \textbf{Característica}: Áreas do coração mostram cicatrizes ou fibrose devido ao infarto anterior, frequentemente visível nas imagens de ressonância magnética. \\ 
+    \hline
+        \textbf{RV} & 
+        A hipertrofia do ventrículo direito é uma condição em que o ventrículo direito do coração está aumentado. 
+        \newline \newline
+        \textbf{Característica}: Espessamento da parede do ventrículo direito, que pode ser devido a diversas condições, como hipertensão pulmonar ou doenças congênitas do coração. \\
     \hline
     \end{tabular} 
     \caption*{Fonte: Adaptado de \cite{bernardDeepLearningTechniques2018a}}
@@ -151,10 +149,10 @@ Há quatro grupos patológicos neste conjunto de dados, que foram classificados 
     \item Insuficiência cardíaca com infarto (\textbf{IC-I}): grupo com \gls{FE} < $40$\% e evidência de realce tardio com gadolínio (Gd).
     \item Insuficiência cardíaca sem infarto (\textbf{IC}): grupo com \gls{FE} < $40$\% e sem realce tardio com gadolínio.
     \item Hipertrofia do ventrículo esquerdo (\textbf{HIP}): grupo com \gls{FE} normal (> $55$\%) e uma razão de massa do ventrículo esquerdo sobre a área da superfície corporal > $83$ g/m².
-    \item Normais (\textbf{NOR}): grupo com \gls{FE} > $55$\% e sem hipertrofia.
+    \item Sem cardiomiopatia (\textbf{NOR}): grupo com \gls{FE} > $55$\% e sem hipertrofia.
 \end{enumerate}
 
-\noindent Para o presente trabalho foi utilizado as classes \textbf{HIP} e \textbf{NOR} para classificação de cenário com cardiomiopatia e normal respectivamente. A Tabela \ref{tab:sunny_stats} demonstra como se encontram distribuídos os $45$ pacientes e os valores relacionados as atividades cardiovasculares utilizados para fins de classificação dos pacientes:
+\noindent Para o presente trabalho foi utilizado as classes \textbf{HIP} e \textbf{NOR} para classificação de cenário com e sem cardiomiopatia respectivamente. A Tabela \ref{tab:sunny_stats} demonstra como se encontram distribuídos os $45$ pacientes e os valores relacionados as atividades cardiovasculares utilizados para fins de classificação dos pacientes:
 \newline
 
 \begin{table}[h!]
@@ -191,7 +189,7 @@ Há quatro grupos patológicos neste conjunto de dados, que foram classificados 
 \section{PRÉ-PROCESSAMENTO}
 \label{subsec:cap4_preprocess}
 
-Na fase de pré-processamento, foi utilizado o conjunto de dados \gls{ACDC}. O \gls{ACDC} originalmente tem cinco classes distintas e foi agrupado de forma que DCM e HCM indicam a classe \gls{CAR} e os demais rótulos NOR, MINF e RV, são classificados como normal. O conjunto de \textit{frames} utilizados são definidos na fase diastólica e a quantidade de \textit{frames} é variada para cada paciente de acordo como consta no conjunto de dados. As características radiômicas são extraídas utilizando a biblioteca \textit{PyRadiomics}\footnote{https://pyradiomics.readthedocs.io}. Utilizando esta ferramenta, pode-se enviar como entrada o volume 3D das imagens cardíacas e suas respectivas máscaras e obter as características manuais extraídas abrangendo textura, forma, escala de cinza, etc. O resultado é um vetor com $\RadiomicFeatures$ características radiômicas. As características profundas são extraídas através de uma rede ResNet50 sem a última camada responsável pela classificação. Este processo é aplicado para cada fatia do volume 3D tanto para imagem cardíaca quanto para sua respectiva máscara tendo como resultado final vetores de tamanho $\DeepFeatures$. 
+Na fase de pré-processamento, foi utilizado o conjunto de dados \gls{ACDC}. O \gls{ACDC} originalmente tem cinco classes distintas e foi agrupado de forma que DCM e HCM indicam a classe \gls{CAR} e os demais rótulos NOR, MINF e RV, são classificados como sem cardiomiopatia. O conjunto de \textit{frames} utilizados são definidos na fase diastólica e a quantidade de \textit{frames} é variada para cada paciente de acordo como consta no conjunto de dados. As características radiômicas são extraídas utilizando a biblioteca \textit{PyRadiomics}\footnote{https://pyradiomics.readthedocs.io}. Utilizando esta ferramenta, pode-se enviar como entrada o volume 3D das imagens cardíacas e suas respectivas máscaras e obter as características manuais extraídas abrangendo textura, forma, escala de cinza, etc. O resultado é um vetor com $\RadiomicFeatures$ características radiômicas. As características profundas são extraídas através de uma rede ResNet50 sem a última camada responsável pela classificação. Este processo é aplicado para cada fatia do volume 3D tanto para imagem cardíaca quanto para sua respectiva máscara tendo como resultado final vetores de tamanho $\DeepFeatures$. 
 
 Seguindo a receita do modelo base, é aplicado o \textit{F-Test} para redução de dimensionalidade das características profundas de $\DeepFeatures$ para $\DeepFeaturesPostLinear$ e das características radiômicas de $\RadiomicFeatures$ para $\text{EMBED}_{size} \in \{24, 48, 64\}$. O valor de $\text{EMBED}_{size}$ varia nas versões adaptadas, sendo considerado um hiperparâmetro, e garante que todos os \textit{embeddings} possuam o mesmo valor. A concatenação é feita na última dimensão para o teste com modelo original e suas variações, e na primeira dimensão para as versões adaptadas. Vale ressaltar que diferente da versão do modelo base que só possui um vetor de características profundas, nas versões adaptadas pode-se ter um vetor adicional referente a máscara com a região de interesse. 
 
